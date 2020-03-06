@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    //initiating intent to TutorList activity
     fun findTutors(view: View){
         val button = findViewById<Button>(R.id.FindTutorsButton)
         button.setOnClickListener{

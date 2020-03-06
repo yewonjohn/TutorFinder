@@ -1,5 +1,6 @@
 package com.example.android.tutorfinder
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -10,7 +11,6 @@ class Tutors : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_of_tutors)
-
 
 
         val listOfTutors = ArrayList<String>()
@@ -25,6 +25,17 @@ class Tutors : AppCompatActivity() {
 
         val listView = findViewById<ListView>(R.id.listView)
         listView.setAdapter(adapter)
+
+
+        listView.setOnItemClickListener{ parent, view, position, id ->
+            //getting item selected
+            val selectedItem = parent.getItemIdAtPosition(position) as String
+
+            //intent to profile activity
+            val intent = Intent(this, TutorProfile::class.java)
+            startActivity(intent)
+
+        }
     }
 
 }
