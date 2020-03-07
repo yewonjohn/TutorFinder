@@ -28,8 +28,8 @@ class Tutors : AppCompatActivity() {
 
 
         listView.setOnItemClickListener{ parent, view, position, id ->
-            //getting item selected
-            val selectedItem = parent.getItemIdAtPosition(position) as String
+            //getting item selected (returning a long?)
+            val selectedItemPosition = parent.getItemIdAtPosition(position)
 
             //intent to profile activity
             val intent = Intent(this, TutorProfile::class.java)
