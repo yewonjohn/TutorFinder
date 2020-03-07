@@ -18,21 +18,34 @@ class MainActivity : AppCompatActivity() {
         var ImageView = findViewById<ImageView>(R.id.imageView)
         ImageView.setImageDrawable(ContextCompat.getDrawable(applicationContext,R.drawable.study_background2))
 
+        //initiating intent to TutorList activity
+        val FindTutorButton = findViewById<Button>(R.id.FindTutorsButton)
+        FindTutorButton.setOnClickListener{
+            val intent = Intent(this, Tutors::class.java)
+            startActivity(intent)
+        }
+        //initiating intent to Login Activity
+        val LoginButton = findViewById<Button>(R.id.LoginButton)
+        LoginButton.setOnClickListener{
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
+        val RegisterButton = findViewById<Button>(R.id.RegisterButton)
+        RegisterButton.setOnClickListener{
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
     //initiating intent to TutorList activity
+
     fun findTutors(view: View){
-        val button = findViewById<Button>(R.id.FindTutorsButton)
-        button.setOnClickListener{
-            val intent = Intent(this, Tutors::class.java)
-            startActivity(intent)
-        }
     }
 
 
     fun registerTutor(view: View){
-
     }
 
     fun logInAsTutor(view: View){
