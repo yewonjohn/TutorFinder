@@ -32,7 +32,7 @@ class Tutors : AppCompatActivity() {
             val selectedItemPosition = parent.getItemIdAtPosition(position)
 
             //intent to profile activity
-            val intent = Intent(this, TutorProfile::class.java)
+            val intent = Intent(this, TutorProfileReadOnly::class.java)
             startActivity(intent)
 
         }
