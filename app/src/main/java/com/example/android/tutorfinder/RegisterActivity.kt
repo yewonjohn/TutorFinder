@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -13,60 +14,43 @@ import com.parse.ParseUser
 import com.parse.SignUpCallback
 import kotlinx.android.synthetic.main.activity_login.*
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity(), View.OnKeyListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        val usernameEditText: EditText = findViewById(R.id.usernameEditText)
-        val passwordEditText: EditText = findViewById(R.id.passwordEditText)
+        //DECLARING THE USERNAME + PASSWORD TEXTS
+        var usernameEditText: EditText = findViewById(R.id.usernameEditText)
+        var passwordEditText: EditText = findViewById(R.id.passwordEditText)
 
-//        fun signUpClicked(view: View){
-//            val usernameEditText: EditText = findViewById(R.id.nameEditText)
-//            val passwordEditText: EditText = findViewById(R.id.passwordEditText)
-//
-//            if(usernameEditText.text.isEmpty() or passwordEditText.text.isEmpty()){
-//                Toast.makeText(this,"A username and password are required",Toast.LENGTH_SHORT)
-//
-//            }
-//            else{
-//                val user = ParseUser()
-//                user.username = usernameEditText.toString()
-//                user.setPassword(passwordEditText.toString())
-//                user.signUpInBackground(object:SignUpCallback {
-//                    override fun done(e:ParseException) {
-//                        if (e == null){
-//                            Log.i("Sign-Up","is a success!")
-//                            val intent = Intent(applicationContext, LoginActivity::class.java)
-//                            startActivity(intent)
-//                        } else{
-//                            Toast.makeText(applicationContext, e.message, Toast.LENGTH_SHORT).show()
-//                        }
-//                    }})
-//            }
-//        }
+        passwordEditText.setOnKeyListener(this)
 
-        val registerButton = findViewById<Button>(R.id.registerButton)
+        //BUTTON TO REGISTER
+        var registerButton = findViewById<Button>(R.id.registerButton)
         registerButton.setOnClickListener{
-            if(usernameEditText.text.isEmpty() or passwordEditText.text.isEmpty()){
-                Toast.makeText(this,"A username and password are required",Toast.LENGTH_SHORT)
+            if(usernameEditText.text.isEmpty() || passwordEditText.text.toString().isBlank()){
+                Toast.makeText(this,"A username and password are required",Toast.LENGTH_SHORT).show()
             }
             else{
-                val user = ParseUser()
-                user.username = usernameEditText.toString()
-                user.setPassword(passwordEditText.toString())
-                user.signUpInBackground(object:SignUpCallback {
-                    override fun done(e:ParseException) {
-                        if (e == null){
-                            Log.i("Sign-Up","is a success!")
-                            val intent = Intent(applicationContext, LoginActivity::class.java)
-                            startActivity(intent)
-                        } else{
-                            Toast.makeText(applicationContext, e.message, Toast.LENGTH_SHORT).show()
-                        }
-                    }})
+                var user = ParseUser()
+                user.username = usernameEditText.text.toString()
+                user.setPassword(passwordEditText.text.toString())
+                user.signUpInBackground { e -> Unit
+                    if (e === null){
+                        Log.i("Sign-Up","is a success!")
+                        val intent = Intent(applicationContext, LoginActivity::class.java)
+                        startActivity(intent)
+                    } else{
+                        Toast.makeText(applicationContext, e.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
+    }
+
+    override fun onKey(p0: View?, p1: Int, p2: KeyEvent?): Boolean {
+        TODO("Not yet implemented")
+        if(p1 === p2.keyCode)
     }
 }
