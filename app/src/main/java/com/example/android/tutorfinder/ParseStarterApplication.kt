@@ -17,7 +17,7 @@ class ParseStarterApplication : Application() {
             Parse.Configuration.Builder(this)
                 .applicationId("4eb0e90b8e77c2e0dbc2f70632304c93c1ccf4ff")
                 .clientKey("e1c1ab85cd386a36b3d7a2e2043c00e5dbec4213")
-                .server("https://18.218.244.112:80/parse/")
+                .server("http://18.218.244.112:80/parse/")
                 .build()
         )
 //        val query = ParseQuery.getQuery<ParseObject>("SoccerPlayers")
