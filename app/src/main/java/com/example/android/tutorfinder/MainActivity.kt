@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        //ParseAnalytics.trackAppOpenedInBackground(intent)
+        ParseAnalytics.trackAppOpenedInBackground(intent)
 
 
 

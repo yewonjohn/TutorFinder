@@ -33,20 +33,17 @@ class ParseStarterApplication : Application() {
 //
 //        })
 
-
-
-
-        val exampleObject = ParseObject("ExampleObject")
-        exampleObject.put("myNumber", "123")
-        exampleObject.put("myString", "rob")
-        exampleObject.saveInBackground { ex ->
-            if (ex == null) {
-                Log.i("Parse Result", "Successful!")
-            } else {
-                Log.i("Parse Result", "Failed$ex")
-                Log.i("stacktrace:",ex.printStackTrace().toString())
-            }
-        }
+//        val exampleObject = ParseObject("ExampleObject")
+//        exampleObject.put("myNumber", "123")
+//        exampleObject.put("myString", "rob")
+//        exampleObject.saveInBackground { ex ->
+//            if (ex == null) {
+//                Log.i("Parse Result", "Successful!")
+//            } else {
+//                Log.i("Parse Result", "Failed$ex")
+//                Log.i("stacktrace:",ex.printStackTrace().toString())
+//            }
+//        }
 
 
         ParseUser.enableAutomaticUser()
