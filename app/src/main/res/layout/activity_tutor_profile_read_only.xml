@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".TutorProfileReadOnly">
 
+    <include layout="@layout/app_toolbar"></include>
+
     <ImageView
         android:id="@+id/profileImageView"
         android:layout_width="0dp"
