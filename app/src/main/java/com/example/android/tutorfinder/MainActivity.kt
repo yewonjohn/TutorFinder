@@ -14,7 +14,8 @@ import com.parse.*
 
 class MainActivity : AppCompatActivity() {
 
-
+    //status of user logged in
+    var loggedInStatus = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,8 +23,6 @@ class MainActivity : AppCompatActivity() {
 
 
         ParseAnalytics.trackAppOpenedInBackground(intent)
-
-
 
 
         //var ImageView = findViewById<ImageView>(R.id.imageView)

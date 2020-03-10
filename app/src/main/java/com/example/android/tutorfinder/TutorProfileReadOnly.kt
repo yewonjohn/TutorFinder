@@ -4,6 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.EditText
 import android.widget.TextView
 import com.parse.FindCallback
@@ -14,6 +17,34 @@ import kotlinx.android.synthetic.main.activity_list_of_tutors.*
 import kotlinx.android.synthetic.main.activity_tutor_profile_read_only.*
 
 class TutorProfileReadOnly : AppCompatActivity() {
+
+    //displaying and initiating options menu if signed in
+    var mainActivity:MainActivity = MainActivity()
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        if (mainActivity.loggedInStatus === true) {
+            var menuInflater: MenuInflater = menuInflater
+            menuInflater.inflate(R.menu.menu_options, menu)
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (mainActivity.loggedInStatus === true) {
+            if (item?.itemId === R.id.logout) {
+                ParseUser.logOutInBackground() { e ->
+                    Unit
+                    if (e === null) {
+                        var mainActivity: MainActivity = MainActivity()
+                        mainActivity.loggedInStatus = false;
+                    } else {
+                        Log.i("error with signing out", e.printStackTrace().toString())
+                    }
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -25,8 +25,6 @@ class RegisterActivity : AppCompatActivity(), View.OnKeyListener, View.OnClickLi
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        //var context: Context = this
-
         //DECLARING layout of registration
         var registrationLayout = findViewById<ConstraintLayout>(R.id.registrationLayout)
 

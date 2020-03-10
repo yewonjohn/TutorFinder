@@ -16,8 +16,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        var loggedInStatus = false
-
         var username = findViewById<EditText>(R.id.usernameLoginEditText)
         var password = findViewById<EditText>(R.id.passwordLoginEditText)
 
@@ -32,7 +30,8 @@ class LoginActivity : AppCompatActivity() {
                 if(e === null){
                     Log.i("login","success!")
                     Toast.makeText(applicationContext,"login success",Toast.LENGTH_SHORT).show()
-                    loggedInStatus = true
+                    var mainActivity:MainActivity = MainActivity()
+                    mainActivity.loggedInStatus = true
 
                     val intent = Intent(this, TutorProfile::class.java)
                     startActivity(intent)
