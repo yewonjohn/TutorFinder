@@ -26,8 +26,8 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        var ImageView = findViewById<ImageView>(R.id.imageView)
-        ImageView.setImageDrawable(ContextCompat.getDrawable(applicationContext,R.drawable.study_background2))
+        //var ImageView = findViewById<ImageView>(R.id.imageView)
+        //ImageView.setImageDrawable(ContextCompat.getDrawable(applicationContext,R.drawable.study_background2))
 
         //initiating intent to TutorList activity
         val FindTutorButton = findViewById<Button>(R.id.FindTutorsButton)
