@@ -16,7 +16,6 @@ import kotlinx.android.synthetic.main.activity_tutor_profile.*
 class TutorProfile : AppCompatActivity() {
 
     //displaying and initiating options menu if signed in
-    var mainActivity:MainActivity = MainActivity()
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //there's no condition for this yet.
             var menuInflater: MenuInflater = menuInflater
@@ -30,7 +29,6 @@ class TutorProfile : AppCompatActivity() {
                 ParseUser.logOutInBackground() { e ->
                     Unit
                     if (e === null) {
-                        var mainActivity: MainActivity = MainActivity()
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                     } else {
@@ -45,6 +43,9 @@ class TutorProfile : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutor_profile)
+
+        //initializing actionBar
+        setSupportActionBar(findViewById(R.id.app_toolbar))
 
         var homeButton = findViewById<Button>(R.id.homeButton)
 

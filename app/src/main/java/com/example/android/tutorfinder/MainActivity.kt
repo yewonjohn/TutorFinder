@@ -21,9 +21,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        setSupportActionBar(findViewById(R.id.app_toolbar))
-
-
         //declaring all the buttons
         var loginButton: Button = findViewById<Button>(R.id.LoginButton)
         var findTutorButton: Button = findViewById<Button>(R.id.FindTutorsButton)

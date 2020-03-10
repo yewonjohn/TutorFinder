@@ -24,19 +24,32 @@ class Tutors : AppCompatActivity() {
         }
             return super.onCreateOptionsMenu(menu)
     }
+    //defining functionality of each button/options on menu ONCLICK
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
             if (item?.itemId === R.id.logout) {
-                ParseUser.logOutInBackground() { e ->
-                    Unit
-                    if (e === null) {
-                        Log.i("success","in signing out")
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                    } else {
-                        Log.i("error with signing out", e.printStackTrace().toString())
-                    }
+            ParseUser.logOutInBackground() { e ->
+                Unit
+                if (e === null) {
+                    Log.i("success","in signing out")
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    Log.i("error with signing out", e.printStackTrace().toString())
                 }
             }
+        }
+        if (item?.itemId === R.id.myProfile) {
+            ParseUser.logOutInBackground() { e ->
+                Unit
+                if (e === null) {
+                    Log.i("success","going to myProfile")
+                    val intent = Intent(this, TutorProfile::class.java)
+                    startActivity(intent)
+                } else {
+                    Log.i("error with going to myProfile", e.printStackTrace().toString())
+                }
+            }
+        }
 
             return super.onOptionsItemSelected(item)
         }

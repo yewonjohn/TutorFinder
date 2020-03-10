@@ -30,7 +30,6 @@ class LoginActivity : AppCompatActivity() {
                 if(e === null){
                     Log.i("login","success!")
                     Toast.makeText(applicationContext,"login success",Toast.LENGTH_SHORT).show()
-                    var mainActivity:MainActivity = MainActivity()
                     val intent = Intent(this, TutorProfile::class.java)
                     startActivity(intent)
                 } else{

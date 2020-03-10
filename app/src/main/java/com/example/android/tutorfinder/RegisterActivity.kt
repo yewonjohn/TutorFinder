@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.parse.LogInCallback
 import com.parse.ParseException
 import com.parse.ParseUser
 import com.parse.SignUpCallback
@@ -63,14 +64,26 @@ class RegisterActivity : AppCompatActivity(), View.OnKeyListener, View.OnClickLi
                         Unit
                         if (e === null) {
                             Log.i("Sign-Up", "is a success!")
-                            val intent = Intent(applicationContext, LoginActivity::class.java)
-                            startActivity(intent)
+                            //LOG THE USER IN AUTOMATICALLY HERE
+                            ParseUser.logInInBackground(usernameEditText.text.toString(),passwordEditText.text.toString(),
+                                LogInCallback { user, e ->  Unit
+                                    if(e === null){
+                                        Log.i("login","success!")
+                                        Toast.makeText(applicationContext,"login success",Toast.LENGTH_SHORT).show()
+                                        val intent = Intent(this, TutorProfile::class.java)
+                                        startActivity(intent)
+                                    } else{
+                                        Log.i("login Failed",e.printStackTrace().toString())
+                                        Toast.makeText(applicationContext,e.message.toString(),Toast.LENGTH_SHORT).show()
+                                    }
+                                })
+                            //EXCEPTIONS FOR LOGIN
                         } else {
                             Toast.makeText(applicationContext, e.message, Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
-                //password and confirm password fields are mismatching
+                //password and confirm password fields are mismatching *EXCEPTIONS FOR REGISTER
                 else{
                     Toast.makeText(this,"Passwords are not matching!",Toast.LENGTH_SHORT).show()
                 }
@@ -85,7 +98,7 @@ class RegisterActivity : AppCompatActivity(), View.OnKeyListener, View.OnClickLi
         }
         return false
     }
-    //setting keyboard interaction for layout (clicking out of keybard view)
+    //setting keyboard interaction for layout (clicking out of keyboard view)
     override fun onClick(p0: View?) {
         if(p0?.id === R.id.registrationLayout){
             var inputMethodManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
