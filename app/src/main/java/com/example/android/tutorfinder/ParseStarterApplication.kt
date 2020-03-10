@@ -46,10 +46,10 @@ class ParseStarterApplication : Application() {
 //        }
 
 
-        ParseUser.enableAutomaticUser()
-        val defaultACL = ParseACL()
-        defaultACL.publicReadAccess = true
-        defaultACL.publicWriteAccess = true
-        ParseACL.setDefaultACL(defaultACL, true)
+//        ParseUser.enableAutomaticUser()
+//        val defaultACL = ParseACL()
+//        defaultACL.publicReadAccess = true
+//        defaultACL.publicWriteAccess = true
+//        ParseACL.setDefaultACL(defaultACL, true)
     }
 }
