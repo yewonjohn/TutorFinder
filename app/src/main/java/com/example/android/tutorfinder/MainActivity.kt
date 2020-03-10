@@ -20,7 +20,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Log.i("something,","soemthinggg")
+
+        setSupportActionBar(findViewById(R.id.app_toolbar))
 
 
         //declaring all the buttons

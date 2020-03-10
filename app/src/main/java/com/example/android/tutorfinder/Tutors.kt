@@ -17,7 +17,6 @@ import com.parse.ParseUser
 class Tutors : AppCompatActivity() {
 
     //displaying and initiating options menu if signed in
-    var mainActivity = MainActivity()
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         if (ParseUser.getCurrentUser() !== null) {
             var menuInflater: MenuInflater = menuInflater
@@ -30,7 +29,6 @@ class Tutors : AppCompatActivity() {
                 ParseUser.logOutInBackground() { e ->
                     Unit
                     if (e === null) {
-                        var mainActivity: MainActivity = MainActivity()
                         Log.i("success","in signing out")
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
@@ -45,6 +43,11 @@ class Tutors : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_of_tutors)
+
+
+        //initializing actionBar
+        setSupportActionBar(findViewById(R.id.app_toolbar))
+
 
         //declaring listView
         val listView = findViewById<ListView>(R.id.listView)
