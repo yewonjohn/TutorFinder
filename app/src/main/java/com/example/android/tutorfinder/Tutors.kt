@@ -76,11 +76,8 @@ class Tutors : AppCompatActivity() {
         query.findInBackground(FindCallback { objects, e -> Unit
             if(e === null){
                 if(objects.size > 0){
-//                    var i = 0
                     for(user: ParseUser in objects){
-                        listOfTutors.add(user.username)
-//                        Log.i("users",listOfTutors.elementAt(i).toString())
-//                        i++
+                        listOfTutors.add(user.getString("username").toString())
                     }
                     listView.setAdapter(adapter)
                 }

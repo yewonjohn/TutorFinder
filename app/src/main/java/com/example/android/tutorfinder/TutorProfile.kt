@@ -21,6 +21,15 @@ import kotlinx.android.synthetic.main.activity_tutor_profile.*
 
 class TutorProfile : AppCompatActivity(), View.OnClickListener {
 
+    //METHOD FOR CHECKING FOR STORAGE PERMISSIONS -- GOTTA ADD THE CONDITIONS THO
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
     //displaying and initiating options menu if signed in
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //there's no condition for this yet.
