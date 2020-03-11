@@ -3,14 +3,20 @@ package com.example.android.tutorfinder
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import com.parse.Parse
 import com.parse.ParseUser
+import com.parse.SaveCallback
+import com.parse.SignUpCallback
 import kotlinx.android.synthetic.main.activity_tutor_profile.*
 
 class TutorProfile : AppCompatActivity() {
@@ -36,6 +42,14 @@ class TutorProfile : AppCompatActivity() {
                     }
                 }
             }
+        if (item?.itemId === R.id.myProfile) {
+                    val intent = Intent(this, TutorProfile::class.java)
+                    startActivity(intent)
+        }
+        if (item?.itemId === R.id.home) {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+        }
 
         return super.onOptionsItemSelected(item)
     }
@@ -47,12 +61,64 @@ class TutorProfile : AppCompatActivity() {
         //initializing actionBar
         setSupportActionBar(findViewById(R.id.app_toolbar))
 
-        var homeButton = findViewById<Button>(R.id.homeButton)
+        //getting current user
+        var currentUser = ParseUser.getCurrentUser()
 
-        homeButton.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+        //initializing fields from page
+        var userAge = findViewById<EditText>(R.id.ageEditText)
+        var userName = findViewById<EditText>(R.id.nameEditText)
+        var userLocation = findViewById<EditText>(R.id.locationEditText)
+
+        var saveButton = findViewById<Button>(R.id.saveButton)
+
+        //displaying current data first
+        userAge.setText(currentUser.getString("age"))
+        userName.setText(currentUser.getString("name"))
+        userLocation.setText(currentUser.getString("location"))
+
+        //saves field data to current User ONCHANGE
+        userAge.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                currentUser.put("age",userAge.text.toString())
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
+
+        userName.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                currentUser.put("name",userName.text.toString())
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
+
+        userName.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                currentUser.put("location",userLocation.text.toString())
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
+
+        saveButton.setOnClickListener(){
+            currentUser.saveInBackground(SaveCallback { e -> Unit
+                if(e === null){
+                    Log.i("data","successfully saved")
+                    Toast.makeText(this,"Saved!",Toast.LENGTH_SHORT)
+                    } else {
+                    Log.i("failed", "unsuccessful in saving user data")
+                }
+            })
         }
-
     }
 }

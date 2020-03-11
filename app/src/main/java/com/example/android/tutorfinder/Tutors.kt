@@ -39,16 +39,12 @@ class Tutors : AppCompatActivity() {
             }
         }
         if (item?.itemId === R.id.myProfile) {
-            ParseUser.logOutInBackground() { e ->
-                Unit
-                if (e === null) {
-                    Log.i("success","going to myProfile")
-                    val intent = Intent(this, TutorProfile::class.java)
-                    startActivity(intent)
-                } else {
-                    Log.i("error with going to myProfile", e.printStackTrace().toString())
-                }
-            }
+            val intent = Intent(this, TutorProfile::class.java)
+            startActivity(intent)
+        }
+        if (item?.itemId === R.id.home) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
             return super.onOptionsItemSelected(item)

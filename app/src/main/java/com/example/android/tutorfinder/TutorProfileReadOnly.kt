@@ -39,6 +39,14 @@ class TutorProfileReadOnly : AppCompatActivity() {
                 }
             }
         }
+        if (item?.itemId === R.id.myProfile) {
+            val intent = Intent(this, TutorProfile::class.java)
+            startActivity(intent)
+        }
+        if (item?.itemId === R.id.home) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
         return super.onOptionsItemSelected(item)
     }
