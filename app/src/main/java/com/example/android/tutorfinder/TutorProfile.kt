@@ -1,15 +1,14 @@
 package com.example.android.tutorfinder
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -17,9 +16,10 @@ import com.parse.Parse
 import com.parse.ParseUser
 import com.parse.SaveCallback
 import com.parse.SignUpCallback
+import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.activity_tutor_profile.*
 
-class TutorProfile : AppCompatActivity() {
+class TutorProfile : AppCompatActivity(), View.OnClickListener {
 
     //displaying and initiating options menu if signed in
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -50,7 +50,6 @@ class TutorProfile : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
         }
-
         return super.onOptionsItemSelected(item)
     }
 
@@ -76,49 +75,30 @@ class TutorProfile : AppCompatActivity() {
         userName.setText(currentUser.getString("name"))
         userLocation.setText(currentUser.getString("location"))
 
-        //saves field data to current User ONCHANGE
-        userAge.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {
-                currentUser.put("age",userAge.text.toString())
-            }
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-        })
-
-        userName.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {
-                currentUser.put("name",userName.text.toString())
-            }
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-        })
-
-        userName.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {
-                currentUser.put("location",userLocation.text.toString())
-            }
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-        })
-
+        //saves field data to current User onClick
         saveButton.setOnClickListener(){
+            currentUser.put("name",userName.text.toString())
+            currentUser.put("age",userAge.text.toString())
+            currentUser.put("location",userLocation.text.toString())
             currentUser.saveInBackground(SaveCallback { e -> Unit
                 if(e === null){
                     Log.i("data","successfully saved")
-                    Toast.makeText(this,"Saved!",Toast.LENGTH_SHORT)
+                    Toast.makeText(this,"Saved!",Toast.LENGTH_SHORT).show()
                     } else {
                     Log.i("failed", "unsuccessful in saving user data")
                 }
             })
+        }
+    }
+
+    //setting keyboard interaction for layout (clicking out of keyboard view)
+    //THIS IS NOT WORKING RIGHT NOW
+    override fun onClick(p0: View?) {
+        if(p0?.id === R.id.profileLayout || p0?.id === R.id.profileImageView){
+            var inputMethodManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken,0)
+            Toast.makeText(this,"Clcked",Toast.LENGTH_SHORT).show()
+            Log.i("Something","CLICKED")
         }
     }
 }

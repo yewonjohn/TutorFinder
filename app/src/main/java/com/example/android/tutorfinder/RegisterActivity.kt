@@ -94,7 +94,6 @@ class RegisterActivity : AppCompatActivity(), View.OnKeyListener, View.OnClickLi
     override fun onKey(p0: View?, p1: Int, p2: KeyEvent?): Boolean {
         if(p1 === KeyEvent.KEYCODE_ENTER && p2?.action === KeyEvent.ACTION_DOWN){
             register(registerButton)
-            Toast.makeText(applicationContext,"onKeyTriggered",Toast.LENGTH_SHORT).show()
         }
         return false
     }
