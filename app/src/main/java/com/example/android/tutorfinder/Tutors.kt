@@ -63,8 +63,6 @@ class Tutors : AppCompatActivity() {
 
         //declaring the array that will hold all the queried users
         val listOfTutors = ArrayList<String>()
-        //val arrayOfTutors = arrayOfNulls<String>(listOfTutors.size)
-        //listOfTutors.toArray(arrayOfTutors)
         val adapter = ArrayAdapter<String>(this, R.layout.listview_item, listOfTutors)
 
 
