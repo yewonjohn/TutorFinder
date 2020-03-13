@@ -6,20 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".TutorProfileReadOnly">
 
-    <include layout="@layout/app_toolbar"></include>
+    <include
+        android:id="@+id/include"
+        layout="@layout/app_toolbar"></include>
 
     <ImageView
         android:id="@+id/profileImageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="226dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="485dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="157dp"
+        android:layout_height="213dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include"
         app:srcCompat="@drawable/study_background1" />
 
     <TextView
