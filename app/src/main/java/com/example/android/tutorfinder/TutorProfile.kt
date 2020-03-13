@@ -168,7 +168,7 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
     }
 
     //setting keyboard interaction for layout (clicking out of keyboard view)
-    //THIS IS NOT WORKING RIGHT NOW
+    //THIS IS NOT WORKING RIGHT NOW-- NOT WORKING
     override fun onClick(p0: View?) {
         if(p0?.id === R.id.profileLayout || p0?.id === R.id.profileImageView){
             var inputMethodManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

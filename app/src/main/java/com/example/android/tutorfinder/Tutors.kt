@@ -65,7 +65,6 @@ class Tutors : AppCompatActivity() {
         val listOfTutors = ArrayList<String>()
         val adapter = ArrayAdapter<String>(this, R.layout.listview_item, listOfTutors)
 
-
         val query: ParseQuery<ParseUser> = ParseUser.getQuery()
         //avoid logged in user displaying
         //query.whereNotEqualTo("username",ParseUser.getCurrentUser().username)
