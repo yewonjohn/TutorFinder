@@ -2,6 +2,7 @@ package com.example.android.tutorfinder
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import com.parse.FindCallback
+import com.parse.GetDataCallback
 import com.parse.Parse
 import com.parse.ParseQuery
 import com.parse.ParseUser
@@ -54,10 +56,10 @@ class Tutors : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_of_tutors)
 
-        var userNames = arrayListOf<String>()
-        var userDescription = arrayListOf<String>()
-        var userPrice = arrayListOf<String>()
-        var userImage = arrayListOf<String>()
+        var userNames = ArrayList<String>()
+        var userLocation = ArrayList<String>()
+        var userPrice = ArrayList<String>()
+        var userImage = ArrayList<Bitmap>()
 
 
         //initializing actionBar
@@ -68,19 +70,33 @@ class Tutors : AppCompatActivity() {
         val listView = findViewById<ListView>(R.id.listView)
 
         //declaring the array that will hold all the queried users
-        val listOfTutors = ArrayList<String>()
-        val adapter = ArrayAdapter<String>(this, R.layout.listview_item, listOfTutors)
+        val listOfTutorsObjectId = ArrayList<String>()
+        val adapter = ArrayAdapter<String>(this, R.layout.listview_item, listOfTutorsObjectId)
 
-        val query: ParseQuery<ParseUser> = ParseUser.getQuery()
-        //avoid logged in user displaying
-        //query.whereNotEqualTo("username",ParseUser.getCurrentUser().username)
         //filter by username ascending order
-        query.addAscendingOrder("username")
-        query.findInBackground(FindCallback { objects, e -> Unit
+        val query1: ParseQuery<ParseUser> = ParseUser.getQuery()
+        query1.addAscendingOrder("name")
+        query1.findInBackground(FindCallback { objects, e -> Unit
             if(e === null){
                 if(objects.size > 0){
                     for(user: ParseUser in objects){
-                        listOfTutors.add(user.getString("username").toString())
+                        listOfTutorsObjectId.add(user.getString("objectId").toString())
+                        userNames.add(user.getString("name").toString())
+                        userLocation.add(user.getString("location").toString())
+                        userPrice.add(user.getString("price").toString())
+                        //adding profile pix to ImageArray
+                        var file = user.getParseFile("image")
+                        file?.getDataInBackground(GetDataCallback { data, e ->
+                            if (e == null) {
+                                // Decode the Byte[] into bitmap
+                                val bmp: Bitmap = BitmapFactory.decodeByteArray(data, 0, data.size)
+                                // Set the Bitmap into the BitMap Array for Profile Images
+                                userImage.add(bmp)
+                                Log.i("success","Image fetched correctly")
+                            } else {
+                                Log.d("test", "There was a problem downloading the data.")
+                            }
+                        })
                     }
                     listView.setAdapter(adapter)
                 }
@@ -89,6 +105,7 @@ class Tutors : AppCompatActivity() {
             }
         })
 
+
         //setting up onClick for list-- clicking name should take you to next page with details
         listView.setOnItemClickListener{ parent, view, position, id ->
             //getting item selected (returning a long?)
@@ -96,9 +113,8 @@ class Tutors : AppCompatActivity() {
 
             //intent to profile activity
             val intent = Intent(this, TutorProfileReadOnly::class.java)
-            intent.putExtra("username", listOfTutors.get(position))
+            intent.putExtra("username", listOfTutorsObjectId.get(position))
             startActivity(intent)
-
         }
     }
 
