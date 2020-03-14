@@ -1,6 +1,7 @@
 package com.example.android.tutorfinder
 
 import android.content.Intent
+import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -52,6 +53,11 @@ class Tutors : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_of_tutors)
+
+        var userNames = arrayListOf<String>()
+        var userDescription = arrayListOf<String>()
+        var userPrice = arrayListOf<String>()
+        var userImage = arrayListOf<String>()
 
 
         //initializing actionBar
