@@ -184,19 +184,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/kee_yeon_s_" />
 
-    <androidx.gridlayout.widget.GridLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/gridLayout"
         android:layout_width="315dp"
         android:layout_height="65dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="123dp"
-        app:columnCount="3"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/kee_yeon_s_2"
-        app:rowCount="2">
+        app:layout_constraintTop_toBottomOf="@+id/kee_yeon_s_2">
 
         <Button
             android:id="@+id/subject1_button"
@@ -205,8 +201,7 @@
             android:background="@drawable/button_border"
             android:fontFamily="@font/open_sans_light"
             android:text="Algebra"
-            android:textColor="@color/colorPrimary"
-            app:layout_gravity="left|top" />
+            android:textColor="@color/colorPrimary" />
 
         <Button
             android:id="@+id/subject2_button"
@@ -215,8 +210,7 @@
             android:background="@drawable/button_border"
             android:fontFamily="@font/open_sans_light"
             android:text="10th English"
-            android:textColor="@color/colorPrimary"
-            app:layout_gravity="left|top" />
+            android:textColor="@color/colorPrimary"/>
 
         <Button
             android:id="@+id/subject3_button"
@@ -225,8 +219,7 @@
             android:background="@drawable/button_border"
             android:fontFamily="@font/open_sans_light"
             android:text="Spanish"
-            android:textColor="@color/colorPrimary"
-            app:layout_gravity="left|top" />
+            android:textColor="@color/colorPrimary"/>
 
         <Button
             android:id="@+id/subject4_button"
@@ -235,8 +228,7 @@
             android:background="@drawable/button_border"
             android:fontFamily="@font/open_sans_light"
             android:text="Biology"
-            android:textColor="@color/colorPrimary"
-            app:layout_gravity="left|top" />
+            android:textColor="@color/colorPrimary"/>
 
         <Button
             android:id="@+id/subject5_button"
@@ -245,8 +237,7 @@
             android:background="@drawable/button_border"
             android:fontFamily="@font/open_sans_light"
             android:text="Science"
-            android:textColor="@color/colorPrimary"
-            app:layout_gravity="left|top" />
+            android:textColor="@color/colorPrimary"/>
 
         <Button
             android:id="@+id/subject6_button"
@@ -255,9 +246,8 @@
             android:background="@drawable/button_border"
             android:fontFamily="@font/open_sans_light"
             android:text="Geometry"
-            android:textColor="@color/colorPrimary"
-            app:layout_gravity="left|top" />
+            android:textColor="@color/colorPrimary"/>
 
-    </androidx.gridlayout.widget.GridLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
