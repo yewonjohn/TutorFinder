@@ -62,7 +62,7 @@ class TutorProfileReadOnly : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.app_toolbar))
 
         //declaring nameTextView
-        var nameTextView: TextView= findViewById(R.id.nameTextView)
+        var nameTextView: TextView= findViewById(R.id.nameAgeTextView)
 
         //Fetching/getting info from passed intent
         var intent = getIntent()
@@ -82,10 +82,5 @@ class TutorProfileReadOnly : AppCompatActivity() {
                 Log.i("query failed",e.printStackTrace().toString())
             }
         })
-
-
-
-
-
     }
 }
