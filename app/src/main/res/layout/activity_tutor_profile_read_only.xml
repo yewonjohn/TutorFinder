@@ -50,36 +50,38 @@
         app:layout_constraintTop_toBottomOf="@+id/nameAgeTextView" />
 
     <View
-        android:id="@+id/vector"
-        android:layout_width="11dp"
+        android:id="@+id/gps_vector"
+        android:layout_width="15dp"
         android:layout_height="16dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="3dp"
-        android:background="@drawable/gps_vector"
+        android:background="@drawable/gps_icon"
         app:layout_constraintEnd_toStartOf="@+id/locationTextView"
         app:layout_constraintStart_toEndOf="@+id/profileImageView"
         app:layout_constraintTop_toBottomOf="@+id/nameAgeTextView" />
 
     <TextView
-        android:id="@+id/short_perso"
+        android:id="@+id/descriptionTextView"
         android:layout_width="0dp"
-        android:layout_height="32dp"
+        android:layout_height="0dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:gravity="top"
         android:lineSpacingExtra="2sp"
-        android:text="Short Personal Description if the person wants"
+        android:text="Short Personal Description if the person wants. It can be as long as they want or as short as they want. Blah blah blah keeyeon is a loser"
         android:textAppearance="@style/short_perso"
         android:translationY="-1.19sp"
+        app:layout_constraintBottom_toTopOf="@+id/costTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profileImageView"
         app:layout_constraintTop_toBottomOf="@+id/locationTextView" />
 
     <TextView
-        android:id="@+id/avg_30_hr"
+        android:id="@+id/costTextView"
         android:layout_width="68dp"
         android:layout_height="16dp"
         android:layout_alignParentLeft="true"
@@ -93,7 +95,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/contactTutorButton"
         android:layout_width="210dp"
         android:layout_height="41dp"
         android:layout_marginStart="100dp"
@@ -107,7 +109,7 @@
         app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
 
     <View
-        android:id="@+id/line_4"
+        android:id="@+id/line1"
         android:layout_width="0dp"
         android:layout_height="22dp"
         android:layout_alignParentLeft="true"
@@ -119,10 +121,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button1" />
+        app:layout_constraintTop_toBottomOf="@+id/contactTutorButton" />
 
     <View
-        android:id="@+id/line_"
+        android:id="@+id/line2"
         android:layout_width="0dp"
         android:layout_height="22dp"
         android:layout_alignParentLeft="true"
@@ -137,7 +139,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/kee_yeon_s_"
+        android:id="@+id/educationTitleTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="false"
@@ -152,10 +154,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.173"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line_4" />
+        app:layout_constraintTop_toBottomOf="@+id/line1" />
 
     <TextView
-        android:id="@+id/kee_yeon_s_2"
+        android:id="@+id/subjectTitleTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="false"
@@ -170,29 +172,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line_" />
+        app:layout_constraintTop_toBottomOf="@+id/line2" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/educationTextView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:text="Bachelors of Science"
-        app:layout_constraintBottom_toTopOf="@+id/line_"
+        app:layout_constraintBottom_toTopOf="@+id/line2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/kee_yeon_s_" />
+        app:layout_constraintTop_toBottomOf="@+id/educationTitleTextView" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/gridLayout"
         android:layout_width="315dp"
         android:layout_height="65dp"
         android:layout_marginStart="50dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/kee_yeon_s_2">
+        app:layout_constraintTop_toBottomOf="@+id/subjectTitleTextView">
 
         <Button
             android:id="@+id/subject1_button"
@@ -200,26 +203,37 @@
             android:layout_height="30dp"
             android:background="@drawable/button_border"
             android:fontFamily="@font/open_sans_light"
+            android:paddingHorizontal="10dp"
             android:text="Algebra"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/subject2_button"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_marginStart="5dp"
             android:background="@drawable/button_border"
             android:fontFamily="@font/open_sans_light"
+            android:paddingHorizontal="10dp"
             android:text="10th English"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/subject3_button" />
 
         <Button
             android:id="@+id/subject3_button"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_marginStart="5dp"
             android:background="@drawable/button_border"
             android:fontFamily="@font/open_sans_light"
+            android:paddingHorizontal="10dp"
             android:text="Spanish"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/subject4_button" />
 
         <Button
             android:id="@+id/subject4_button"
@@ -227,27 +241,51 @@
             android:layout_height="30dp"
             android:background="@drawable/button_border"
             android:fontFamily="@font/open_sans_light"
+            android:paddingHorizontal="10dp"
             android:text="Biology"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/subject5_button"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="36dp"
             android:background="@drawable/button_border"
             android:fontFamily="@font/open_sans_light"
+            android:paddingHorizontal="10dp"
             android:text="Science"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/subject6_button"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/subject6_button"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_marginStart="5dp"
             android:background="@drawable/button_border"
             android:fontFamily="@font/open_sans_light"
+            android:paddingHorizontal="10dp"
             android:text="Geometry"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintStart_toEndOf="@+id/subject1_button"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/seeMoreButton"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_marginEnd="50dp"
+        android:text="see more.."
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
