@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/relativeLayout"
+    <RelativeLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="113dp"
+        android:layout_height="112dp"
         android:layout_marginBottom="5dp"
         android:background="#ffffff"
         android:padding="15dp">
@@ -18,60 +18,63 @@
             android:id="@+id/imageView"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_weight="0.11"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></ImageView>
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"></ImageView>
 
         <TextView
             android:id="@+id/listViewNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/imageView"
             android:fontFamily="@font/open_sans"
             android:text="John Doe"
             android:textColor="#333"
             android:textSize="22dp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toRightOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent"></TextView>
+            android:textStyle="bold"></TextView>
 
         <View
             android:id="@+id/gps_vector"
             android:layout_width="20dp"
             android:layout_height="22dp"
-            android:layout_marginStart="3dp"
-            android:background="@drawable/gps_icon"
-            app:layout_constraintLeft_toRightOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/listViewNameTextView" />
+            android:layout_below="@+id/listViewNameTextView"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/imageView"
+            android:background="@drawable/gps_icon" />
 
         <TextView
             android:id="@+id/userLocationTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/listViewNameTextView"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="3dp"
+            android:layout_toEndOf="@+id/gps_vector"
             android:fontFamily="@font/open_sans"
             android:paddingLeft="5dp"
             android:text="Closter, NJ"
-            android:textColor="#333"
-            app:layout_constraintLeft_toRightOf="@+id/gps_vector"
-            app:layout_constraintStart_toEndOf="@+id/gps_vector"
-            app:layout_constraintTop_toBottomOf="@+id/listViewNameTextView"></TextView>
+            android:textColor="#333"></TextView>
 
         <TextView
             android:id="@+id/userSalaryTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="228dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="215dp"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
             android:fontFamily="@font/open_sans"
             android:text="Avg $30 / hr"
-            android:textColor="#333"
-            app:layout_constraintLeft_toRightOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/userLocationTextView"></TextView>
+            android:textColor="#333"></TextView>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </LinearLayout>
 

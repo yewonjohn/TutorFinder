@@ -1,7 +1,7 @@
 package com.example.android.tutorfinder;
 
 import android.app.Activity;
-import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +12,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class CustomListView extends ArrayAdapter<String> {
 
-    private String[] userNames;
-    private String[] userLocation;
-    private String[] userPrice;
-    private String[] userImage;
+    private ArrayList<String> userNames;
+    private ArrayList<String> userLocation;
+    private ArrayList<String> userPrice;
+    private ArrayList<Bitmap> userImage;
     private Activity context;
 
-    public CustomListView(Activity context, String[] userNames, String[] userLocation, String[] userPrice,String[] userImage) {
+    public CustomListView(Activity context, ArrayList<String> userNames, ArrayList<String> userLocation, ArrayList<String> userPrice, ArrayList<Bitmap> userImage) {
         super(context, R.layout.listview_item,userNames);
 
         this.context = context;
@@ -44,14 +46,20 @@ public class CustomListView extends ArrayAdapter<String> {
         }
         else{
             viewHolder = (ViewHolder) r.getTag();
-
         }
-        viewHolder.tvw4.setImageResource(Integer.parseInt(userImage[position]));
-        viewHolder.tvw1.setText(userNames[position]);
-        viewHolder.tvw2.setText(userLocation[position]);
-        viewHolder.tvw3.setText(userPrice[position]);
 
-
+        if(!userImage.isEmpty()){
+            viewHolder.tvw4.setImageBitmap(userImage.get(position));
+        }
+        if(!userNames.isEmpty()){
+            viewHolder.tvw1.setText(userNames.get(position));
+        }
+        if(!userLocation.isEmpty()){
+            viewHolder.tvw2.setText(userLocation.get(position));
+        }
+        if(!userPrice.isEmpty()) {
+            viewHolder.tvw3.setText(userPrice.get(position));
+        }
         return r;
     }
 

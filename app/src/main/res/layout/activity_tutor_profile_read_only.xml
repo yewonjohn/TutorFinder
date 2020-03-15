@@ -8,7 +8,10 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/app_toolbar"></include>
+        layout="@layout/app_toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></include>
 
     <ImageView
         android:id="@+id/profileImageView"
@@ -72,6 +75,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="7dp"
         android:layout_marginBottom="5dp"
+        android:fontFamily="@font/open_sans"
         android:gravity="top"
         android:lineSpacingExtra="2sp"
         android:text="Short Personal Description if the person wants. It can be as long as they want or as short as they want. Blah blah blah keeyeon is a loser"
@@ -84,11 +88,12 @@
 
     <TextView
         android:id="@+id/costTextView"
-        android:layout_width="68dp"
-        android:layout_height="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginEnd="20dp"
+        android:fontFamily="@font/open_sans"
         android:gravity="top"
         android:lineSpacingExtra="0sp"
         android:text="Avg $30 / hr"
@@ -145,7 +150,7 @@
         android:layout_alignParentLeft="false"
         android:layout_alignParentTop="false"
         android:layout_marginStart="50dp"
-        android:layout_marginEnd="235dp"
+        android:layout_marginEnd="50dp"
         android:fontFamily="@font/open_sans"
         android:gravity="top"
         android:lineSpacingExtra="0sp"
@@ -163,7 +168,7 @@
         android:layout_alignParentLeft="false"
         android:layout_alignParentTop="false"
         android:layout_marginStart="50dp"
-        android:layout_marginEnd="235dp"
+        android:layout_marginEnd="50dp"
         android:fontFamily="@font/open_sans"
         android:gravity="top"
         android:lineSpacingExtra="0sp"
@@ -204,62 +209,9 @@
             android:background="@drawable/button_border"
             android:fontFamily="@font/open_sans_light"
             android:paddingHorizontal="10dp"
-            android:text="Algebra"
             android:textColor="@color/colorPrimary"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/subject2_button"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginStart="5dp"
-            android:background="@drawable/button_border"
-            android:fontFamily="@font/open_sans_light"
-            android:paddingHorizontal="10dp"
-            android:text="10th English"
-            android:textColor="@color/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/subject3_button" />
-
-        <Button
-            android:id="@+id/subject3_button"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginStart="5dp"
-            android:background="@drawable/button_border"
-            android:fontFamily="@font/open_sans_light"
-            android:paddingHorizontal="10dp"
-            android:text="Spanish"
-            android:textColor="@color/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/subject4_button" />
-
-        <Button
-            android:id="@+id/subject4_button"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:background="@drawable/button_border"
-            android:fontFamily="@font/open_sans_light"
-            android:paddingHorizontal="10dp"
-            android:text="Biology"
-            android:textColor="@color/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/subject5_button"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginBottom="36dp"
-            android:background="@drawable/button_border"
-            android:fontFamily="@font/open_sans_light"
-            android:paddingHorizontal="10dp"
-            android:text="Science"
-            android:textColor="@color/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/subject6_button"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
@@ -270,8 +222,59 @@
             android:background="@drawable/button_border"
             android:fontFamily="@font/open_sans_light"
             android:paddingHorizontal="10dp"
-            android:text="Geometry"
             android:textColor="@color/colorPrimary"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/subject5_button" />
+
+        <Button
+            android:id="@+id/subject5_button"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/button_border"
+            android:fontFamily="@font/open_sans_light"
+            android:paddingHorizontal="10dp"
+            android:textColor="@color/colorPrimary"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/subject4_button" />
+
+        <Button
+            android:id="@+id/subject4_button"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/button_border"
+            android:fontFamily="@font/open_sans_light"
+            android:paddingHorizontal="10dp"
+            android:textColor="@color/colorPrimary"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/subject3_button"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/button_border"
+            android:fontFamily="@font/open_sans_light"
+            android:paddingHorizontal="10dp"
+            android:textColor="@color/colorPrimary"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@+id/subject2_button"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/subject2_button"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/button_border"
+            android:fontFamily="@font/open_sans_light"
+            android:paddingHorizontal="10dp"
+            android:textColor="@color/colorPrimary"
+            android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/subject1_button"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -283,6 +286,7 @@
         android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:layout_marginEnd="50dp"
+        android:fontFamily="@font/open_sans"
         android:text="see more.."
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"

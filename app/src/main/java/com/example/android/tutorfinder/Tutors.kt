@@ -71,19 +71,20 @@ class Tutors : AppCompatActivity() {
 
         //declaring the array that will hold all the queried users
         val listOfTutorsObjectId = ArrayList<String>()
-        val adapter = ArrayAdapter<String>(this, R.layout.listview_item, listOfTutorsObjectId)
+        val adapter = CustomListView(this,userNames,userLocation,userPrice,userImage)
+        //val adapter = ArrayAdapter<String>(this, R.layout.listview_item, listOfTutorsObjectId)
 
         //filter by username ascending order
         val query1: ParseQuery<ParseUser> = ParseUser.getQuery()
-        query1.addAscendingOrder("name")
+        query1.addAscendingOrder("objectId")
         query1.findInBackground(FindCallback { objects, e -> Unit
             if(e === null){
                 if(objects.size > 0){
                     for(user: ParseUser in objects){
-                        listOfTutorsObjectId.add(user.getString("objectId").toString())
+                        listOfTutorsObjectId.add(user.objectId.toString())
                         userNames.add(user.getString("name").toString())
                         userLocation.add(user.getString("location").toString())
-                        userPrice.add(user.getString("price").toString())
+                        userPrice.add("Avg $"+user.getString("cost").toString()+" /hr")
                         //adding profile pix to ImageArray
                         var file = user.getParseFile("image")
                         file?.getDataInBackground(GetDataCallback { data, e ->
@@ -92,9 +93,8 @@ class Tutors : AppCompatActivity() {
                                 val bmp: Bitmap = BitmapFactory.decodeByteArray(data, 0, data.size)
                                 // Set the Bitmap into the BitMap Array for Profile Images
                                 userImage.add(bmp)
-                                Log.i("success","Image fetched correctly")
                             } else {
-                                Log.d("test", "There was a problem downloading the data.")
+                                Log.d("problem with downloading img", e.printStackTrace().toString())
                             }
                         })
                     }
@@ -113,7 +113,7 @@ class Tutors : AppCompatActivity() {
 
             //intent to profile activity
             val intent = Intent(this, TutorProfileReadOnly::class.java)
-            intent.putExtra("username", listOfTutorsObjectId.get(position))
+            intent.putExtra("objectId", listOfTutorsObjectId[position])
             startActivity(intent)
         }
     }
