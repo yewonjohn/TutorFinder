@@ -90,29 +90,24 @@ class TutorProfileReadOnly : AppCompatActivity() {
                                 Log.i("subjects:","nothing here")
                             }
                             1 -> {
-                                Log.i("subjects:","switch 1")
                                 subject1_button.text = subjects?.get(0)
                             }
                             2 -> {
-                                Log.i("subjects:","switch 2")
                                 subject1_button.text = subjects?.get(0)
                                 subject2_button.text = subjects?.get(1)
                             }
                             3 -> {
-                                Log.i("subjects:","switch 3")
                                 subject1_button.text = subjects?.get(0)
                                 subject2_button.text = subjects?.get(1)
                                 subject3_button.text = subjects?.get(2)
                             }
                             4 -> {
-                                Log.i("subjects:","switch 4")
                                 subject1_button.text = subjects?.get(0)
                                 subject2_button.text = subjects?.get(1)
                                 subject3_button.text = subjects?.get(2)
                                 subject4_button.text = subjects?.get(3)
                             }
                             5 -> {
-                                Log.i("subjects:","switch 5")
                                 subject1_button.text = subjects?.get(0)
                                 subject2_button.text = subjects?.get(1)
                                 subject3_button.text = subjects?.get(2)
@@ -120,7 +115,6 @@ class TutorProfileReadOnly : AppCompatActivity() {
                                 subject5_button.text = subjects?.get(4)
                             }
                             6 -> {
-                                Log.i("subjects:","switch 6")
                                 subject1_button.text = subjects?.get(0)
                                 subject2_button.text = subjects?.get(1)
                                 subject3_button.text = subjects?.get(2)

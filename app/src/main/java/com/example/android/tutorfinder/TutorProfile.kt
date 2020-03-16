@@ -67,12 +67,17 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
 
         //initializing actionBar
         setSupportActionBar(findViewById(R.id.app_toolbar))
+
         //getting current user
         var currentUser = ParseUser.getCurrentUser()
         //initializing fields from page
         var userAge = findViewById<EditText>(R.id.ageEditText)
         var userName = findViewById<EditText>(R.id.nameEditText)
         var userLocation = findViewById<EditText>(R.id.locationEditText)
+        var userDescription = findViewById<EditText>(R.id.descriptionEditText)
+        var userCost = findViewById<EditText>(R.id.costEditText)
+        var userEducation = findViewById<EditText>(R.id.educationEditText)
+        var userSubjects = findViewById<EditText>(R.id.subjectsEditText)
         var saveButton = findViewById<Button>(R.id.saveButton)
         var profileImage = findViewById<ImageView>(R.id.profileImageView)
         //displaying current user image
@@ -94,11 +99,24 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
         userName.setText(currentUser.getString("name"))
         //displaying current user location
         userLocation.setText(currentUser.getString("location"))
-        //saves field data to current User onClick
+        //displaying current user description
+        userDescription.setText(currentUser.getString("description"))
+        //displaying current user costs
+        userCost.setText(currentUser.getString("cost"))
+        //displaying current user education
+        userEducation.setText(currentUser.getString("educationDesc"))
+        //displaying current user subjects
+        userSubjects.setText(currentUser.getString("subjects"))
+
+        //SAVES field data to current User onClick
         saveButton.setOnClickListener(){
             currentUser.put("name",userName.text.toString())
             currentUser.put("age",userAge.text.toString())
             currentUser.put("location",userLocation.text.toString())
+            currentUser.put("description",userDescription.text.toString())
+            currentUser.put("cost",userCost.text.toString())
+            currentUser.put("educationDesc",userEducation.text.toString())
+            currentUser.put("subjects",userSubjects.text.toString())
             currentUser.saveInBackground(SaveCallback { e -> Unit
                 if(e === null){
                     Log.i("data","successfully saved")
@@ -170,7 +188,7 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
     //setting keyboard interaction for layout (clicking out of keyboard view)
     //THIS IS NOT WORKING RIGHT NOW-- NOT WORKING
     override fun onClick(p0: View?) {
-        if(p0?.id === R.id.profileLayout || p0?.id === R.id.profileImageView){
+        if(p0?.id === R.id.profileConstraintLayout || p0?.id === R.id.profileImageView){
             var inputMethodManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken,0)
             Toast.makeText(this,"Clicked",Toast.LENGTH_SHORT).show()
