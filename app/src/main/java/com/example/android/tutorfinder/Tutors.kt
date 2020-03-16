@@ -65,7 +65,6 @@ class Tutors : AppCompatActivity() {
         //initializing actionBar
         setSupportActionBar(findViewById(R.id.app_toolbar))
 
-
         //declaring listView
         val listView = findViewById<ListView>(R.id.listView)
 
@@ -117,5 +116,4 @@ class Tutors : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
 }

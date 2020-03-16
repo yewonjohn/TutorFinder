@@ -1,6 +1,7 @@
 package com.example.android.tutorfinder
 
 import android.content.Intent
+import android.media.Rating
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,13 +10,15 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.RatingBar
 import android.widget.TextView
+import android.widget.Toast
 import com.parse.FindCallback
 import com.parse.ParseQuery
 import com.parse.ParseUser
 import kotlinx.android.synthetic.main.activity_tutor_profile_read_only.*
 
-class TutorProfileReadOnly : AppCompatActivity() {
+class TutorProfileReadOnly : AppCompatActivity(){
 
     //displaying and initiating options menu if signed in
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -56,6 +59,16 @@ class TutorProfileReadOnly : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutor_profile_read_only)
+
+        //TEMPORARY RATING SYSTEM
+        var ratingbar = findViewById<RatingBar>(R.id.ratingBar)
+        var ratingButton = findViewById<TextView>(R.id.ratingTextButton)
+        var ratingTextView = findViewById<TextView>(R.id.ratingTextView)
+
+        ratingButton.setOnClickListener(View.OnClickListener {
+            ratingTextView.text = ratingbar.rating.toString()
+        })
+
 
         //initializing actionBar
         setSupportActionBar(findViewById(R.id.app_toolbar))
@@ -150,4 +163,5 @@ class TutorProfileReadOnly : AppCompatActivity() {
         })
 
     }
+
 }
