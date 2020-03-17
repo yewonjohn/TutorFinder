@@ -22,20 +22,18 @@ class TutorProfileReadOnly : AppCompatActivity(){
 
     //displaying and initiating options menu if signed in
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        //this condition will have to change
-        super.onCreateOptionsMenu(menu);
-
-        var menuInflater: MenuInflater = menuInflater
+            var menuInflater: MenuInflater = menuInflater
             menuInflater.inflate(R.menu.menu_options, menu)
 
         return super.onCreateOptionsMenu(menu)
     }
-    //when loggedout, intent takes you back to homepage
+    //defining functionality of each button/options on menu ONCLICK
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId === R.id.logout) {
             ParseUser.logOutInBackground() { e ->
                 Unit
                 if (e === null) {
+                    Log.i("success","in signing out")
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 } else {
@@ -43,12 +41,10 @@ class TutorProfileReadOnly : AppCompatActivity(){
                 }
             }
         }
-        //profile icon takes you to myProfile
         if (item?.itemId === R.id.myProfile) {
             val intent = Intent(this, TutorProfile::class.java)
             startActivity(intent)
         }
-        //home icon takes you to home
         if (item?.itemId === R.id.home) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

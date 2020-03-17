@@ -12,10 +12,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.parse.GetDataCallback
@@ -65,8 +62,8 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_tutor_profile)
 
         //triggering onClicklistener for keyboard minimizing
-        var profileLayout = findViewById<ConstraintLayout>(R.id.profileConstraintLayout)
-        profileLayout.setOnClickListener(this)
+        var profileScrollViewConstraintLayout = findViewById<ConstraintLayout>(R.id.profileScrollViewConstraintLayout)
+        profileScrollViewConstraintLayout.setOnClickListener(this)
 
         //initializing actionBar
         setSupportActionBar(findViewById(R.id.app_toolbar))
@@ -76,11 +73,13 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
         //initializing fields from page
         var userAge = findViewById<EditText>(R.id.ageEditText)
         var userName = findViewById<EditText>(R.id.nameEditText)
-        var userLocation = findViewById<EditText>(R.id.locationEditText)
+        var userZipCode = findViewById<EditText>(R.id.zipcodeEditText)
         var userDescription = findViewById<EditText>(R.id.descriptionEditText)
-        var userCost = findViewById<EditText>(R.id.costEditText)
-        var userEducation = findViewById<EditText>(R.id.educationEditText)
-        var userSubjects = findViewById<EditText>(R.id.subjectsEditText)
+        var userCost = findViewById<EditText>(R.id.costRateEditText)
+        var userHighestDegree = findViewById<EditText>(R.id.highestDegreeEditText)
+        var userSchool = findViewById<EditText>(R.id.SchoolEditText)
+        var userGraduationDate = findViewById<EditText>(R.id.graduationEditText)
+        var userSubjects = findViewById<EditText>(R.id.SubjectsEditText)
         var saveButton = findViewById<Button>(R.id.saveButton)
         var profileImage = findViewById<ImageView>(R.id.profileImageView)
         //displaying current user image
@@ -101,13 +100,15 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
         //displaying current user name
         userName.setText(currentUser.getString("name"))
         //displaying current user location
-        userLocation.setText(currentUser.getString("location"))
+        //TO BE CONVERTED TO LOCATION FROM ZIPCODE VVVVV *************
+        userZipCode.setText(currentUser.getString("location"))
         //displaying current user description
         userDescription.setText(currentUser.getString("description"))
         //displaying current user costs
         userCost.setText(currentUser.getString("cost"))
         //displaying current user education
-        userEducation.setText(currentUser.getString("educationDesc"))
+        //MANAGE AND MANIPULATE DESCRIPTION BASED ON 3 EDUCATION FIELDS VVVVV ***************
+        userHighestDegree.setText(currentUser.getString("educationDesc"))
         //displaying current user subjects
         userSubjects.setText(currentUser.getString("subjects"))
 
@@ -115,10 +116,12 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
         saveButton.setOnClickListener(){
             currentUser.put("name",userName.text.toString())
             currentUser.put("age",userAge.text.toString())
-            currentUser.put("location",userLocation.text.toString())
+            //MODIFY THIS FIELD ********** VVVV
+            currentUser.put("location",userZipCode.text.toString())
             currentUser.put("description",userDescription.text.toString())
             currentUser.put("cost",userCost.text.toString())
-            currentUser.put("educationDesc",userEducation.text.toString())
+            //MODIFY THIS FIELD ************* VVV
+            currentUser.put("educationDesc",userHighestDegree.text.toString())
             currentUser.put("subjects",userSubjects.text.toString())
             currentUser.saveInBackground(SaveCallback { e -> Unit
                 if(e === null){
@@ -190,7 +193,7 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
 
     //setting keyboard interaction for layout (clicking out of keyboard view)
     override fun onClick(p0: View?) {
-        if(p0?.id === R.id.profileConstraintLayout || p0?.id === R.id.profileImageView){
+        if(p0?.id === R.id.profileScrollViewConstraintLayout || p0?.id === R.id.profileImageView){
             var inputMethodManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken,0)
         }

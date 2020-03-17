@@ -7,7 +7,6 @@
     tools:context=".TutorProfileReadOnly">
 
     <include
-        android:id="@+id/include"
         layout="@layout/app_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,9 +17,9 @@
         android:layout_width="157dp"
         android:layout_height="213dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="69dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/study_background1" />
 
     <TextView
@@ -28,7 +27,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="66dp"
         android:layout_marginEnd="5dp"
         android:ems="10"
         android:fontFamily="@font/open_sans"
@@ -37,7 +36,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profileImageView"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/locationTextView"

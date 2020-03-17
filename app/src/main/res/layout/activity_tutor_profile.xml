@@ -8,242 +8,425 @@
     tools:context=".TutorProfileReadOnly">
 
     <include
-        android:id="@+id/include"
         layout="@layout/app_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></include>
 
-    <ImageView
-        android:id="@+id/profileImageView"
-        android:layout_width="157dp"
-        android:layout_height="213dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include"
-        app:srcCompat="@drawable/study_background1" />
-
-    <Button
-        android:id="@+id/uploadButton"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="77dp"
-        android:layout_height="37dp"
-        android:onClick="getPhoto"
-        android:text="Upload"
-        android:textSize="10sp"
-        app:layout_constraintStart_toEndOf="@+id/ageEditText"
-        app:layout_constraintTop_toBottomOf="@+id/profileImageView"
-        tools:ignore="OnClick" />
-
-    <EditText
-        android:id="@+id/nameEditText"
-        android:layout_width="0dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:fontFamily="@font/open_sans"
-        android:hint="First Name, Last Name"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profileImageView"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
-
-    <EditText
-        android:id="@+id/locationEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:ems="10"
-        android:hint="Example, Location"
-        android:textColor="#BCBCBC"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profileImageView"
-        app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
-
-    <View
-        android:id="@+id/gps_vector"
-        android:layout_width="0dp"
+    <ScrollView
+        android:id="@+id/profileScrollView"
+        android:layout_width="412dp"
         android:layout_height="0dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="3dp"
-        android:background="@drawable/gps_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/locationEditText"
-        app:layout_constraintEnd_toStartOf="@+id/locationEditText"
-        app:layout_constraintStart_toEndOf="@+id/profileImageView"
-        app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
-
-    <EditText
-        android:id="@+id/descriptionEditText"
-        android:background="@drawable/custom_text_box"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:fontFamily="@font/open_sans"
-        android:gravity="start|top"
-        android:hint="describe yourself!"
-        android:inputType="textMultiLine"
-        android:lineSpacingExtra="2sp"
-        android:textAppearance="@style/short_perso"
-        android:translationY="-1.19sp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/costEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/profileImageView"
-        app:layout_constraintTop_toBottomOf="@+id/locationEditText" />
-
-    <EditText
-        android:id="@+id/costEditText"
-        android:layout_width="80dp"
-        android:layout_height="35dp"
-        android:fontFamily="@font/open_sans"
-        android:gravity="top"
-        android:hint="$30 / hr"
-        android:lineSpacingExtra="0sp"
-        android:textAppearance="@style/avg_30_hr"
-        app:layout_constraintBottom_toBottomOf="@+id/profileImageView"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageView
-        android:id="@+id/line1"
-        android:layout_width="0dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="30dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ageEditText"
-        app:srcCompat="@drawable/line" />
-
-    <ImageView
-        android:id="@+id/line2"
-        android:layout_width="0dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="244dp"
-        android:scaleType="fitCenter"
+        android:layout_marginTop="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/line" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
-    <TextView
-        android:id="@+id/educationTitleTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentTop="false"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:fontFamily="@font/open_sans"
-        android:gravity="top"
-        android:lineSpacingExtra="0sp"
-        android:text="Your Education"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.173"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line1" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/profileScrollViewConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/subjectTitleTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentTop="false"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:fontFamily="@font/open_sans"
-        android:gravity="top"
-        android:lineSpacingExtra="0sp"
-        android:text="Subjects You Can Teach"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line2" />
+            <Button
+                android:id="@+id/uploadButton"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="77dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:onClick="getPhoto"
+                android:text="Upload"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileImageView"
+                tools:ignore="OnClick" />
 
-    <EditText
-        android:id="@+id/educationEditText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/custom_text_box"
-        android:fontFamily="@font/open_sans"
-        android:gravity="start|top"
-        android:hint="Your Highest Level of Education"
-        android:inputType="textMultiLine"
-        android:paddingLeft="5dp"
-        android:paddingTop="2dp"
-        android:paddingRight="5dp"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/line2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/educationTitleTextView" />
+            <ImageView
+                android:id="@+id/profileImageView"
+                android:layout_width="157dp"
+                android:layout_height="213dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/study_background1" />
 
-    <EditText
-        android:id="@+id/ageEditText"
-        android:layout_width="78dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="3dp"
-        android:ems="10"
-        android:fontFamily="@font/open_sans"
-        android:hint="age"
-        android:inputType="number"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
+            <Button
+                android:id="@+id/saveButton"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="12dp"
+                android:text="Save"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionEditText" />
 
-    <EditText
-        android:id="@+id/subjectsEditText"
-        android:background="@drawable/custom_text_box"
-        android:hint="Subjects you can teach! Seperate by commas"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="150dp"
-        android:ems="10"
-        android:fontFamily="@font/open_sans"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:textSize="10sp"
-        android:paddingTop="2dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subjectTitleTextView" />
+            <EditText
+                android:id="@+id/zipcodeEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/open_sans"
+                android:hint="Zip Code"
+                android:inputType="textPersonName"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.466"
+                app:layout_constraintStart_toEndOf="@+id/profileImageView"
+                app:layout_constraintTop_toBottomOf="@+id/zipcodeLabelTextView" />
 
-    <Button
-        android:id="@+id/saveButton"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="25dp"
-        android:text="Save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <EditText
+                android:id="@+id/phoneNumberEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/open_sans"
+                android:hint="Phone Number"
+                android:inputType="number|textPersonName|phone"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.466"
+                app:layout_constraintStart_toEndOf="@+id/profileImageView"
+                app:layout_constraintTop_toBottomOf="@+id/phoneNumberLabelEditText" />
+
+            <EditText
+                android:id="@+id/profileEmailEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/open_sans"
+                android:hint="Email Address"
+                android:inputType="textEmailAddress"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.466"
+                app:layout_constraintStart_toEndOf="@+id/profileImageView"
+                app:layout_constraintTop_toBottomOf="@+id/emailLabelTextView" />
+
+            <EditText
+                android:id="@+id/nameEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/open_sans"
+                android:hint="Full Name"
+                android:inputType="textPersonName"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/profileImageView"
+                app:layout_constraintTop_toBottomOf="@+id/nameLabelEditText" />
+
+            <EditText
+                android:id="@+id/ageEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/open_sans"
+                android:hint="Age"
+                android:inputType="textPersonName"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/profileImageView"
+                app:layout_constraintTop_toBottomOf="@+id/ageLabelTextView" />
+
+            <TextView
+                android:id="@+id/tutorInfoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="568dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="Tutor Info"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/SubjectsEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:ems="10"
+                android:fontFamily="@font/open_sans"
+                android:hint="Subjects"
+                android:inputType="textPersonName"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/subjectsLabelTextView" />
+
+            <EditText
+                android:id="@+id/highestDegreeEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:ems="10"
+                android:fontFamily="@font/open_sans"
+                android:hint="Highest Degree"
+                android:inputType="textPersonName"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/highestDegreeTextView" />
+
+            <EditText
+                android:id="@+id/SchoolEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:ems="10"
+                android:fontFamily="@font/open_sans"
+                android:hint="School/University"
+                android:inputType="textPersonName"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/schoolLabelTextView" />
+
+            <EditText
+                android:id="@+id/graduationEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:ems="10"
+                android:fontFamily="@font/open_sans"
+                android:hint="Graduation Date"
+                android:inputType="textPersonName"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/graduationLabelTextView" />
+
+            <EditText
+                android:id="@+id/costRateEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:ems="10"
+                android:fontFamily="@font/open_sans"
+                android:hint="Graduation Date"
+                android:inputType="textPersonName"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/costRateLabelTextView" />
+
+            <TextView
+                android:id="@+id/descriptionTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="Description"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/costRateEditText" />
+
+            <EditText
+                android:id="@+id/descriptionEditText"
+                android:layout_width="374dp"
+                android:layout_height="106dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/custom_text_box"
+                android:ems="10"
+                android:fontFamily="@font/open_sans"
+                android:gravity="top|left"
+                android:hint="Description"
+                android:inputType="textMultiLine|textPersonName"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionTitleTextView" />
+
+            <TextView
+                android:id="@+id/ratingTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="308dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="Current Rating"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RatingBar
+                android:id="@+id/ratingBar2"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="79dp"
+                android:layout_height="18dp"
+                app:layout_constraintStart_toEndOf="@+id/ratingTitleTextView2"
+                app:layout_constraintTop_toBottomOf="@+id/ratingTitleTextView" />
+
+            <TextView
+                android:id="@+id/ratingTitleTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="332dp"
+                android:fontFamily="@font/open_sans"
+                android:text="5.0"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/basicInfoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="Basic Info"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.116"
+                app:layout_constraintStart_toEndOf="@+id/profileImageView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/line1"
+                android:layout_width="349dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="64dp"
+                android:background="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.507"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText" />
+
+            <TextView
+                android:id="@+id/nameLabelEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="Full Name:"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.517"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/basicInfoTextView" />
+
+            <TextView
+                android:id="@+id/ageLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="Age:"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.459"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+
+            <TextView
+                android:id="@+id/emailLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="Email Address:"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.559"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ageEditText" />
+
+            <TextView
+                android:id="@+id/phoneNumberLabelEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="Phone Number:"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.577"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/zipcodeEditText" />
+
+            <TextView
+                android:id="@+id/zipcodeLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="Zip Code:"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileEmailEditText" />
+
+            <TextView
+                android:id="@+id/subjectsLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="Subjects:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tutorInfoTextView" />
+
+            <TextView
+                android:id="@+id/highestDegreeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="Highest Degree:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/SubjectsEditText" />
+
+            <TextView
+                android:id="@+id/schoolLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="School/University"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/highestDegreeEditText" />
+
+            <TextView
+                android:id="@+id/graduationLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="Graduation Date:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/SchoolEditText" />
+
+            <TextView
+                android:id="@+id/costRateLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="Average Rate (in $):"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/graduationEditText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
