@@ -10,20 +10,19 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.parse.GetDataCallback
 import com.parse.ParseFile
 import com.parse.ParseUser
 import com.parse.SaveCallback
+import kotlinx.android.synthetic.main.activity_register.*
 import java.io.ByteArrayOutputStream
 
 class TutorProfile : AppCompatActivity(), View.OnClickListener {
@@ -64,6 +63,10 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutor_profile)
+
+        //triggering onClicklistener for keyboard minimizing
+        var profileLayout = findViewById<ConstraintLayout>(R.id.profileConstraintLayout)
+        profileLayout.setOnClickListener(this)
 
         //initializing actionBar
         setSupportActionBar(findViewById(R.id.app_toolbar))
@@ -186,13 +189,10 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
     }
 
     //setting keyboard interaction for layout (clicking out of keyboard view)
-    //THIS IS NOT WORKING RIGHT NOW-- NOT WORKING
     override fun onClick(p0: View?) {
         if(p0?.id === R.id.profileConstraintLayout || p0?.id === R.id.profileImageView){
             var inputMethodManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken,0)
-            Toast.makeText(this,"Clicked",Toast.LENGTH_SHORT).show()
-            Log.i("Something","CLICKED")
         }
     }
 }

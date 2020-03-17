@@ -33,7 +33,8 @@
         android:text="Upload"
         android:textSize="10sp"
         app:layout_constraintStart_toEndOf="@+id/ageEditText"
-        app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/profileImageView"
+        tools:ignore="OnClick" />
 
     <EditText
         android:id="@+id/nameEditText"
@@ -81,6 +82,7 @@
 
     <EditText
         android:id="@+id/descriptionEditText"
+        android:background="@drawable/custom_text_box"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -91,6 +93,9 @@
         android:lineSpacingExtra="2sp"
         android:textAppearance="@style/short_perso"
         android:translationY="-1.19sp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="2dp"
         app:layout_constraintBottom_toTopOf="@+id/costEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -179,11 +184,14 @@
         android:layout_height="0dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
+        android:background="@drawable/custom_text_box"
         android:fontFamily="@font/open_sans"
         android:gravity="start|top"
-        android:hint="describe yourself!"
+        android:hint="Your Highest Level of Education"
         android:inputType="textMultiLine"
-        android:text="Bachelors of Science"
+        android:paddingLeft="5dp"
+        android:paddingTop="2dp"
+        android:paddingRight="5dp"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/line2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -206,6 +214,8 @@
 
     <EditText
         android:id="@+id/subjectsEditText"
+        android:background="@drawable/custom_text_box"
+        android:hint="Subjects you can teach! Seperate by commas"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="50dp"
@@ -216,6 +226,9 @@
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:textSize="10sp"
+        android:paddingTop="2dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

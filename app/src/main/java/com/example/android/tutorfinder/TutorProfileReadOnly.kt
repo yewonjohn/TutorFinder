@@ -23,10 +23,11 @@ class TutorProfileReadOnly : AppCompatActivity(){
     //displaying and initiating options menu if signed in
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //this condition will have to change
-        if (ParseUser.getCurrentUser() !== null) {
-            var menuInflater: MenuInflater = menuInflater
+        super.onCreateOptionsMenu(menu);
+
+        var menuInflater: MenuInflater = menuInflater
             menuInflater.inflate(R.menu.menu_options, menu)
-        }
+
         return super.onCreateOptionsMenu(menu)
     }
     //when loggedout, intent takes you back to homepage

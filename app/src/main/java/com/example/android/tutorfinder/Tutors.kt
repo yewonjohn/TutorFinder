@@ -61,7 +61,6 @@ class Tutors : AppCompatActivity() {
         var userPrice = ArrayList<String>()
         var userImage = ArrayList<Bitmap>()
 
-
         //initializing actionBar
         setSupportActionBar(findViewById(R.id.app_toolbar))
 
@@ -109,7 +108,6 @@ class Tutors : AppCompatActivity() {
         listView.setOnItemClickListener{ parent, view, position, id ->
             //getting item selected (returning a long?)
             val selectedItemPosition = parent.getItemIdAtPosition(position)
-
             //intent to profile activity
             val intent = Intent(this, TutorProfileReadOnly::class.java)
             intent.putExtra("objectId", listOfTutorsObjectId[position])
