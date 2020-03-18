@@ -43,13 +43,11 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
                 var reader: InputStreamReader = InputStreamReader(input)
                 var data = reader.read()
 
-                while (data !== 1){
-                    var current = data.toChar() as Char
+                while (data !== -1){
+                    var current = data as Char
                     result += current
                     data = reader.read()
                 }
-
-
             } catch (e: Exception){
                 Log.i("Error fetching API",e.printStackTrace().toString())
             }
@@ -106,8 +104,8 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
         var result: String
         try {
             var task = DownloadTask()
-            result = task.execute("https://google.com").get()
-//            result = task.execute("https://maps.googleapis.com/maps/api/geocode/json?address=07661=AIzaSyDElpkgxu91ZEno8fO0xiJ1f_c_gGWH8Uo").get()
+           // result = task.execute("https://google.com").get()
+            result = task.execute("https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyBlXzJreSsIzhWffbBUlhEcP_Eoc8qIXbM").get()
         } catch (e:Exception){
             Log.i("Error fetching API",e.printStackTrace().toString())
         }
