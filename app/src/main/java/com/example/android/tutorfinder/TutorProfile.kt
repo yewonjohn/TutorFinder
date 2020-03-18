@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.AsyncTask
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -21,8 +22,47 @@ import com.parse.ParseUser
 import com.parse.SaveCallback
 import kotlinx.android.synthetic.main.activity_register.*
 import java.io.ByteArrayOutputStream
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
 
 class TutorProfile : AppCompatActivity(), View.OnClickListener {
+
+    //CLASS FOR API
+    public class DownloadTask: AsyncTask<String, Void, String>() {
+        override fun doInBackground(vararg p0: String?): String {
+
+            var result: String = ""
+            var url: URL
+            var urlConnection: HttpURLConnection
+
+            try {
+                url = URL(p0[0])
+                urlConnection = url.openConnection() as HttpURLConnection
+                var input = urlConnection.inputStream
+                var reader: InputStreamReader = InputStreamReader(input)
+                var data = reader.read()
+
+                while (data !== 1){
+                    var current = data.toChar() as Char
+                    result += current
+                    data = reader.read()
+                }
+
+
+            } catch (e: Exception){
+                Log.i("Error fetching API",e.printStackTrace().toString())
+            }
+
+            return result
+        }
+    //METHOD POST EXECUTE FOR API
+        override fun onPostExecute(result: String?) {
+            super.onPostExecute(result)
+            Log.i("JSON",result)
+        }
+    }
+
 
     //displaying and initiating options menu if signed in
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -60,6 +100,18 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutor_profile)
+
+
+        //API STUFF HERE:
+        var result: String
+        try {
+            var task = DownloadTask()
+            result = task.execute("https://google.com").get()
+//            result = task.execute("https://maps.googleapis.com/maps/api/geocode/json?address=07661=AIzaSyDElpkgxu91ZEno8fO0xiJ1f_c_gGWH8Uo").get()
+        } catch (e:Exception){
+            Log.i("Error fetching API",e.printStackTrace().toString())
+        }
+
 
         //triggering onClicklistener for keyboard minimizing
         var profileScrollViewConstraintLayout = findViewById<ConstraintLayout>(R.id.profileScrollViewConstraintLayout)
