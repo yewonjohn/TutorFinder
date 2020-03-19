@@ -11,17 +11,26 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.parse.GetDataCallback
 import com.parse.ParseFile
 import com.parse.ParseUser
 import com.parse.SaveCallback
-import kotlinx.android.synthetic.main.activity_register.*
+import org.json.JSONException
+import org.json.JSONObject
+import java.io.BufferedReader
 import java.io.ByteArrayOutputStream
+import java.io.IOException
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
@@ -44,7 +53,7 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
                 var data = reader.read()
 
                 while (data !== -1){
-                    var current = data as Char
+                    var current = data.toChar()
                     result += current
                     data = reader.read()
                 }
@@ -100,17 +109,6 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_tutor_profile)
 
 
-        //API STUFF HERE:
-        var result: String
-        try {
-            var task = DownloadTask()
-           // result = task.execute("https://google.com").get()
-            result = task.execute("https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyBlXzJreSsIzhWffbBUlhEcP_Eoc8qIXbM").get()
-        } catch (e:Exception){
-            Log.i("Error fetching API",e.printStackTrace().toString())
-        }
-
-
         //triggering onClicklistener for keyboard minimizing
         var profileScrollViewConstraintLayout = findViewById<ConstraintLayout>(R.id.profileScrollViewConstraintLayout)
         profileScrollViewConstraintLayout.setOnClickListener(this)
@@ -151,7 +149,7 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
         userName.setText(currentUser.getString("name"))
         //displaying current user location
         //TO BE CONVERTED TO LOCATION FROM ZIPCODE VVVVV *************
-        userZipCode.setText(currentUser.getString("location"))
+        userZipCode.setText(currentUser.getString("zipcode"))
         //displaying current user description
         userDescription.setText(currentUser.getString("description"))
         //displaying current user costs
@@ -167,12 +165,22 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
             currentUser.put("name",userName.text.toString())
             currentUser.put("age",userAge.text.toString())
             //MODIFY THIS FIELD ********** VVVV
-            currentUser.put("location",userZipCode.text.toString())
+            currentUser.put("zipcode",userZipCode.text.toString())
             currentUser.put("description",userDescription.text.toString())
             currentUser.put("cost",userCost.text.toString())
             //MODIFY THIS FIELD ************* VVV
             currentUser.put("educationDesc",userHighestDegree.text.toString())
             currentUser.put("subjects",userSubjects.text.toString())
+
+            //API STUFF HERE: calling api then parsing JSON about user location
+            var result: String
+            try {
+                var task = DownloadTask()
+                result = task.execute("https://maps.googleapis.com/maps/api/geocode/json?address="+userZipCode+"&key=AIzaSyBlXzJreSsIzhWffbBUlhEcP_Eoc8qIXbM").get()
+            } catch (e:Exception){
+                Log.i("Error fetching API",e.printStackTrace().toString())
+            }
+
             currentUser.saveInBackground(SaveCallback { e -> Unit
                 if(e === null){
                     Log.i("data","successfully saved")
