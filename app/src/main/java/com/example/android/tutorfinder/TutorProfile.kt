@@ -66,10 +66,7 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
     //METHOD POST EXECUTE FOR API
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
-            Log.i("JSON",result)
-
-
-
+            //Log.i("JSON",result)
         }
     }
 
@@ -156,9 +153,12 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
         userDescription.setText(currentUser.getString("description"))
         //displaying current user costs
         userCost.setText(currentUser.getString("cost"))
-        //displaying current user education
-        //MANAGE AND MANIPULATE DESCRIPTION BASED ON 3 EDUCATION FIELDS VVVVV ***************
-        userHighestDegree.setText(currentUser.getString("educationDesc"))
+        //displaying current highest degree
+        userHighestDegree.setText(currentUser.getString("highestDegree"))
+        //displaying current user school
+        userSchool.setText(currentUser.getString("school"))
+        //displaying current user graduation date
+        userGraduationDate.setText(currentUser.getString("graduationDate"))
         //displaying current user subjects
         userSubjects.setText(currentUser.getString("subjects"))
 
@@ -170,15 +170,18 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
             currentUser.put("description",userDescription.text.toString())
             currentUser.put("cost",userCost.text.toString())
             //MODIFY THIS FIELD ************* VVV
-            //add 2 more variables 
-            currentUser.put("educationDesc",userHighestDegree.text.toString())
+            //add 2 more variables
+            currentUser.put("highestDegree",userHighestDegree.text.toString())
+            currentUser.put("school",userSchool.text.toString())
+            currentUser.put("graduationDate",userGraduationDate.text.toString())
             currentUser.put("subjects",userSubjects.text.toString())
 
             //API STUFF HERE: calling api then parsing JSON about user location
-            var result: String
+            var result: String = ""
             try {
                 var task = DownloadTask()
-                result = task.execute("https://maps.googleapis.com/maps/api/geocode/json?address="+userZipCode+"&key=AIzaSyBlXzJreSsIzhWffbBUlhEcP_Eoc8qIXbM").get()
+                result = task.execute("https://maps.googleapis.com/maps/api/geocode/json?address="+userZipCode.text.toString()+"&key=AIzaSyBlXzJreSsIzhWffbBUlhEcP_Eoc8qIXbM").get()
+                Log.i("result of API call",result)
             } catch (e:Exception){
                 Log.i("Error fetching API",e.printStackTrace().toString())
             }
