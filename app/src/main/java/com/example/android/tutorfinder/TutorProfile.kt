@@ -67,6 +67,9 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
             Log.i("JSON",result)
+
+
+
         }
     }
 
@@ -147,8 +150,7 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
         userAge.setText(currentUser.getString("age"))
         //displaying current user name
         userName.setText(currentUser.getString("name"))
-        //displaying current user location
-        //TO BE CONVERTED TO LOCATION FROM ZIPCODE VVVVV *************
+        //displaying current user zipcode
         userZipCode.setText(currentUser.getString("zipcode"))
         //displaying current user description
         userDescription.setText(currentUser.getString("description"))
@@ -164,11 +166,11 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
         saveButton.setOnClickListener(){
             currentUser.put("name",userName.text.toString())
             currentUser.put("age",userAge.text.toString())
-            //MODIFY THIS FIELD ********** VVVV
             currentUser.put("zipcode",userZipCode.text.toString())
             currentUser.put("description",userDescription.text.toString())
             currentUser.put("cost",userCost.text.toString())
             //MODIFY THIS FIELD ************* VVV
+            //add 2 more variables 
             currentUser.put("educationDesc",userHighestDegree.text.toString())
             currentUser.put("subjects",userSubjects.text.toString())
 
@@ -180,6 +182,8 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
             } catch (e:Exception){
                 Log.i("Error fetching API",e.printStackTrace().toString())
             }
+
+            //SET LOCATION HERE
 
             currentUser.saveInBackground(SaveCallback { e -> Unit
                 if(e === null){
