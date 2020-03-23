@@ -187,6 +187,14 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
             }
 
             //SET LOCATION HERE
+            try {
+                var jsonObject = JSONObject(result)
+                var userAddress = jsonObject.getString("result")
+                Log.i("formatted address",userAddress)
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+
 
             currentUser.saveInBackground(SaveCallback { e -> Unit
                 if(e === null){
