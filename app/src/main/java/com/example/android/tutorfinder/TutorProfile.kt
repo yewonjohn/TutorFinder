@@ -26,6 +26,7 @@ import com.parse.GetDataCallback
 import com.parse.ParseFile
 import com.parse.ParseUser
 import com.parse.SaveCallback
+import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -189,12 +190,14 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
             //SET LOCATION HERE
             try {
                 var jsonObject = JSONObject(result)
-                var userAddress = jsonObject.getString("result")
-                Log.i("formatted address",userAddress)
+                var results1 = jsonObject.getString("results")
+                var results2 = JSONArray(results1).toString()
+                var result3 = JSONObject(results2)
+                var result4 = result3.getString("formatted_address")
+                Log.i("addresss",result4)
             }catch (e:Exception){
                 e.printStackTrace()
             }
-
 
             currentUser.saveInBackground(SaveCallback { e -> Unit
                 if(e === null){
