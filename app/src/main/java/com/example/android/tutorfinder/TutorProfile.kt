@@ -188,7 +188,7 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
             }
 
             //SET LOCATION HERE
-            // parsing the JSON Object is not working..
+            // parsing the JSON Object is not working......
             try {
                 var jsonObject = JSONObject(result)
                 var results1 = jsonObject.getString("results")
