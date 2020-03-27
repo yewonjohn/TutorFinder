@@ -91,6 +91,7 @@ class TutorProfileReadOnly : AppCompatActivity(){
                         educationTitleTextView.text = user.getString("name")+"'s Education"
                         educationTextView.text = user.getString("educationDesc")
                         subjectTitleTextView.text = user.getString("name")+"'s Subjects"
+                        locationTextView.text = user.getString("address")
                         //setting every subject button
                         //THIS WILL CHANGE. I HAVE MADE THIS AS JUST A LINE OF STRINGS FOR NOW
                         var subjects = user.getString("subjects")?.split(",")

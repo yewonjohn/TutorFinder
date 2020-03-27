@@ -175,12 +175,13 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
             currentUser.put("description",userDescription.text.toString())
             currentUser.put("cost",userCost.text.toString())
             currentUser.put("email",userEmail.text.toString())
-            //MODIFY THIS FIELD ************* VVV
-            //add 2 more variables
             currentUser.put("highestDegree",userHighestDegree.text.toString())
             currentUser.put("school",userSchool.text.toString())
             currentUser.put("graduationDate",userGraduationDate.text.toString())
             currentUser.put("subjects",userSubjects.text.toString())
+            //compiling education into one variable here
+            var education = userSchool.text.toString() +" "+userHighestDegree.text.toString()+" "+ userGraduationDate.text.toString()
+            currentUser.put("educationDesc",education)
 
             //API STUFF HERE: calling api then parsing JSON about user location
             var result: String = ""
