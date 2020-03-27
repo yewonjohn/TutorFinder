@@ -50,7 +50,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
         if(p0?.id === R.id.loginLayout){
             var inputMethodManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken,0)
+            if(currentFocus !== null) {
+                inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+            }
         }
     }
 }

@@ -101,7 +101,9 @@ class RegisterActivity : AppCompatActivity(), View.OnKeyListener, View.OnClickLi
     override fun onClick(p0: View?) {
         if(p0?.id === R.id.registrationLayout){
             var inputMethodManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken,0)
+            if(currentFocus !== null) {
+                inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+            }
         }
     }
 

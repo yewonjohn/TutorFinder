@@ -20,6 +20,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.parse.GetDataCallback
@@ -131,6 +132,8 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
         var userSubjects = findViewById<EditText>(R.id.SubjectsEditText)
         var saveButton = findViewById<Button>(R.id.saveButton)
         var profileImage = findViewById<ImageView>(R.id.profileImageView)
+        var userEmail = findViewById<EditText>(R.id.profileEmailEditText)
+        var userNumber = findViewById<EditText>(R.id.phoneNumberEditText)
         //displaying current user image
         var file = currentUser.getParseFile("image")
         file?.getDataInBackground(GetDataCallback { data, e ->
@@ -144,24 +147,25 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
                 Log.d("test", "There was a problem downloading the data.")
             }
         })
-        //displaying current user age
-        userAge.setText(currentUser.getString("age"))
-        //displaying current user name
-        userName.setText(currentUser.getString("name"))
-        //displaying current user zipcode
-        userZipCode.setText(currentUser.getString("zipcode"))
-        //displaying current user description
-        userDescription.setText(currentUser.getString("description"))
-        //displaying current user costs
-        userCost.setText(currentUser.getString("cost"))
-        //displaying current highest degree
-        userHighestDegree.setText(currentUser.getString("highestDegree"))
-        //displaying current user school
-        userSchool.setText(currentUser.getString("school"))
-        //displaying current user graduation date
-        userGraduationDate.setText(currentUser.getString("graduationDate"))
-        //displaying current user subjects
-        userSubjects.setText(currentUser.getString("subjects"))
+
+        try {
+            //displaying current user info
+            userAge.setText(currentUser.getString("age"))
+            userName.setText(currentUser.getString("name"))
+            userEmail.setText((currentUser.getString("email")))
+            userZipCode.setText(currentUser.getString("zipcode"))
+            userDescription.setText(currentUser.getString("description"))
+            userCost.setText(currentUser.getString("cost"))
+            userHighestDegree.setText(currentUser.getString("highestDegree"))
+            userSchool.setText(currentUser.getString("school"))
+            userGraduationDate.setText(currentUser.getString("graduationDate"))
+            userSubjects.setText(currentUser.getString("subjects"))
+            userNumber.setText(currentUser.getInt("phoneNumber").toString())
+        } catch (e:Exception){
+            e.printStackTrace()
+            Toast.makeText(this,"Info not fetched correctly",Toast.LENGTH_SHORT).show()
+        }
+
 
         //SAVES field data to current User onClick
         saveButton.setOnClickListener(){
@@ -170,6 +174,7 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
             currentUser.put("zipcode",userZipCode.text.toString())
             currentUser.put("description",userDescription.text.toString())
             currentUser.put("cost",userCost.text.toString())
+            currentUser.put("email",userEmail.text.toString())
             //MODIFY THIS FIELD ************* VVV
             //add 2 more variables
             currentUser.put("highestDegree",userHighestDegree.text.toString())
@@ -188,14 +193,15 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
             }
 
             //SET LOCATION HERE
-            // parsing the JSON Object is not working......
+            // parsing the JSON here to "formatted_address"
             try {
                 var jsonObject = JSONObject(result)
-                var results1 = jsonObject.getString("results")
-                var results2 = JSONArray(results1).toString()
-                var result3 = JSONObject(results2)
-                var result4 = result3.getString("formatted_address")
-                Log.i("addresss",result4)
+                var results = jsonObject.getString("results")
+                var results1 = JSONArray(results)
+                var results2 = JSONObject(results1[0].toString())
+                var results3 = results2.getString("formatted_address")
+                Log.i("addresss",results3)
+                currentUser.put("address",results3)
             }catch (e:Exception){
                 e.printStackTrace()
             }
@@ -272,7 +278,9 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
         if(p0?.id === R.id.profileScrollViewConstraintLayout || p0?.id === R.id.profileImageView){
             var inputMethodManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken,0)
+            if(currentFocus !== null) {
+                inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+            }
         }
     }
 }
