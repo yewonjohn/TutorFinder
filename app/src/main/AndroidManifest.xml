@@ -16,9 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RegisterPage3"></activity>
-        <activity android:name=".RegisterPage2" />
-        <activity android:name=".RegisterPage1" />
+        <activity android:name=".RegisterPage3Activity"></activity>
+        <activity android:name=".RegisterPage2Activity" />
+        <activity android:name=".RegisterPage1Activity" />
         <activity android:name=".TutorProfileReadOnly" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />

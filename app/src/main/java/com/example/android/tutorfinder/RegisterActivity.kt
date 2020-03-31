@@ -70,7 +70,7 @@ class RegisterActivity : AppCompatActivity(), View.OnKeyListener, View.OnClickLi
                                     if(e === null){
                                         Log.i("login","success!")
                                         Toast.makeText(applicationContext,"login success",Toast.LENGTH_SHORT).show()
-                                        val intent = Intent(this, TutorProfile::class.java)
+                                        val intent = Intent(this, RegisterPage1Activity::class.java)
                                         startActivity(intent)
                                     } else{
                                         Log.i("login Failed",e.printStackTrace().toString())

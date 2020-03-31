@@ -5,7 +5,7 @@
     android:id="@+id/register1Layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterPage1">
+    tools:context=".RegisterPage1Activity">
 
     <TextView
         android:id="@+id/setUpProfileTextView"
@@ -102,7 +102,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
         android:layout_marginBottom="48dp"
+        android:clickable="true"
         android:fontFamily="@font/open_sans_semibold"
+        android:onClick="doItLater"
         android:text="I'll do it later"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

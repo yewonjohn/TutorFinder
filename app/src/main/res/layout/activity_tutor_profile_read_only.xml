@@ -18,6 +18,7 @@
         android:layout_height="213dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="69dp"
+        android:background="@drawable/picture_rounded"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/study_background1" />
