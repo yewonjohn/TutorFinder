@@ -22,12 +22,13 @@ class TutorProfileReadOnly : AppCompatActivity(){
 
     //displaying and initiating options menu if signed in
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        if (ParseUser.getCurrentUser() !== null) {
             var menuInflater: MenuInflater = menuInflater
             menuInflater.inflate(R.menu.menu_options, menu)
-
+        }
         return super.onCreateOptionsMenu(menu)
     }
-    //defining functionality of each button/options on menu ONCLICK  
+    //defining functionality of each button/options on menu ONCLICK
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId === R.id.logout) {
             ParseUser.logOutInBackground() { e ->

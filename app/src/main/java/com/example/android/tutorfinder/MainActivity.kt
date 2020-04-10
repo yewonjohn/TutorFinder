@@ -13,8 +13,15 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.android.tutorfinder.api.FullAddress
+import com.example.android.tutorfinder.api.JsonPlaceHolderApi
 import com.parse.*
 import kotlinx.android.synthetic.main.activity_login.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,7 +48,6 @@ class MainActivity : AppCompatActivity() {
 
             loginButton.visibility = View.GONE
             registerButton.visibility = View.GONE
-
             myProfileButton.visibility = View.VISIBLE
         }
 
@@ -65,6 +71,44 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
+
+
+        // TESTING OUT RETROFIT HERE ----------------------v
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://maps.googleapis.com/maps/api/geocode/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val jsonPlaceHolderApi: JsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi::class.java)
+        val call = jsonPlaceHolderApi.getAddress()
+
+        call.enqueue(object: Callback<List<FullAddress>>{
+            override fun onFailure(call: Call<List<FullAddress>>, t: Throwable) {
+                Log.i("failed retrofit thingy:",t.toString())
+            }
+
+            override fun onResponse(
+                call: Call<List<FullAddress>>,
+                response: Response<List<FullAddress>>
+            ) {
+                if(!response.isSuccessful){
+                    Log.i("Code:",response.code().toString())
+                    return;
+                }
+
+                var addresses = response.body()
+                if (addresses != null) {
+                    for(address in addresses){
+                        var content:String = ""
+                        content += "formatted address:"+address.getAddress()
+
+                        Log.i("result!!!: ",content)
+                    }
+                }
+            }
+        })
+
+
 
     }
 }

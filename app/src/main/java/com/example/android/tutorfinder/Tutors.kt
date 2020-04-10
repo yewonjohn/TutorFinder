@@ -67,10 +67,10 @@ class Tutors : AppCompatActivity() {
         //declaring listView
         val listView = findViewById<ListView>(R.id.listView)
 
-        //declaring the array that will hold all the queried users
+        //declaring the array that will hold all the queried users objectId
         val listOfTutorsObjectId = ArrayList<String>()
+        //initializing adapter for listView
         val adapter = CustomListView(this,userNames,userLocation,userPrice,userImage)
-        //val adapter = ArrayAdapter<String>(this, R.layout.listview_item, listOfTutorsObjectId)
 
         //filter by username ascending order
         val query1: ParseQuery<ParseUser> = ParseUser.getQuery()
