@@ -4,11 +4,17 @@ import com.google.gson.annotations.SerializedName
 
 class FullAddress {
 
-    @SerializedName("formatted_address")
+    @SerializedName("results")
     private var address:String = ""
 
+    private var status:String = ""
+
     fun getAddress(): String {
-        return address;
+        return address
+    }
+
+    fun getStatus(): String {
+        return status
     }
 
 

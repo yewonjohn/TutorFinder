@@ -87,10 +87,7 @@ class MainActivity : AppCompatActivity() {
                 Log.i("failed retrofit thingy:",t.toString())
             }
 
-            override fun onResponse(
-                call: Call<List<FullAddress>>,
-                response: Response<List<FullAddress>>
-            ) {
+            override fun onResponse(call: Call<List<FullAddress>>, response: Response<List<FullAddress>>) {
                 if(!response.isSuccessful){
                     Log.i("Code:",response.code().toString())
                     return;
@@ -98,17 +95,14 @@ class MainActivity : AppCompatActivity() {
 
                 var addresses = response.body()
                 if (addresses != null) {
-                    for(address in addresses){
-                        var content:String = ""
-                        content += "formatted address:"+address.getAddress()
-
-                        Log.i("result!!!: ",content)
+                    for(info in addresses) {
+                        Log.i("result!!!: ", info.getAddress())
                     }
                 }
             }
         })
 
-
+        Log.i("testing log","testing")
 
     }
 }
