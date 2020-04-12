@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.android.tutorfinder.api.CurrentAddressResponse
 import com.example.android.tutorfinder.api.FullAddress
 import com.example.android.tutorfinder.api.JsonPlaceHolderApi
 import com.parse.*
@@ -74,35 +75,36 @@ class MainActivity : AppCompatActivity() {
 
 
         // TESTING OUT RETROFIT HERE ----------------------v
+        var result = ""
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://maps.googleapis.com/maps/api/geocode/")
+            .baseUrl("https://maps.googleapis.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         val jsonPlaceHolderApi: JsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi::class.java)
-        val call = jsonPlaceHolderApi.getAddress()
-
-        call.enqueue(object: Callback<List<FullAddress>>{
-            override fun onFailure(call: Call<List<FullAddress>>, t: Throwable) {
+        val call = jsonPlaceHolderApi.getAddress("07661","AIzaSyBlXzJreSsIzhWffbBUlhEcP_Eoc8qIXbM")
+        call.enqueue(object: Callback<CurrentAddressResponse>{
+            override fun onFailure(call: Call<CurrentAddressResponse>, t: Throwable) {
                 Log.i("failed retrofit thingy:",t.toString())
             }
 
-            override fun onResponse(call: Call<List<FullAddress>>, response: Response<List<FullAddress>>) {
+            override fun onResponse(call: Call<CurrentAddressResponse>, response: Response<CurrentAddressResponse>) {
                 if(!response.isSuccessful){
                     Log.i("Code:",response.code().toString())
                     return;
                 }
 
                 var addresses = response.body()
-                if (addresses != null) {
-                    for(info in addresses) {
-                        Log.i("result!!!: ", info.getAddress())
+                var addresses1 = addresses?.results
+
+                if (addresses1 != null) {
+                    for(address in addresses1){
+                        result = address.formattedAddress
+                        Log.i("result",result)
                     }
                 }
+
             }
         })
-
-        Log.i("testing log","testing")
-
     }
 }
