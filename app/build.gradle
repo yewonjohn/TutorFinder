@@ -35,6 +35,7 @@ dependencies {
     implementation "com.github.parse-community.Parse-SDK-Android:parse:1.23.1"
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    //retrofit stuff
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 

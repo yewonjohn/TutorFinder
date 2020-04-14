@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.android.tutorfinder.ViewModels.LoginViewModel
 import com.parse.LogInCallback
 import com.parse.ParseUser
 
