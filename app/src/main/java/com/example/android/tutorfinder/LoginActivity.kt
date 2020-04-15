@@ -48,6 +48,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 })
         }
     }
+    //onclick for login
     override fun onClick(p0: View?) {
         if(p0?.id === R.id.loginLayout){
             var inputMethodManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
