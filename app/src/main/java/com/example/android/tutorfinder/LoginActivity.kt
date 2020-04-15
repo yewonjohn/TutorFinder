@@ -11,11 +11,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.example.android.tutorfinder.ViewModels.LoginViewModel
+import com.example.android.tutorfinder.ViewModels.AuthViewModel
 import com.parse.LogInCallback
 import com.parse.ParseUser
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
+
+    private val viewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
