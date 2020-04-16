@@ -1,4 +1,4 @@
-package com.example.android.tutorfinder.api
+package com.example.android.tutorfinder.data.api
 
 import com.google.gson.annotations.SerializedName
 

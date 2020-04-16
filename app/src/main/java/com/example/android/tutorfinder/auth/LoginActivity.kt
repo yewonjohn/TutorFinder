@@ -1,10 +1,8 @@
 package com.example.android.tutorfinder.auth
 
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
@@ -12,13 +10,11 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.android.tutorfinder.R
-import com.example.android.tutorfinder.TutorProfile
 import com.example.android.tutorfinder.databinding.ActivityLoginBinding
-import com.parse.LogInCallback
-import com.parse.ParseUser
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener,AuthListener {
 
@@ -73,11 +69,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,AuthListener {
         Toast.makeText(this,"started",Toast.LENGTH_SHORT).show()
     }
 
-    override fun onSuccess() {
-        Toast.makeText(this,"success",Toast.LENGTH_SHORT).show()
+    override fun onSuccess(loginResponse: LiveData<String>) {
+        loginResponse.observe(this, Observer {
+            Toast.makeText(this,it,Toast.LENGTH_SHORT).show()
+        })
     }
 
     override fun onFailiure(message:String) {
-        Toast.makeText(this,"failedd",Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
     }
 }

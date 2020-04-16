@@ -6,8 +6,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.example.android.tutorfinder.api.CurrentAddressResponse
-import com.example.android.tutorfinder.api.JsonPlaceHolderApi
+import com.example.android.tutorfinder.data.api.CurrentAddressResponse
+import com.example.android.tutorfinder.data.api.JsonPlaceHolderApi
 import com.example.android.tutorfinder.auth.LoginActivity
 import com.parse.*
 import retrofit2.Call

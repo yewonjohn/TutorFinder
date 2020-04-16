@@ -1,14 +1,8 @@
 package com.example.android.tutorfinder.auth
 
-import android.content.Intent
-import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
-import com.example.android.tutorfinder.TutorProfile
-import com.parse.LogInCallback
-import com.parse.ParseUser
+import com.example.android.tutorfinder.data.repository.UserRepository
 
 class AuthViewModel: ViewModel() {
 
@@ -23,6 +17,7 @@ class AuthViewModel: ViewModel() {
             authListener?.onFailiure("invalid username or pw")
             return
         }
-        authListener?.onSuccess()
+        val loginResponse = UserRepository().userLogin(username!!,password!!)
+        authListener?.onSuccess(loginResponse)
     }
 }
