@@ -1,10 +1,11 @@
 package com.example.android.tutorfinder.auth
 
 import android.view.View
+import androidx.lifecycle.ViewModel
 import com.example.android.tutorfinder.data.repository.UserRepository
 import kotlinx.android.synthetic.main.activity_register.*
 
-class RegisterViewModel {
+class RegisterViewModel: ViewModel(){
 
     var email: String? = null
     var username: String? = null
@@ -15,6 +16,7 @@ class RegisterViewModel {
 
     fun onRegisterButtonClicked(view: View){
         authListener?.onStarted()
+        //checking all these conditions for validity
         if(username.isNullOrEmpty() || password.isNullOrEmpty() || email.isNullOrEmpty() || passwordConfirm.isNullOrEmpty()){
             authListener?.onFailiure("invalid username or pw")
             return
@@ -26,7 +28,8 @@ class RegisterViewModel {
         if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             authListener?.onFailiure("email is invalid")
         }
-//        val loginResponse = UserRepository().userLogin(username!!,password!!)
-//        authListener?.onSuccess(loginResponse)
+        //success
+       val registerResponse = UserRepository().userRegister(email!!,username!!,password!!)
+        authListener?.onSuccess(registerResponse)
     }
 }

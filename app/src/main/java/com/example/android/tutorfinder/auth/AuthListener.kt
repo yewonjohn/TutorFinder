@@ -8,7 +8,7 @@ interface AuthListener {
     fun onStarted()
 
     //when auth is successful
-    fun onSuccess(loginResponse: LiveData<String>)
+    fun onSuccess(response: LiveData<String>)
 
     //for failure
     fun onFailiure(message:String)
