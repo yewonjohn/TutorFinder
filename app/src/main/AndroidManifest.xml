@@ -20,7 +20,7 @@
         <activity android:name=".RegisterPage2Activity" />
         <activity android:name=".RegisterPage1Activity" />
         <activity android:name=".TutorProfileReadOnly" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".auth.RegisterActivity" />
         <activity android:name="com.example.android.tutorfinder.auth.LoginActivity" />
         <activity android:name=".TutorProfile" />
         <activity android:name=".Tutors" />

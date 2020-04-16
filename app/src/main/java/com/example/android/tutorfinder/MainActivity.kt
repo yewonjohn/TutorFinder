@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.android.tutorfinder.data.api.CurrentAddressResponse
 import com.example.android.tutorfinder.data.api.JsonPlaceHolderApi
 import com.example.android.tutorfinder.auth.LoginActivity
+import com.example.android.tutorfinder.auth.RegisterActivity
 import com.parse.*
 import retrofit2.Call
 import retrofit2.Callback

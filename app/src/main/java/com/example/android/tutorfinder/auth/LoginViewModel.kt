@@ -4,7 +4,7 @@ import android.view.View
 import androidx.lifecycle.ViewModel
 import com.example.android.tutorfinder.data.repository.UserRepository
 
-class AuthViewModel: ViewModel() {
+class LoginViewModel: ViewModel() {
 
     var username: String? = null
     var password: String? = null

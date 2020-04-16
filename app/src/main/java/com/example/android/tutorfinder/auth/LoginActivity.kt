@@ -1,6 +1,7 @@
 package com.example.android.tutorfinder.auth
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -14,7 +15,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.android.tutorfinder.R
+import com.example.android.tutorfinder.TutorProfile
 import com.example.android.tutorfinder.databinding.ActivityLoginBinding
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener,AuthListener {
 
@@ -23,7 +26,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,AuthListener {
         super.onCreate(savedInstanceState)
         //mapping viewmodel to this ui page
         val binding : ActivityLoginBinding = DataBindingUtil.setContentView(this,R.layout.activity_login)
-        val viewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
+        val viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
         binding.viewmodel = viewModel
         viewModel.authListener = this
 
@@ -66,16 +69,20 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,AuthListener {
     }
 
     override fun onStarted() {
-        Toast.makeText(this,"started",Toast.LENGTH_SHORT).show()
+        progress_bar.visibility = View.VISIBLE
     }
 
     override fun onSuccess(loginResponse: LiveData<String>) {
         loginResponse.observe(this, Observer {
+            progress_bar.visibility = View.GONE
             Toast.makeText(this,it,Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, TutorProfile::class.java)
+            startActivity(intent)
         })
     }
 
     override fun onFailiure(message:String) {
+        progress_bar.visibility = View.GONE
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
     }
 }
