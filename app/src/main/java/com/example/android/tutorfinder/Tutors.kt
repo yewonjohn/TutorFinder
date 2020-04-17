@@ -9,11 +9,10 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.ArrayAdapter
 import android.widget.ListView
+import com.example.android.tutorfinder.ui.home.HomePageActivity
 import com.parse.FindCallback
 import com.parse.GetDataCallback
-import com.parse.Parse
 import com.parse.ParseQuery
 import com.parse.ParseUser
 
@@ -34,7 +33,7 @@ class Tutors : AppCompatActivity() {
                 Unit
                 if (e === null) {
                     Log.i("success","in signing out")
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, HomePageActivity::class.java)
                     startActivity(intent)
                 } else {
                     Log.i("error with signing out", e.printStackTrace().toString())
@@ -46,7 +45,7 @@ class Tutors : AppCompatActivity() {
             startActivity(intent)
         }
         if (item?.itemId === R.id.home) {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
         }
 

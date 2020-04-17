@@ -1,4 +1,4 @@
-package com.example.android.tutorfinder
+package com.example.android.tutorfinder.ui.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,10 +6,13 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.example.android.tutorfinder.R
+import com.example.android.tutorfinder.TutorProfile
+import com.example.android.tutorfinder.Tutors
 import com.example.android.tutorfinder.data.api.CurrentAddressResponse
 import com.example.android.tutorfinder.data.api.JsonPlaceHolderApi
-import com.example.android.tutorfinder.auth.LoginActivity
-import com.example.android.tutorfinder.auth.RegisterActivity
+import com.example.android.tutorfinder.ui.auth.LoginActivity
+import com.example.android.tutorfinder.ui.auth.RegisterActivity
 import com.parse.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,7 +20,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class MainActivity : AppCompatActivity() {
+class HomePageActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

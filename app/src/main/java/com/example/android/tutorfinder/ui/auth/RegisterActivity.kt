@@ -1,11 +1,9 @@
-package com.example.android.tutorfinder.auth
+package com.example.android.tutorfinder.ui.auth
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -16,14 +14,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.android.tutorfinder.R
-import com.example.android.tutorfinder.RegisterPage1Activity
-import com.example.android.tutorfinder.TutorProfile
+import com.example.android.tutorfinder.ui.profile.RegisterPage1Activity
 import com.example.android.tutorfinder.databinding.ActivityLoginBinding
 import com.example.android.tutorfinder.databinding.ActivityRegisterBinding
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.activity_register.progress_bar
 
@@ -43,7 +38,6 @@ class RegisterActivity : AppCompatActivity(), View.OnKeyListener, View.OnClickLi
         //DECLARING THE USERNAME + PASSWORD TEXTS + PASSWORD CONFIRM + email
         var usernameEditText: EditText = findViewById(R.id.usernameEditText)
         var passwordEditText: EditText = findViewById(R.id.passwordEditText)
-        var emailEditText: EditText = findViewById(R.id.emailEditText)
         var confirmPasswordEditText: EditText = findViewById(R.id.confirmPasswordEditText)
         var registerButton = findViewById<Button>(R.id.registerButton)
 

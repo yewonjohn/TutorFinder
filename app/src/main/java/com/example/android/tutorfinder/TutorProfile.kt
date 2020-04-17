@@ -20,19 +20,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.android.tutorfinder.ui.home.HomePageActivity
 import com.parse.GetDataCallback
 import com.parse.ParseFile
 import com.parse.ParseUser
 import com.parse.SaveCallback
 import org.json.JSONArray
-import org.json.JSONException
 import org.json.JSONObject
-import java.io.BufferedReader
 import java.io.ByteArrayOutputStream
-import java.io.IOException
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
@@ -88,7 +85,7 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
                 ParseUser.logOutInBackground() { e ->
                     Unit
                     if (e === null) {
-                        val intent = Intent(this, MainActivity::class.java)
+                        val intent = Intent(this, HomePageActivity::class.java)
                         startActivity(intent)
                     } else {
                         Log.i("error with signing out", e.printStackTrace().toString())
@@ -100,7 +97,7 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
                     startActivity(intent)
         }
         if (item?.itemId === R.id.home) {
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, HomePageActivity::class.java)
                     startActivity(intent)
         }
         return super.onOptionsItemSelected(item)

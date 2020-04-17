@@ -1,4 +1,4 @@
-package com.example.android.tutorfinder.auth
+package com.example.android.tutorfinder.ui.auth
 
 import android.content.Context
 import android.content.Intent
@@ -38,25 +38,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,AuthListener {
         var username = findViewById<EditText>(R.id.usernameLoginEditText)
         var password = findViewById<EditText>(R.id.passwordLoginEditText)
 
-
-        // setting login button to sign in user
-        var LoginButton = findViewById<Button>(R.id.loginButton)
-//        LoginButton.setOnClickListener{
-//
-//            ParseUser.logInInBackground(username.text.toString(),password.text.toString(),
-//                LogInCallback { user, e ->  Unit
-//
-//                if(e === null){
-//                    Log.i("login","success!")
-//                    Toast.makeText(applicationContext,"login success",Toast.LENGTH_SHORT).show()
-//                    val intent = Intent(this, TutorProfile::class.java)
-//                    startActivity(intent)
-//                } else{
-//                    Log.i("login Failed",e.printStackTrace().toString())
-//                    Toast.makeText(applicationContext,e.message.toString(),Toast.LENGTH_SHORT).show()
-//                }
-//                })
-//        }
     }
     //onclick for keyboard management
     override fun onClick(p0: View?) {

@@ -1,4 +1,4 @@
-package com.example.android.tutorfinder
+package com.example.android.tutorfinder.ui.profile
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.example.android.tutorfinder.R
 import com.parse.ParseUser
 import com.parse.SaveCallback
 import kotlinx.android.synthetic.main.activity_register_page2.*

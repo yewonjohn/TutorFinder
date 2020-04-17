@@ -1,7 +1,6 @@
 package com.example.android.tutorfinder
 
 import android.content.Intent
-import android.media.Rating
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,10 +8,9 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import android.widget.RatingBar
 import android.widget.TextView
-import android.widget.Toast
+import com.example.android.tutorfinder.ui.home.HomePageActivity
 import com.parse.FindCallback
 import com.parse.ParseQuery
 import com.parse.ParseUser
@@ -35,7 +33,7 @@ class TutorProfileReadOnly : AppCompatActivity(){
                 Unit
                 if (e === null) {
                     Log.i("success","in signing out")
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, HomePageActivity::class.java)
                     startActivity(intent)
                 } else {
                     Log.i("error with signing out", e.printStackTrace().toString())
@@ -47,7 +45,7 @@ class TutorProfileReadOnly : AppCompatActivity(){
             startActivity(intent)
         }
         if (item?.itemId === R.id.home) {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
         }
 

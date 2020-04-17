@@ -1,26 +1,23 @@
-package com.example.android.tutorfinder
+package com.example.android.tutorfinder.ui.profile
 
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.*
+import com.example.android.tutorfinder.R
+import com.example.android.tutorfinder.Tutors
 import com.parse.ParseFile
 import com.parse.ParseUser
 import com.parse.SaveCallback
-import kotlinx.android.synthetic.main.activity_register_page2.*
 import kotlinx.android.synthetic.main.activity_register_page3.*
 import java.io.ByteArrayOutputStream
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.URL
 
 class RegisterPage3Activity : AppCompatActivity(), View.OnClickListener {
 

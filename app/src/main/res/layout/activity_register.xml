@@ -7,42 +7,61 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.example.android.tutorfinder.auth.RegisterViewModel" />
+            type="com.example.android.tutorfinder.ui.auth.RegisterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/registrationLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".auth.RegisterActivity">
+        tools:context=".ui.auth.RegisterActivity">
 
         <EditText
-            android:text="@={viewmodel.username}"
             android:id="@+id/usernameEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="22dp"
             android:layout_marginEnd="50dp"
             android:ems="10"
             android:hint="Username"
             android:inputType="textPersonName"
+            android:text="@={viewmodel.username}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
+            app:layout_constraintTop_toBottomOf="@+id/signUpTextView"
+            app:layout_constraintVertical_bias="0.136" />
 
         <EditText
-            android:text="@={viewmodel.password}"
+            android:id="@+id/confirmPasswordEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="50dp"
+            android:ems="10"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:text="@={viewmodel.passwordConfirm}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
+
+        <EditText
             android:id="@+id/passwordEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="50dp"
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
+            android:text="@={viewmodel.password}"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
 
@@ -61,24 +80,6 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/confirmPasswordEditText" />
-
-        <EditText
-            android:id="@+id/emailEditText"
-            android:text="@={viewmodel.email}"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="22dp"
-            android:ems="10"
-            android:hint="Email Address"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/usernameEditText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signUpTextView" />
 
         <TextView
             android:id="@+id/tutorTextView"
@@ -106,21 +107,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:text="@={viewmodel.passwordConfirm}"
-            android:id="@+id/confirmPasswordEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="50dp"
-            android:ems="10"
-            android:hint="Confirm Password"
-            android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
 
         <TextView
             android:id="@+id/signUpTextView"

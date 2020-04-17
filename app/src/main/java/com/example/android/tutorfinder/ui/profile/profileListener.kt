@@ -1,8 +1,8 @@
-package com.example.android.tutorfinder.auth
+package com.example.android.tutorfinder.ui.profile
 
 import androidx.lifecycle.LiveData
 
-interface AuthListener {
+interface profileListener {
 
     //for progressbar
     fun onStarted()
@@ -12,6 +12,4 @@ interface AuthListener {
 
     //for failure
     fun onFailiure(message:String)
-
-
 }

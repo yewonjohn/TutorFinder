@@ -7,14 +7,14 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.example.android.tutorfinder.auth.LoginViewModel" />
+            type="com.example.android.tutorfinder.ui.auth.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/loginLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".auth.LoginActivity">
+        tools:context=".ui.auth.LoginActivity">
 
         <TextView
             android:id="@+id/tutorTextView"
