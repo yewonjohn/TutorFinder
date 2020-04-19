@@ -78,7 +78,8 @@ class HomePageActivity : AppCompatActivity() {
             .build()
 
         val jsonPlaceHolderApi: JsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi::class.java)
-        val call = jsonPlaceHolderApi.getAddress("07661","AIzaSyBlXzJreSsIzhWffbBUlhEcP_Eoc8qIXbM")
+        val zipcode = "07631"
+        val call = jsonPlaceHolderApi.getAddress(zipcode,"AIzaSyBlXzJreSsIzhWffbBUlhEcP_Eoc8qIXbM")
         call.enqueue(object: Callback<CurrentAddressResponse>{
             override fun onFailure(call: Call<CurrentAddressResponse>, t: Throwable) {
                 Log.i("failed retrofit thingy:",t.toString())
