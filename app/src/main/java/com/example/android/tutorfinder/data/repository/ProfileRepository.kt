@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ProfileRepository {
 
-    fun fetchFormattedAddress(zipcode:String): String {
+    fun fetchFormattedAddress(zipcode:String,user:ParseUser) {
         var result:String = ""
         val retrofit = Retrofit.Builder()
             .baseUrl("https://maps.googleapis.com/")
@@ -37,18 +37,19 @@ class ProfileRepository {
             ) {
                 if (!response.isSuccessful) {
                     Log.i("Code:", response.code().toString())
-                    return;
+
                 }
                 val addresses = response.body()?.results
                 if (addresses != null) {
                     for (address in addresses) {
                         result = address.formattedAddress
+                        user.put("address",result)
+                        //NOT SURE IF THIS IS BEST WAY....
+                        user.save()
                     }
                 }
             }
         })
-        Log.i("result last part",result)
-        return result
     }
 
     fun saveUserDataPage1(fullname:String,email:String,phoneNumber:String,zipcode:String) :LiveData<String>{
@@ -61,12 +62,8 @@ class ProfileRepository {
         currentUser.put("zipcode",zipcode)
         //make condition to check if string is not empty if neccessary
         currentUser.put("phoneNumber", phoneNumber.toLong())
-
-        val formattedAdress = fetchFormattedAddress(zipcode)
-        Log.i("address",formattedAdress)
-        currentUser.put("address",formattedAdress)
-
-
+        //calling API & saving data. This is probably not the best idea..
+        fetchFormattedAddress(zipcode,currentUser)
         currentUser.saveInBackground(SaveCallback { e -> Unit
             if(e === null){
                 saveDataResponseP1.value = "success"
