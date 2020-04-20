@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.android.tutorfinder.R
 import com.example.android.tutorfinder.TutorProfile
 import com.example.android.tutorfinder.Tutors
-import com.example.android.tutorfinder.data.api.CurrentAddressResponse
-import com.example.android.tutorfinder.data.api.JsonPlaceHolderApi
+import com.example.android.tutorfinder.data.addressApi.CurrentAddressResponse
+import com.example.android.tutorfinder.data.addressApi.addressApi
 import com.example.android.tutorfinder.ui.auth.LoginActivity
 import com.example.android.tutorfinder.ui.auth.RegisterActivity
 import com.parse.*
@@ -68,40 +68,5 @@ class HomePageActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
-
-
-        // TESTING OUT RETROFIT HERE ----------------------v
-        var result = ""
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://maps.googleapis.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val jsonPlaceHolderApi: JsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi::class.java)
-        val zipcode = "07631"
-        val call = jsonPlaceHolderApi.getAddress(zipcode,"AIzaSyBlXzJreSsIzhWffbBUlhEcP_Eoc8qIXbM")
-        call.enqueue(object: Callback<CurrentAddressResponse>{
-            override fun onFailure(call: Call<CurrentAddressResponse>, t: Throwable) {
-                Log.i("failed retrofit thingy:",t.toString())
-            }
-
-            override fun onResponse(call: Call<CurrentAddressResponse>, response: Response<CurrentAddressResponse>) {
-                if(!response.isSuccessful){
-                    Log.i("Code:",response.code().toString())
-                    return;
-                }
-
-                var addresses = response.body()
-                var addresses1 = addresses?.results
-
-                if (addresses1 != null) {
-                    for(address in addresses1){
-                        result = address.formattedAddress
-                        Log.i("result in homepage activity",result)
-                    }
-                }
-
-            }
-        })
     }
 }

@@ -1,13 +1,10 @@
 package com.example.android.tutorfinder.data.repository
 
-import android.content.Intent
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.android.tutorfinder.data.api.CurrentAddressResponse
-import com.example.android.tutorfinder.data.api.JsonPlaceHolderApi
-import com.example.android.tutorfinder.ui.profile.RegisterPage2Activity
+import com.example.android.tutorfinder.data.addressApi.CurrentAddressResponse
+import com.example.android.tutorfinder.data.addressApi.addressApi
 import com.parse.ParseUser
 import com.parse.SaveCallback
 import retrofit2.Call
@@ -20,14 +17,9 @@ class ProfileRepository {
 
     fun fetchFormattedAddress(zipcode:String,user:ParseUser) {
         var result:String = ""
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://maps.googleapis.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
 
-        val jsonPlaceHolderApi: JsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi::class.java)
-        val call = jsonPlaceHolderApi.getAddress(zipcode,"AIzaSyBlXzJreSsIzhWffbBUlhEcP_Eoc8qIXbM")
-        call.enqueue(object: Callback<CurrentAddressResponse> {
+        addressApi().getAddress(zipcode,"AIzaSyBlXzJreSsIzhWffbBUlhEcP_Eoc8qIXbM")
+            .enqueue(object: Callback<CurrentAddressResponse> {
             override fun onFailure(call: Call<CurrentAddressResponse>, t: Throwable) {
                 Log.i("failed api call using retrofit:", t.toString())
             }
