@@ -97,7 +97,7 @@ class HomePageActivity : AppCompatActivity() {
                 if (addresses1 != null) {
                     for(address in addresses1){
                         result = address.formattedAddress
-                        Log.i("result",result)
+                        Log.i("result in homepage activity",result)
                     }
                 }
 

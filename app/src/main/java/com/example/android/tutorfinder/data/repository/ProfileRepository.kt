@@ -19,7 +19,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ProfileRepository {
 
     fun fetchFormattedAddress(zipcode:String): String {
-        Log.i("API FUNCTION","CALLED")
         var result:String = ""
         val retrofit = Retrofit.Builder()
             .baseUrl("https://maps.googleapis.com/")
@@ -40,17 +39,15 @@ class ProfileRepository {
                     Log.i("Code:", response.code().toString())
                     return;
                 }
-                Log.i("response is success..","its successful...?")
-                var addresses = response.body()?.results
+                val addresses = response.body()?.results
                 if (addresses != null) {
-                    Log.i("address","is not null")
                     for (address in addresses) {
                         result = address.formattedAddress
                     }
                 }
             }
         })
-        Log.i("address",result)
+        Log.i("result last part",result)
         return result
     }
 
