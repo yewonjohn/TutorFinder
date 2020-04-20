@@ -3,6 +3,7 @@ package com.example.android.tutorfinder.ui.profile
 import android.view.View
 import androidx.lifecycle.ViewModel
 import com.example.android.tutorfinder.data.repository.ProfileRepository
+import com.example.android.tutorfinder.util.Coroutines
 
 class RegisterPage1ViewModel: ViewModel() {
 
@@ -21,6 +22,7 @@ class RegisterPage1ViewModel: ViewModel() {
         }
             val registerPage1 = ProfileRepository().saveUserDataPage1(fullname!!,email!!,phoneNumber!!,zipCode!!)
             profileListener?.onSuccess(registerPage1)
+
     }
 
 }

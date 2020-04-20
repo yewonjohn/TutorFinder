@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.android.tutorfinder.R
 import com.example.android.tutorfinder.TutorProfile
 import com.example.android.tutorfinder.databinding.ActivityLoginBinding
+import com.example.android.tutorfinder.ui.home.HomePageActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener,AuthListener {
@@ -57,8 +58,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,AuthListener {
         loginResponse.observe(this, Observer {
             progress_bar.visibility = View.GONE
             Toast.makeText(this,it,Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, TutorProfile::class.java)
-            startActivity(intent)
+            val intent = Intent(this, HomePageActivity::class.java).also {
+                it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(it)
+            }
         })
     }
 
