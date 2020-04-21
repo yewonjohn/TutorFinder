@@ -2,7 +2,7 @@ package com.example.android.tutorfinder.ui.profile
 
 import androidx.lifecycle.LiveData
 
-interface profileListener {
+interface RegisterPageListener {
 
     //for progressbar
     fun onStarted()

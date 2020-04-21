@@ -6,16 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.android.tutorfinder.R
-import com.example.android.tutorfinder.TutorProfile
 import com.example.android.tutorfinder.databinding.ActivityLoginBinding
 import com.example.android.tutorfinder.ui.home.HomePageActivity
 import kotlinx.android.synthetic.main.activity_login.*

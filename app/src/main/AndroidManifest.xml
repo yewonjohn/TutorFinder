@@ -16,13 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.profile.RegisterPage3Activity"></activity>
-        <activity android:name=".ui.profile.RegisterPage2Activity" />
-        <activity android:name=".ui.profile.RegisterPage1Activity" />
+        <activity android:name=".ui.profile.RegisterPagePage3Activity"></activity>
+        <activity android:name=".ui.profile.RegisterPagePage2Activity" />
+        <activity android:name=".ui.profile.RegisterPagePage1Activity" />
         <activity android:name=".TutorProfileReadOnly" />
         <activity android:name="com.example.android.tutorfinder.ui.auth.RegisterActivity" />
         <activity android:name="com.example.android.tutorfinder.ui.auth.LoginActivity" />
-        <activity android:name=".TutorProfile" />
+        <activity android:name=".ui.profile.TutorProfileActivity" />
         <activity android:name=".Tutors" />
         <activity android:name=".ui.home.HomePageActivity">
             <intent-filter>

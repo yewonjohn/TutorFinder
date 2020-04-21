@@ -16,7 +16,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.android.tutorfinder.R
-import com.example.android.tutorfinder.ui.profile.RegisterPage1Activity
+import com.example.android.tutorfinder.ui.profile.RegisterPagePage1Activity
 import com.example.android.tutorfinder.databinding.ActivityLoginBinding
 import com.example.android.tutorfinder.databinding.ActivityRegisterBinding
 import kotlinx.android.synthetic.main.activity_register.*
@@ -76,7 +76,7 @@ class RegisterActivity : AppCompatActivity(), View.OnKeyListener, View.OnClickLi
         registerResponse.observe(this, Observer {
             progress_bar.visibility = View.GONE
             Toast.makeText(this,it,Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, RegisterPage1Activity::class.java)
+            val intent = Intent(this, RegisterPagePage1Activity::class.java)
             startActivity(intent)
         })
     }

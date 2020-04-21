@@ -2,23 +2,15 @@ package com.example.android.tutorfinder.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.android.tutorfinder.R
-import com.example.android.tutorfinder.TutorProfile
+import com.example.android.tutorfinder.ui.profile.TutorProfileActivity
 import com.example.android.tutorfinder.Tutors
-import com.example.android.tutorfinder.data.addressApi.CurrentAddressResponse
-import com.example.android.tutorfinder.data.addressApi.addressApi
 import com.example.android.tutorfinder.ui.auth.LoginActivity
 import com.example.android.tutorfinder.ui.auth.RegisterActivity
 import com.parse.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class HomePageActivity : AppCompatActivity() {
 
@@ -50,7 +42,7 @@ class HomePageActivity : AppCompatActivity() {
 
         //initiating intent to TutorProfile activity
         myProfileButton.setOnClickListener{
-            val intent = Intent(this, TutorProfile::class.java)
+            val intent = Intent(this, TutorProfileActivity::class.java)
             startActivity(intent)
         }
         //initiating intent to TutorList activity

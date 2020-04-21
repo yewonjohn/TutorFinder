@@ -1,146 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.profile.RegisterPage3Activity">
+    xmlns:tools="http://schemas.android.com/tools">
+    
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.android.tutorfinder.ui.profile.RegisterPage3ViewModel" />
+        
+    </data>
 
-    <TextView
-        android:id="@+id/setUpProfileTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="56dp"
-        android:fontFamily="@font/open_sans_semibold"
-        android:text="Set up your profile"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.profile.RegisterPagePage3Activity">
 
-    <TextView
-        android:id="@+id/descriptionInfoTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:fontFamily="@font/open_sans_bold"
-        android:text="Description info"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setUpProfileTextView" />
+        <TextView
+            android:id="@+id/setUpProfileTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="56dp"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="Set up your profile"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/descriptionEditText2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="30dp"
-        android:ems="10"
-        android:fontFamily="@font/open_sans"
-        android:hint="Tell us a little about yourself"
-        android:inputType="textPersonName"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionInfoTextView" />
+        <TextView
+            android:id="@+id/descriptionInfoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="Description info"
+            android:textColor="@android:color/black"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/setUpProfileTextView" />
 
-    <ImageView
-        android:id="@+id/profileImage1View"
-        android:layout_width="138dp"
-        android:layout_height="127dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="44dp"
-        android:background="@drawable/picture_rounded"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionEditText2"
-        app:srcCompat="@drawable/ic_person_black_24dp" />
+        <EditText
+            android:text="@={viewmodel.description}"
+            android:id="@+id/descriptionEditText2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="30dp"
+            android:ems="10"
+            android:fontFamily="@font/open_sans"
+            android:hint="Tell us a little about yourself"
+            android:inputType="textPersonName"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionInfoTextView" />
 
-    <Button
-        android:id="@+id/addImageButton"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="101dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/button_rounded_clear"
-        android:text="Add an image"
-        android:textAllCaps="false"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileImage1View"
-        tools:ignore="OnClick" />
+        <ImageView
+            android:id="@+id/profileImage1View"
+            android:layout_width="138dp"
+            android:layout_height="127dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/picture_rounded"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionEditText2"
+            app:srcCompat="@drawable/ic_person_black_24dp" />
 
-    <Spinner
-        android:id="@+id/age_spinner"
-        android:layout_width="97dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="39dp"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionEditText2" />
+        <Button
+            android:id="@+id/addImageButton"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="101dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/button_rounded_clear"
+            android:text="Add an image"
+            android:textAllCaps="false"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileImage1View"
+            tools:ignore="OnClick" />
 
-    <TextView
-        android:id="@+id/ageTextView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/open_sans"
-        android:text="Age:"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/age_spinner"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/profileImage1View"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionEditText2" />
+        <Spinner
+            android:text="@={viewmodel.age}"
+            android:id="@+id/age_spinner"
+            android:layout_width="97dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="39dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionEditText2" />
 
-    <Spinner
-        android:id="@+id/cost_spinner"
-        android:layout_width="97dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/age_spinner" />
+        <TextView
+            android:id="@+id/ageTextView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/open_sans"
+            android:text="Age:"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/age_spinner"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/profileImage1View"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionEditText2" />
 
-    <TextView
-        android:id="@+id/costTextView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/open_sans"
-        android:text="Cost:"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/cost_spinner"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/profileImage1View"
-        app:layout_constraintTop_toBottomOf="@+id/ageTextView1" />
+        <Spinner
+            android:text="@={viewmodel.price}"
+            android:id="@+id/cost_spinner"
+            android:layout_width="97dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/age_spinner" />
 
-    <TextView
-        android:id="@+id/doItLaterTextView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginBottom="48dp"
-        android:fontFamily="@font/open_sans_semibold"
-        android:text="I'll do it later"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/costTextView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/open_sans"
+            android:text="Cost:"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/cost_spinner"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/profileImage1View"
+            app:layout_constraintTop_toBottomOf="@+id/ageTextView1" />
 
-    <Button
-        android:id="@+id/nextButton3"
-        android:layout_width="82dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="40dp"
-        android:background="@drawable/button_rounded"
-        android:fontFamily="@font/open_sans_semibold"
-        android:text="Next"
-        android:textAllCaps="false"
-        android:textColor="@android:color/background_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:onClick="doItLater"
+            android:id="@+id/doItLaterTextView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginBottom="48dp"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="I'll do it later"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:onClick="@{viewmodel::saveInfoAndProceed}"
+            android:id="@+id/nextButton3"
+            android:layout_width="82dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/button_rounded"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="Next"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.481" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

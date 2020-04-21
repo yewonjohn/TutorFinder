@@ -1,21 +1,26 @@
 package com.example.android.tutorfinder.data.repository
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.util.Log
+import android.widget.Spinner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.android.tutorfinder.data.addressApi.CurrentAddressResponse
 import com.example.android.tutorfinder.data.addressApi.addressApi
+import com.parse.GetDataCallback
+import com.parse.ParseFile
 import com.parse.ParseUser
 import com.parse.SaveCallback
+import kotlinx.android.synthetic.main.activity_tutor_profile.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class ProfileRepository {
 
-    fun fetchFormattedAddress(zipcode:String,user:ParseUser) {
+    //uses retrofit api call
+    fun fetchFormattedAddressAndSave(zipcode:String,user:ParseUser) {
         var result:String = ""
 
         addressApi().getAddress(zipcode,"AIzaSyBlXzJreSsIzhWffbBUlhEcP_Eoc8qIXbM")
@@ -46,7 +51,7 @@ class ProfileRepository {
 
     fun saveUserDataPage1(fullname:String,email:String,phoneNumber:String,zipcode:String) :LiveData<String>{
 
-        val saveDataResponseP1 = MutableLiveData<String>()
+        var saveDataResponseP1 = MutableLiveData<String>()
 
         var currentUser = ParseUser.getCurrentUser()
         currentUser.put("name",fullname)
@@ -55,7 +60,7 @@ class ProfileRepository {
         //make condition to check if string is not empty if neccessary
         currentUser.put("phoneNumber", phoneNumber.toLong())
         //calling API & saving data. This is probably not the best idea..
-        fetchFormattedAddress(zipcode,currentUser)
+        fetchFormattedAddressAndSave(zipcode,currentUser)
         currentUser.saveInBackground(SaveCallback { e -> Unit
             if(e === null){
                 saveDataResponseP1.value = "success"
@@ -68,7 +73,95 @@ class ProfileRepository {
         return saveDataResponseP1
     }
 
-    fun saveUserDataPage2(){
+    fun saveUserDataPage2(subjects:String,degree:String,school:String,gradDate:String): LiveData<String>{
 
+        var saveDataResponseP2 = MutableLiveData<String>()
+
+        var currentUser = ParseUser.getCurrentUser()
+        currentUser.put("subjects",subjects)
+        currentUser.put("highestDegree",degree)
+        currentUser.put("school",school)
+        currentUser.put("graduationDate", gradDate)
+        currentUser.saveInBackground(SaveCallback { e -> Unit
+            if(e === null){
+                saveDataResponseP2.value = "Successfully saved"
+            } else {
+                saveDataResponseP2.value = "Unsuccessful in saving user data"
+                e.printStackTrace()
+            }
+        })
+    return saveDataResponseP2
     }
+
+    fun saveUserDataPage3(description:String, age:Spinner, price:Spinner,image:Bitmap): LiveData<String>{
+
+        var saveDataResponseP3 = MutableLiveData<String>()
+
+        var currentUser = ParseUser.getCurrentUser()
+        currentUser.put("description",description)
+        currentUser.put("age",age.selectedItem.toString())
+        currentUser.put("cost",price.selectedItem.toString())
+
+
+
+
+
+
+
+        return saveDataResponseP3
+    }
+
+    fun saveProfileInfo(name:String, age:String, email: String, zipcode: String, phoneNumber: String,
+                        subjects: String, degree: String, school: String, gradDate: String, price:String,
+                        description: String): LiveData<ParseUser>{
+
+        var saveUserResponse = MutableLiveData<ParseUser>()
+        var currentUser = ParseUser.getCurrentUser()
+        saveUserResponse.value = currentUser
+
+        currentUser.put("name",name)
+        currentUser.put("age",age)
+        currentUser.put("email",email)
+        currentUser.put("zipcode",zipcode)
+        currentUser.put("phoneNumber",phoneNumber)
+        currentUser.put("subjects",subjects)
+        currentUser.put("highestDegree",degree)
+        currentUser.put("school",school)
+        currentUser.put("graduationDate",gradDate)
+        currentUser.put("cost",price)
+        currentUser.put("description",description)
+        currentUser.put("educationDesc",school+" "+degree+" "+gradDate)
+        fetchFormattedAddressAndSave(zipcode,currentUser)
+
+        currentUser.saveInBackground(SaveCallback { e -> Unit
+            if(e === null){
+                Log.i("data","successfully saved")
+            } else {
+                Log.i("failed", "unsuccessful in saving user data")
+            }
+        })
+        return saveUserResponse
+    }
+
+    fun getCurrentUserInfo():LiveData<ParseUser>{
+        val currentUser = ParseUser.getCurrentUser()
+        val userResponse = MutableLiveData<ParseUser>()
+
+        userResponse.value = currentUser
+
+        return userResponse
+    }
+
+    suspend fun getProfilePhoto(): Bitmap?{
+        val currentUser = ParseUser.getCurrentUser()
+
+        var file: ParseFile? = currentUser.getParseFile("image")
+        //NOT USING BACKGROUND! TRY OUT SUSPEND FUNCTION FOR THIS
+        val data = file?.data
+        val bmp: Bitmap? = data?.size?.let { BitmapFactory.decodeByteArray(data,0, it) }
+
+        return bmp
+    }
+
+
 }

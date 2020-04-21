@@ -11,6 +11,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.ListView
 import com.example.android.tutorfinder.ui.home.HomePageActivity
+import com.example.android.tutorfinder.ui.profile.TutorProfileActivity
 import com.parse.FindCallback
 import com.parse.GetDataCallback
 import com.parse.ParseQuery
@@ -41,7 +42,7 @@ class Tutors : AppCompatActivity() {
             }
         }
         if (item?.itemId === R.id.myProfile) {
-            val intent = Intent(this, TutorProfile::class.java)
+            val intent = Intent(this, TutorProfileActivity::class.java)
             startActivity(intent)
         }
         if (item?.itemId === R.id.home) {

@@ -10,12 +10,13 @@ class RegisterPage2ViewModel : ViewModel() {
     var degree: String? = null
     var school: String? = null
     var gradDate: String? = null
-    var profileListener: profileListener? = null
+    var RegisterPageListener: RegisterPageListener? = null
 
     fun saveInfoAndProceed(view: View){
-        profileListener?.onStarted()
+        RegisterPageListener?.onStarted()
+        //HAVE TO FIGURE OUT LOGIC FOR SUBJECTS FOR FAILIURE CONDITIONS
 
-        //val registerPage1 = ProfileRepository().saveUserDataPage1(fullname!!,email!!,phoneNumber!!,zipCode!!)
-        //profileListener?.onSuccess(registerPage1)
+        val registerPage2 = ProfileRepository().saveUserDataPage2(subjects!!,degree!!,school!!,gradDate!!)
+        RegisterPageListener?.onSuccess(registerPage2)
 
     }}

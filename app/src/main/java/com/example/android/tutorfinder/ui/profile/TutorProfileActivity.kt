@@ -1,4 +1,4 @@
-package com.example.android.tutorfinder
+package com.example.android.tutorfinder.ui.profile
 
 import android.Manifest
 import android.app.Activity
@@ -22,11 +22,22 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.example.android.tutorfinder.R
+import com.example.android.tutorfinder.databinding.ActivityLoginBinding
+import com.example.android.tutorfinder.databinding.ActivityTutorProfileBinding
+import com.example.android.tutorfinder.ui.auth.LoginViewModel
 import com.example.android.tutorfinder.ui.home.HomePageActivity
 import com.parse.GetDataCallback
 import com.parse.ParseFile
 import com.parse.ParseUser
 import com.parse.SaveCallback
+import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_register.progress_bar
+import kotlinx.android.synthetic.main.activity_tutor_profile.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
@@ -34,7 +45,7 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 
-class TutorProfile : AppCompatActivity(), View.OnClickListener {
+class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileListener,GetProfileListener,GetImageListener {
 
     //CLASS FOR API
     public class DownloadTask: AsyncTask<String, Void, String>() {
@@ -93,7 +104,7 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
                 }
             }
         if (item?.itemId === R.id.myProfile) {
-                    val intent = Intent(this, TutorProfile::class.java)
+                    val intent = Intent(this, TutorProfileActivity::class.java)
                     startActivity(intent)
         }
         if (item?.itemId === R.id.home) {
@@ -105,7 +116,16 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tutor_profile)
+        val binding : ActivityTutorProfileBinding = DataBindingUtil.setContentView(this,R.layout.activity_tutor_profile)
+        val viewModel = ViewModelProviders.of(this).get(TutorProfileViewModel::class.java)
+        binding.viewmodel = viewModel
+        viewModel.ProfileListener = this
+
+        //fetching current user data from ViewModel --> respository
+        val displayInfo = TutorProfileViewModel().getInfo()
+        val displayImage = TutorProfileViewModel().getProfileImage()
+
+
 
 
         //triggering onClicklistener for keyboard minimizing
@@ -183,7 +203,8 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
             //API STUFF HERE: calling api then parsing JSON about user location
             var result: String = ""
             try {
-                var task = DownloadTask()
+                var task =
+                    DownloadTask()
                 result = task.execute("https://maps.googleapis.com/maps/api/geocode/json?address="+userZipCode.text.toString()+"&key=AIzaSyBlXzJreSsIzhWffbBUlhEcP_Eoc8qIXbM").get()
                 Log.i("result of API call",result)
             } catch (e:Exception){
@@ -214,7 +235,7 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
             })
         }
     }
-    //Uploading Image on Button Clicked
+    //initiating intent to fetch Image on Button Clicked
     fun getPhoto(view:View){
         if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !== PackageManager.PERMISSION_GRANTED){
             requestPermissions(arrayOf<String>(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
@@ -281,4 +302,65 @@ class TutorProfile : AppCompatActivity(), View.OnClickListener {
             }
         }
     }
+
+    override fun onStarted() {
+        progress_bar.visibility = View.VISIBLE
+    }
+
+    override fun onSuccess(response: LiveData<ParseUser>) {
+        progress_bar.visibility = View.GONE
+        TODO("Not yet implemented")
+    }
+
+    override fun onFailiure(message: String) {
+        progress_bar.visibility = View.GONE
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+    }
+
+
+    override fun onGETStarted() {
+        progress_bar.visibility = View.VISIBLE
+    }
+
+    override fun onGETSuccess(response: LiveData<ParseUser>) {
+        progress_bar.visibility = View.GONE
+        response.observe(this, Observer{
+            try {
+                nameEditText.setText(it.get("name").toString())
+                ageEditText.setText(it.get("age").toString())
+                profileEmailEditText.setText(it.get("email").toString())
+                zipcodeEditText.setText(it.get("zipcode").toString())
+                phoneNumberEditText.setText(it.get("phoneNumber").toString())
+                SubjectsEditText.setText(it.get("subjects").toString())
+                highestDegreeEditText.setText(it.get("highestDegree").toString())
+                SchoolEditText.setText(it.get("school").toString())
+                graduationEditText.setText(it.get("graduationDate").toString())
+                costRateEditText.setText(it.get("cost").toString())
+                descriptionEditText.setText(it.get("description").toString())
+            } catch (e:Exception){
+                Toast.makeText(this,"Error in fetching user data",Toast.LENGTH_SHORT).show()
+                e.printStackTrace()
+            }
+        })
+
+        TODO("Not yet implemented")
+    }
+
+    override fun onGETFailiure(message: String) {
+        progress_bar.visibility = View.GONE
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onGetImgStarted() {
+        progress_bar.visibility = View.VISIBLE
+    }
+
+    override fun onGetImgSuccess(response: Bitmap?) {
+        progress_bar.visibility = View.GONE
+        profileImageView.setImageBitmap(response)
+    }
+
+    override fun onGetImgFailiure(message: String) {
+        progress_bar.visibility = View.GONE
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()    }
 }
