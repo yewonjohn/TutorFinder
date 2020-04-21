@@ -47,39 +47,6 @@ import java.net.URL
 
 class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileListener,GetProfileListener,GetImageListener {
 
-    //CLASS FOR API
-    public class DownloadTask: AsyncTask<String, Void, String>() {
-        override fun doInBackground(vararg p0: String?): String {
-
-            var result: String = ""
-            var url: URL
-            var urlConnection: HttpURLConnection
-
-            try {
-                url = URL(p0[0])
-                urlConnection = url.openConnection() as HttpURLConnection
-                var input = urlConnection.inputStream
-                var reader: InputStreamReader = InputStreamReader(input)
-                var data = reader.read()
-
-                while (data !== -1){
-                    var current = data.toChar()
-                    result += current
-                    data = reader.read()
-                }
-            } catch (e: Exception){
-                Log.i("Error fetching API",e.printStackTrace().toString())
-            }
-
-            return result
-        }
-    //METHOD POST EXECUTE FOR API
-        override fun onPostExecute(result: String?) {
-            super.onPostExecute(result)
-            //Log.i("JSON",result)
-        }
-    }
-
 
     //displaying and initiating options menu if signed in
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -116,7 +83,8 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding : ActivityTutorProfileBinding = DataBindingUtil.setContentView(this,R.layout.activity_tutor_profile)
+        val binding: ActivityTutorProfileBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_tutor_profile)
         val viewModel = ViewModelProviders.of(this).get(TutorProfileViewModel::class.java)
         binding.viewmodel = viewModel
         viewModel.ProfileListener = this
@@ -126,114 +94,15 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
         val displayImage = TutorProfileViewModel().getProfileImage()
 
 
-
-
         //triggering onClicklistener for keyboard minimizing
-        var profileScrollViewConstraintLayout = findViewById<ConstraintLayout>(R.id.profileScrollViewConstraintLayout)
+        var profileScrollViewConstraintLayout =
+            findViewById<ConstraintLayout>(R.id.profileScrollViewConstraintLayout)
         profileScrollViewConstraintLayout.setOnClickListener(this)
 
         //initializing actionBar
         setSupportActionBar(findViewById(R.id.app_toolbar))
 
-        //getting current user
-        var currentUser = ParseUser.getCurrentUser()
-        //initializing fields from page
-        var userAge = findViewById<EditText>(R.id.ageEditText)
-        var userName = findViewById<EditText>(R.id.nameEditText)
-        var userZipCode = findViewById<EditText>(R.id.zipcodeEditText)
-        var userDescription = findViewById<EditText>(R.id.descriptionEditText)
-        var userCost = findViewById<EditText>(R.id.costRateEditText)
-        var userHighestDegree = findViewById<EditText>(R.id.highestDegreeEditText)
-        var userSchool = findViewById<EditText>(R.id.SchoolEditText)
-        var userGraduationDate = findViewById<EditText>(R.id.graduationEditText)
-        var userSubjects = findViewById<EditText>(R.id.SubjectsEditText)
-        var saveButton = findViewById<Button>(R.id.saveButton)
-        var profileImage = findViewById<ImageView>(R.id.profileImageView)
-        var userEmail = findViewById<EditText>(R.id.profileEmailEditText)
-        var userNumber = findViewById<EditText>(R.id.phoneNumberEditText)
-        //displaying current user image
-        var file = currentUser.getParseFile("image")
-        file?.getDataInBackground(GetDataCallback { data, e ->
-            if (e == null) {
-                // Decode the Byte[] into bitmap
-                val bmp: Bitmap = BitmapFactory.decodeByteArray(data, 0, data.size)
-                // Set the Bitmap into the imageView
-                profileImage.setImageBitmap(bmp)
-                Log.i("success","Image fetched correctly")
-            } else {
-                Log.d("test", "There was a problem downloading the data.")
-            }
-        })
 
-        try {
-            //displaying current user info
-            userAge.setText(currentUser.getString("age"))
-            userName.setText(currentUser.getString("name"))
-            userEmail.setText((currentUser.getString("email")))
-            userZipCode.setText(currentUser.getString("zipcode"))
-            userDescription.setText(currentUser.getString("description"))
-            userCost.setText(currentUser.getString("cost"))
-            userHighestDegree.setText(currentUser.getString("highestDegree"))
-            userSchool.setText(currentUser.getString("school"))
-            userGraduationDate.setText(currentUser.getString("graduationDate"))
-            userSubjects.setText(currentUser.getString("subjects"))
-            userNumber.setText(currentUser.getInt("phoneNumber").toString())
-        } catch (e:Exception){
-            e.printStackTrace()
-            Toast.makeText(this,"Info not fetched correctly",Toast.LENGTH_SHORT).show()
-        }
-
-
-        //SAVES field data to current User onClick
-        saveButton.setOnClickListener(){
-            currentUser.put("name",userName.text.toString())
-            currentUser.put("age",userAge.text.toString())
-            currentUser.put("zipcode",userZipCode.text.toString())
-            currentUser.put("description",userDescription.text.toString())
-            currentUser.put("cost",userCost.text.toString())
-            currentUser.put("email",userEmail.text.toString())
-            currentUser.put("highestDegree",userHighestDegree.text.toString())
-            currentUser.put("school",userSchool.text.toString())
-            currentUser.put("graduationDate",userGraduationDate.text.toString())
-            currentUser.put("subjects",userSubjects.text.toString())
-            //compiling education into one variable here
-            var education = userSchool.text.toString() +" "+userHighestDegree.text.toString()+" "+ userGraduationDate.text.toString()
-            currentUser.put("educationDesc",education)
-
-            //API STUFF HERE: calling api then parsing JSON about user location
-            var result: String = ""
-            try {
-                var task =
-                    DownloadTask()
-                result = task.execute("https://maps.googleapis.com/maps/api/geocode/json?address="+userZipCode.text.toString()+"&key=AIzaSyBlXzJreSsIzhWffbBUlhEcP_Eoc8qIXbM").get()
-                Log.i("result of API call",result)
-            } catch (e:Exception){
-                Log.i("Error fetching API",e.printStackTrace().toString())
-            }
-
-            //SET LOCATION HERE
-            // parsing the JSON here to "formatted_address"
-            try {
-                var jsonObject = JSONObject(result)
-                var results = jsonObject.getString("results")
-                var results1 = JSONArray(results)
-                var results2 = JSONObject(results1[0].toString())
-                var results3 = results2.getString("formatted_address")
-                Log.i("addresss",results3)
-                currentUser.put("address",results3)
-            }catch (e:Exception){
-                e.printStackTrace()
-            }
-
-            currentUser.saveInBackground(SaveCallback { e -> Unit
-                if(e === null){
-                    Log.i("data","successfully saved")
-                    Toast.makeText(this,"Saved!",Toast.LENGTH_SHORT).show()
-                    } else {
-                    Log.i("failed", "unsuccessful in saving user data")
-                }
-            })
-        }
     }
     //initiating intent to fetch Image on Button Clicked
     fun getPhoto(view:View){
@@ -302,7 +171,7 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
             }
         }
     }
-
+// SETTING USER INFO ON SAVE CLICK RESPONSE:
     override fun onStarted() {
         progress_bar.visibility = View.VISIBLE
     }
@@ -317,7 +186,7 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
     }
 
-
+// GETTING USER DATA AND SETTING IT TO DISPLAY RESPONSE:
     override fun onGETStarted() {
         progress_bar.visibility = View.VISIBLE
     }
@@ -346,6 +215,7 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
         TODO("Not yet implemented")
     }
 
+    //GETTING PROFILE IMAGE AND SETTING IT
     override fun onGETFailiure(message: String) {
         progress_bar.visibility = View.GONE
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
