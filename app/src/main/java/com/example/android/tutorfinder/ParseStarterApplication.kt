@@ -3,9 +3,14 @@ package com.example.android.tutorfinder
 import android.app.Application
 import android.util.Log
 import com.parse.*
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.androidXModule
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.singleton
 
 
-class ParseStarterApplication : Application() {
+class ParseStarterApplication : Application(), KodeinAware {
     override fun onCreate() {
         super.onCreate()
 
@@ -20,30 +25,7 @@ class ParseStarterApplication : Application() {
                 .server("http://18.218.244.112:80/parse/")
                 .build()
         )
-//        val query = ParseQuery.getQuery<ParseObject>("SoccerPlayers")
-//        query.whereEqualTo("objectId", "QHjRWwgEtd")
-//        query.getFirstInBackground(GetCallback(){
-//            fun done (object1: ParseObject, e: ParseException){
-//                if (e == null){
-//                    val playerName = object1.getString("playerName");
-//                } else{
-//                    Log.i("something went wrong:",e.printStackTrace().toString())
-//                }
-//            }
-//
-//        })
 
-//        val exampleObject = ParseObject("ExampleObject")
-//        exampleObject.put("myNumber", "123")
-//        exampleObject.put("myString", "rob")
-//        exampleObject.saveInBackground { ex ->
-//            if (ex == null) {
-//                Log.i("Parse Result", "Successful!")
-//            } else {
-//                Log.i("Parse Result", "Failed$ex")
-//                Log.i("stacktrace:",ex.printStackTrace().toString())
-//            }
-//        }
 
 
 //        ParseUser.enableAutomaticUser()
@@ -51,5 +33,11 @@ class ParseStarterApplication : Application() {
 //        defaultACL.publicReadAccess = true
 //        defaultACL.publicWriteAccess = true
 //        ParseACL.setDefaultACL(defaultACL, true)
+    }
+    override val kodein: Kodein = Kodein.lazy {
+
+        import(androidXModule(this@ParseStarterApplication))
+
+//        bind() from singleton { }
     }
 }

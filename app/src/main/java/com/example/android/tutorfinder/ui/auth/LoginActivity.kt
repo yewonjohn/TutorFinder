@@ -33,11 +33,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,AuthListener {
 
 
         //triggering onClicklistener for keyboard minimizing
-        var loginLayout = findViewById<ConstraintLayout>(R.id.loginLayout)
         loginLayout.setOnClickListener(this)
 
-        var username = findViewById<EditText>(R.id.usernameLoginEditText)
-        var password = findViewById<EditText>(R.id.passwordLoginEditText)
 
     }
     //onclick for keyboard management
