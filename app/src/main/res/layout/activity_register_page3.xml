@@ -90,6 +90,7 @@
             android:layout_marginTop="39dp"
             android:layout_marginEnd="30dp"
             android:entries="@array/age_array"
+            android:selectedItemPosition="@={viewmodel.agePosition}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/descriptionEditText2" />
 
@@ -114,6 +115,7 @@
             android:layout_marginTop="17dp"
             android:layout_marginEnd="30dp"
             android:entries="@array/cost_array"
+            android:selectedItemPosition="@={viewmodel.pricePosition}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/age_spinner" />
 

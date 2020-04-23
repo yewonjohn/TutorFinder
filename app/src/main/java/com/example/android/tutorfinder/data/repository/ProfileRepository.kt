@@ -93,14 +93,14 @@ class ProfileRepository {
     return saveDataResponseP2
     }
 
-    fun saveUserDataPage3(description:String, age:Spinner, price:Spinner,image:Bitmap): LiveData<String>{
+    fun saveUserDataPage3(description:String, age:Int, price:Int): LiveData<String>{
 
         var saveDataResponseP3 = MutableLiveData<String>()
 
         var currentUser = ParseUser.getCurrentUser()
         currentUser.put("description",description)
-        currentUser.put("age",age.selectedItem.toString())
-        currentUser.put("cost",price.selectedItem.toString())
+        currentUser.put("age",age.toString())
+        currentUser.put("cost",price.toString())
         //ADD IMAGE SAVING CODE HERE
         currentUser.saveInBackground(SaveCallback { e -> Unit
             if(e === null){
