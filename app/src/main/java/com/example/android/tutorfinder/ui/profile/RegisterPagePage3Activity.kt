@@ -35,30 +35,30 @@ class RegisterPagePage3Activity : AppCompatActivity(),RegisterPageListener {
         viewModel.RegisterPageListener = this
 
         //setting age Spinner
-        val ageSpinner = findViewById<Spinner>(R.id.age_spinner)
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.age_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            ageSpinner.adapter = adapter
-        }
+//        val ageSpinner = findViewById<Spinner>(R.id.age_spinner)
+//        ArrayAdapter.createFromResource(
+//            this,
+//            R.array.age_array,
+//            android.R.layout.simple_spinner_item
+//        ).also { adapter ->
+//            // Specify the layout to use when the list of choices appears
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//            // Apply the adapter to the spinner
+//            ageSpinner.adapter = adapter
+//        }
 
         //setting cost Spinner
-        val costSpinner = findViewById<Spinner>(R.id.cost_spinner)
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.cost_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            costSpinner.adapter = adapter
-        }
+//        val costSpinner = findViewById<Spinner>(R.id.cost_spinner)
+//        ArrayAdapter.createFromResource(
+//            this,
+//            R.array.cost_array,
+//            android.R.layout.simple_spinner_item
+//        ).also { adapter ->
+//            // Specify the layout to use when the list of choices appears
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//            // Apply the adapter to the spinner
+//            costSpinner.adapter = adapter
+//        }
 
         //Initiating Intent for Image Upload on Button Clicked
         val uploadButton = findViewById<Button>(R.id.addImageButton)

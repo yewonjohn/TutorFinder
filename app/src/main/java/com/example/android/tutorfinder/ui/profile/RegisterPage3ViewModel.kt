@@ -23,7 +23,7 @@ class RegisterPage3ViewModel : ViewModel(){
         RegisterPageListener?.onSuccess(registerPage3)
 
     }
-
+//function for image upload
     fun uploadImage(view: View){
 
     }
