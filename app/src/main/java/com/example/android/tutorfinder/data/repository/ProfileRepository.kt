@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_tutor_profile.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.reflect.InvocationTargetException
 
 class ProfileRepository {
 
@@ -116,33 +117,41 @@ class ProfileRepository {
 
     fun saveProfileInfo(name:String, age:String, email: String, zipcode: String, phoneNumber: String,
                         subjects: String, degree: String, school: String, gradDate: String, price:String,
-                        description: String): LiveData<ParseUser>{
+                        description: String): LiveData<ParseUser>?{
 
-        var saveUserResponse = MutableLiveData<ParseUser>()
+        var saveUserResponse:MutableLiveData<ParseUser>? = MutableLiveData<ParseUser>()
         var currentUser = ParseUser.getCurrentUser()
-        saveUserResponse.value = currentUser
+        saveUserResponse?.value = currentUser
 
-        currentUser.put("name",name)
-        currentUser.put("age",age)
-        currentUser.put("email",email)
-        currentUser.put("zipcode",zipcode)
-        currentUser.put("phoneNumber",phoneNumber)
-        currentUser.put("subjects",subjects)
-        currentUser.put("highestDegree",degree)
-        currentUser.put("school",school)
-        currentUser.put("graduationDate",gradDate)
-        currentUser.put("cost",price)
-        currentUser.put("description",description)
-        currentUser.put("educationDesc",school+" "+degree+" "+gradDate)
-        fetchFormattedAddressAndSave(zipcode,currentUser)
+        try {
+            currentUser.put("name",name)
+            currentUser.put("age",age)
+            currentUser.put("email",email)
+            currentUser.put("zipcode",zipcode)
+            currentUser.put("phoneNumber",phoneNumber)
+            currentUser.put("subjects",subjects)
+            currentUser.put("highestDegree",degree)
+            currentUser.put("school",school)
+            currentUser.put("graduationDate",gradDate)
+            currentUser.put("cost",price)
+            currentUser.put("description",description)
+            currentUser.put("educationDesc", "$school $degree $gradDate")
+            fetchFormattedAddressAndSave(zipcode,currentUser)
 
-        currentUser.saveInBackground(SaveCallback { e -> Unit
-            if(e === null){
-                Log.i("data","successfully saved")
-            } else {
-                Log.i("failed", "unsuccessful in saving user data")
-            }
-        })
+            currentUser.saveInBackground(SaveCallback { e -> Unit
+                if(e === null){
+                    Log.i("data","successfully saved")
+                }
+                else {
+                    saveUserResponse = null
+                    Log.i("failed", "unsuccessful in saving user data")
+                    Log.i("error",e.cause.toString())
+                }
+            })
+        }catch (e:InvocationTargetException){
+            Log.i("error",e.cause.toString())
+        }
+
         return saveUserResponse
     }
 

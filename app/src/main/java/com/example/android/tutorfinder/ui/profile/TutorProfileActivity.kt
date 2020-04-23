@@ -87,11 +87,12 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
         val viewModel = ViewModelProviders.of(this).get(TutorProfileViewModel::class.java)
         binding.viewmodel = viewModel
         viewModel.ProfileListener = this
+        viewModel.GetProfileListener = this
+        viewModel.GetImageListener = this
 
         //fetching current user data from ViewModel --> respository
-        val displayInfo = TutorProfileViewModel().getInfo()
-        val displayImage = TutorProfileViewModel().getProfileImage()
-
+        TutorProfileViewModel().getInfo()
+        TutorProfileViewModel().getProfileImage()
 
         //triggering onClicklistener for keyboard minimizing
         var profileScrollViewConstraintLayout =
@@ -116,20 +117,20 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
 
     //setup setting imageView to uploaded image
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        var selectedImage = data?.data
+        val selectedImage = data?.data
         if(requestCode === 1 && resultCode === Activity.RESULT_OK && data !== null){
             try {
-                var bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver,selectedImage)
-                var imageView = findViewById<ImageView>(R.id.profileImageView)
+                val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver,selectedImage)
+                val imageView = findViewById<ImageView>(R.id.profileImageView)
                 imageView.setImageBitmap(bitmap)
 
-                var stream = ByteArrayOutputStream()
+                val stream = ByteArrayOutputStream()
                 bitmap.compress(Bitmap.CompressFormat.PNG,100,stream)
 
-                var byteArray = stream.toByteArray()
-                var file = ParseFile("profile_img.png",byteArray)
+                val byteArray = stream.toByteArray()
+                val file = ParseFile("profile_img.png",byteArray)
 
-                var currentUser = ParseUser.getCurrentUser()
+                val currentUser = ParseUser.getCurrentUser()
                 currentUser.put("image",file)
                 currentUser.saveInBackground(SaveCallback { e -> Unit
                     if(e === null){
@@ -175,9 +176,10 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
         progress_bar.visibility = View.VISIBLE
     }
 
-    override fun onSuccess(response: LiveData<ParseUser>) {
+    override fun onSuccess(response: LiveData<ParseUser>?) {
         progress_bar.visibility = View.GONE
-        TODO("Not yet implemented")
+        Toast.makeText(this, response?.value?.get("name").toString()+"'s info saved",Toast.LENGTH_SHORT).show()
+
     }
 
     override fun onFailiure(message: String) {
@@ -192,8 +194,10 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
 
     override fun onGETSuccess(response: LiveData<ParseUser>) {
         progress_bar.visibility = View.GONE
+        Log.i("testg","test")
         response.observe(this, Observer{
             try {
+                Log.i("name:",it.get("name").toString())
                 nameEditText.setText(it.get("name").toString())
                 ageEditText.setText(it.get("age").toString())
                 profileEmailEditText.setText(it.get("email").toString())
@@ -210,16 +214,14 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
                 e.printStackTrace()
             }
         })
-
-        TODO("Not yet implemented")
     }
 
-    //GETTING PROFILE IMAGE AND SETTING IT
     override fun onGETFailiure(message: String) {
         progress_bar.visibility = View.GONE
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
     }
 
+    //GETTING PROFILE IMAGE AND SETTING IT
     override fun onGetImgStarted() {
         progress_bar.visibility = View.VISIBLE
     }

@@ -9,7 +9,7 @@ interface ProfileListener {
         fun onStarted()
 
         //when auth is successful
-        fun onSuccess(response: LiveData<ParseUser>)
+        fun onSuccess(response: LiveData<ParseUser>?)
 
         //for failure
         fun onFailiure(message:String)

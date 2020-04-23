@@ -1,6 +1,7 @@
 package com.example.android.tutorfinder.ui.profile
 
 import android.graphics.Bitmap
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
 import com.example.android.tutorfinder.data.repository.ProfileRepository
@@ -37,6 +38,7 @@ class TutorProfileViewModel: ViewModel() {
 
     }
     fun getInfo(){
+        Log.i("getInfo","Called")
         GetProfileListener?.onGETStarted()
 
         //have to figure out failiure conditions
@@ -47,10 +49,13 @@ class TutorProfileViewModel: ViewModel() {
             GetProfileListener?.onGETFailiure("Failed to fetch user data")
         }
 
+        Log.i("userInfo In ViewModel",userInfo.value?.get("name").toString())
         GetProfileListener?.onGETSuccess(userInfo)
+        Log.i("Test","testingg")
     }
     //USING COROUTINE! SUSPEND FUNCTIONS
     fun getProfileImage(){
+        Log.i("getProfile","Called")
         GetImageListener?.onGetImgStarted()
 
         Coroutines.main {
