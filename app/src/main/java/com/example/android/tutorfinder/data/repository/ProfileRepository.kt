@@ -101,12 +101,15 @@ class ProfileRepository {
         currentUser.put("description",description)
         currentUser.put("age",age.selectedItem.toString())
         currentUser.put("cost",price.selectedItem.toString())
-
-
-
-
-
-
+        //ADD IMAGE SAVING CODE HERE
+        currentUser.saveInBackground(SaveCallback { e -> Unit
+            if(e === null){
+                saveDataResponseP3.value = "Successfully saved"
+            } else {
+                saveDataResponseP3.value = "Unsuccessful in saving user data"
+                e.printStackTrace()
+            }
+        })
 
         return saveDataResponseP3
     }

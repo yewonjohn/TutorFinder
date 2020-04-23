@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.activity_register_page3.*
 import kotlinx.android.synthetic.main.activity_register_page3.progress_bar
 import java.io.ByteArrayOutputStream
 
-class RegisterPagePage3Activity : AppCompatActivity(), View.OnClickListener,RegisterPageListener {
+class RegisterPagePage3Activity : AppCompatActivity(),RegisterPageListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,26 +58,6 @@ class RegisterPagePage3Activity : AppCompatActivity(), View.OnClickListener,Regi
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             // Apply the adapter to the spinner
             costSpinner.adapter = adapter
-        }
-
-        val currentUser = ParseUser.getCurrentUser()
-
-        nextButton3.setOnClickListener(){
-            currentUser.put("description",descriptionEditText2.text.toString())
-            //currentUser.put("age",age_spinner.getItemAtPosition())
-
-
-            currentUser.saveInBackground(SaveCallback { e -> Unit
-                if(e === null){
-                    Log.i("data","successfully saved")
-                    Toast.makeText(this,"Saved!", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, Tutors::class.java)
-                    startActivity(intent)
-                } else {
-                    Log.i("failed", "unsuccessful in saving user data")
-                    e.printStackTrace()
-                }
-            })
         }
 
         //Initiating Intent for Image Upload on Button Clicked
@@ -139,11 +119,6 @@ class RegisterPagePage3Activity : AppCompatActivity(), View.OnClickListener,Regi
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-
-
-    override fun onClick(p0: View?) {
-        TODO("Not yet implemented")
-    }
 
     fun doItLater(view: View){
         val intent = Intent(this, Tutors::class.java)

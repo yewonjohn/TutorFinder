@@ -83,8 +83,7 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityTutorProfileBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_tutor_profile)
+        val binding: ActivityTutorProfileBinding = DataBindingUtil.setContentView(this, R.layout.activity_tutor_profile)
         val viewModel = ViewModelProviders.of(this).get(TutorProfileViewModel::class.java)
         binding.viewmodel = viewModel
         viewModel.ProfileListener = this

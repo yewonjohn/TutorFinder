@@ -4,10 +4,10 @@ import android.graphics.Bitmap
 import android.view.View
 import android.widget.Spinner
 import androidx.lifecycle.ViewModel
+import com.example.android.tutorfinder.data.repository.ProfileRepository
 
 
-
-class RegisterPage3ViewModel : ViewModel() {
+class RegisterPage3ViewModel : ViewModel(){
 
     var description: String? = null
     var age: Spinner? = null
@@ -19,8 +19,8 @@ class RegisterPage3ViewModel : ViewModel() {
         RegisterPageListener?.onStarted()
         //HAVE TO FIGURE OUT LOGIC FOR SUBJECTS FOR FAILIURE CONDITIONS
 
-//        val registerPage2 = ProfileRepository().saveUserDataPage2(subjects!!,degree!!,school!!,gradDate!!)
-//        profileListener?.onSuccess(registerPage2)
+        val registerPage3 = ProfileRepository().saveUserDataPage3(description!!,age!!,price!!,image!!)
+        RegisterPageListener?.onSuccess(registerPage3)
 
     }
 
