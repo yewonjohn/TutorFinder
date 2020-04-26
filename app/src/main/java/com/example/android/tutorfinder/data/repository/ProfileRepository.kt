@@ -123,6 +123,7 @@ class ProfileRepository {
         var currentUser = ParseUser.getCurrentUser()
         saveUserResponse?.value = currentUser
 
+        //data is not saving properly here for some reason
         try {
             currentUser.put("name",name)
             currentUser.put("age",age)
