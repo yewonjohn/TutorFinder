@@ -155,7 +155,7 @@ class ProfileRepository {
 
         return saveUserResponse
     }
-
+//method to fetch user info
     fun getCurrentUserInfo():LiveData<ParseUser>{
         val currentUser = ParseUser.getCurrentUser()
         val userResponse = MutableLiveData<ParseUser>()
