@@ -35,7 +35,10 @@ class TutorProfileViewModel: ViewModel() {
 
         val profileInfo = ProfileRepository().saveProfileInfo(name!!,age!!,email!!,zipcode!!,phoneNumber!!,subjects!!,degree!!,school!!,gradDate!!,price!!,description!!)
         ProfileListener?.onSuccess(profileInfo)
-
+        //this triggers.. if uncommented
+//        if (profileInfo != null) {
+//            GetProfileListener?.onGETSuccess(profileInfo)
+//        }
     }
     fun getInfo(){
         Log.i("getInfo","Called")
@@ -47,6 +50,7 @@ class TutorProfileViewModel: ViewModel() {
 
         if(userInfo.value.toString().isEmpty()){
             GetProfileListener?.onGETFailiure("Failed to fetch user data")
+            return
         }
 
         Log.i("userInfo In ViewModel",userInfo.value?.get("name").toString())

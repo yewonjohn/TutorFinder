@@ -90,7 +90,7 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
         viewModel.GetProfileListener = this
         viewModel.GetImageListener = this
 
-        //fetching current user data from ViewModel --> respository
+        //fetching current user data from ViewModel --> repository
         TutorProfileViewModel().getInfo()
         TutorProfileViewModel().getProfileImage()
 
@@ -171,7 +171,7 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
             }
         }
     }
-// SETTING USER INFO ON SAVE CLICK RESPONSE:
+// SETTING USER INFO ON SAVE CLICK RESPONSE: this worked--
     override fun onStarted() {
         progress_bar.visibility = View.VISIBLE
     }
@@ -190,6 +190,7 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
 // GETTING USER DATA AND SETTING IT TO DISPLAY RESPONSE:
     override fun onGETStarted() {
         progress_bar.visibility = View.VISIBLE
+    Log.i("getStarted","called")
     }
 
     override fun onGETSuccess(response: LiveData<ParseUser>) {

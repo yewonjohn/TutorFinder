@@ -122,6 +122,7 @@ class ProfileRepository {
         var currentUser = ParseUser.getCurrentUser()
         saveUserResponse?.value = currentUser
 
+
         //data is not saving properly here for some reason
         try {
             currentUser.put("name",name)
@@ -145,7 +146,8 @@ class ProfileRepository {
                 else {
                     saveUserResponse = null
                     Log.i("failed", "unsuccessful in saving user data")
-                    Log.i("error",e.cause.toString())
+                    Log.i("parent error",e.toString())
+                    Log.i("parent error",e.cause.toString())
                 }
             })
         }catch (e:InvocationTargetException){
