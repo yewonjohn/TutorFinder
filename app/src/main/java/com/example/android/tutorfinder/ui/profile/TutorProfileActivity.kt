@@ -45,7 +45,7 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 
-class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileListener,GetProfileListener,GetImageListener {
+class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileListener,GetImageListener,SaveImageListener {
 
 
     //displaying and initiating options menu if signed in
@@ -87,11 +87,30 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
         val viewModel = ViewModelProviders.of(this).get(TutorProfileViewModel::class.java)
         binding.viewmodel = viewModel
         viewModel.ProfileListener = this
-        viewModel.GetProfileListener = this
         viewModel.GetImageListener = this
+        viewModel.saveImageListener = this
 
-        //fetching current user data from ViewModel --> repository
-        TutorProfileViewModel().getInfo()
+
+        // GETTING USER DATA AND SETTING IT TO DISPLAY RESPONSE:
+        var userInfo = TutorProfileViewModel().getInfo()
+            try {
+                Log.i("name:",userInfo.value?.get("name").toString())
+                nameEditText.setText(userInfo.value?.get("name").toString())
+                ageEditText.setText(userInfo.value?.get("age").toString())
+                profileEmailEditText.setText(userInfo.value?.get("email").toString())
+                zipcodeEditText.setText(userInfo.value?.get("zipcode").toString())
+                phoneNumberEditText.setText(userInfo.value?.get("phoneNumber").toString())
+                SubjectsEditText.setText(userInfo.value?.get("subjects").toString())
+                highestDegreeEditText.setText(userInfo.value?.get("highestDegree").toString())
+                SchoolEditText.setText(userInfo.value?.get("school").toString())
+                graduationEditText.setText(userInfo.value?.get("graduationDate").toString())
+                costRateEditText.setText(userInfo.value?.get("cost").toString())
+                descriptionEditText.setText(userInfo.value?.get("description").toString())
+            } catch (e:Exception){
+                Toast.makeText(this,"Error in fetching user data",Toast.LENGTH_SHORT).show()
+                e.printStackTrace()
+            }
+
         TutorProfileViewModel().getProfileImage()
 
         //triggering onClicklistener for keyboard minimizing
@@ -104,45 +123,23 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
 
 
     }
-    //initiating intent to fetch Image on Button Clicked
-    fun getPhoto(view:View){
-        if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !== PackageManager.PERMISSION_GRANTED){
-            requestPermissions(arrayOf<String>(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
-        } else{
-            //fetching photo
-            val intent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(intent,1)
-        }
-    }
 
     //setup setting imageView to uploaded image
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val selectedImage = data?.data
         if(requestCode === 1 && resultCode === Activity.RESULT_OK && data !== null){
-            try {
-                val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver,selectedImage)
-                val imageView = findViewById<ImageView>(R.id.profileImageView)
-                imageView.setImageBitmap(bitmap)
 
-                val stream = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.PNG,100,stream)
+            val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver,selectedImage)
+            val imageView = findViewById<ImageView>(R.id.profileImageView)
+            imageView.setImageBitmap(bitmap)
 
-                val byteArray = stream.toByteArray()
-                val file = ParseFile("profile_img.png",byteArray)
+            val stream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.PNG,100,stream)
 
-                val currentUser = ParseUser.getCurrentUser()
-                currentUser.put("image",file)
-                currentUser.saveInBackground(SaveCallback { e -> Unit
-                    if(e === null){
-                        Log.i("data","successfully saved image")
-                    } else {
-                        Log.i("failed", "unsuccessful in saving user image")
-                    }
-                })
+            val byteArray = stream.toByteArray()
+            val file:ParseFile = ParseFile("profile_img.png",byteArray)
 
-            }catch (e:Exception){
-                Log.i("error",e.printStackTrace().toString())
-            }
+            TutorProfileViewModel().saveImageToUser(file)
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
@@ -187,41 +184,6 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
     }
 
-// GETTING USER DATA AND SETTING IT TO DISPLAY RESPONSE:
-    override fun onGETStarted() {
-        progress_bar.visibility = View.VISIBLE
-    Log.i("getStarted","called")
-    }
-
-    override fun onGETSuccess(response: LiveData<ParseUser>) {
-        progress_bar.visibility = View.GONE
-        Log.i("testg","test")
-        response.observe(this, Observer{
-            try {
-                Log.i("name:",it.get("name").toString())
-                nameEditText.setText(it.get("name").toString())
-                ageEditText.setText(it.get("age").toString())
-                profileEmailEditText.setText(it.get("email").toString())
-                zipcodeEditText.setText(it.get("zipcode").toString())
-                phoneNumberEditText.setText(it.get("phoneNumber").toString())
-                SubjectsEditText.setText(it.get("subjects").toString())
-                highestDegreeEditText.setText(it.get("highestDegree").toString())
-                SchoolEditText.setText(it.get("school").toString())
-                graduationEditText.setText(it.get("graduationDate").toString())
-                costRateEditText.setText(it.get("cost").toString())
-                descriptionEditText.setText(it.get("description").toString())
-            } catch (e:Exception){
-                Toast.makeText(this,"Error in fetching user data",Toast.LENGTH_SHORT).show()
-                e.printStackTrace()
-            }
-        })
-    }
-
-    override fun onGETFailiure(message: String) {
-        progress_bar.visibility = View.GONE
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
-    }
-
     //GETTING PROFILE IMAGE AND SETTING IT
     override fun onGetImgStarted() {
         progress_bar.visibility = View.VISIBLE
@@ -235,4 +197,25 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
     override fun onGetImgFailiure(message: String) {
         progress_bar.visibility = View.GONE
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()    }
+
+    //FOR IMAGE UPLOAD & SAVE
+    override fun onClickStart() {
+        //initiating intent to fetch Image on Button Clicked
+            if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !== PackageManager.PERMISSION_GRANTED){
+                requestPermissions(arrayOf<String>(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+            } else{
+                //fetching photo
+                val intent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                startActivityForResult(intent,1)
+            }
+        }
+
+    override fun onUploadSuccess(response:String) {
+        Toast.makeText(this,response,Toast.LENGTH_SHORT).show()
+        Log.i("testing","triggereddd")
+    }
+
+    override fun onUploadFailiure(message: String) {
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+    }
 }

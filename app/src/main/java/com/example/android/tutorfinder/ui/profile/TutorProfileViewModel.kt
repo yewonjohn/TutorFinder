@@ -3,9 +3,12 @@ package com.example.android.tutorfinder.ui.profile
 import android.graphics.Bitmap
 import android.util.Log
 import android.view.View
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.android.tutorfinder.data.repository.ProfileRepository
 import com.example.android.tutorfinder.util.Coroutines
+import com.parse.ParseFile
+import com.parse.ParseUser
 
 class TutorProfileViewModel: ViewModel() {
 
@@ -24,39 +27,33 @@ class TutorProfileViewModel: ViewModel() {
     var ProfileListener: ProfileListener? = null
     var GetProfileListener: GetProfileListener? = null
     var GetImageListener: GetImageListener? = null
+    var saveImageListener: SaveImageListener? = null
+
 
     fun uploadImage(view: View){
-
+        Log.i("uploadImage","triggered")
+        saveImageListener?.onClickStart()
     }
+    fun saveImageToUser(file: ParseFile){
+        val result = ProfileRepository().saveUserImage(file)
 
+
+        saveImageListener?.onUploadSuccess("Saved Image!")
+        saveImageListener?.onUploadFailiure("Failed to save Image")
+    }
     fun saveInfo(view: View) {
         ProfileListener?.onStarted()
         //HAVE TO FIGURE OUT LOGIC FOR SUBJECTS FOR FAILIURE CONDITIONS
 
         val profileInfo = ProfileRepository().saveProfileInfo(name!!,age!!,email!!,zipcode!!,phoneNumber!!,subjects!!,degree!!,school!!,gradDate!!,price!!,description!!)
         ProfileListener?.onSuccess(profileInfo)
-        //this triggers.. if uncommented
-//        if (profileInfo != null) {
-//            GetProfileListener?.onGETSuccess(profileInfo)
-//        }
+
     }
-    fun getInfo(){
-        Log.i("getInfo","Called")
-        GetProfileListener?.onGETStarted()
-
-        //have to figure out failiure conditions
-
+    fun getInfo():LiveData<ParseUser>{
         val userInfo = ProfileRepository().getCurrentUserInfo()
-
-        if(userInfo.value.toString().isEmpty()){
-            GetProfileListener?.onGETFailiure("Failed to fetch user data")
-            return
-        }
-
-        Log.i("userInfo In ViewModel",userInfo.value?.get("name").toString())
-        GetProfileListener?.onGETSuccess(userInfo)
-        Log.i("Test","testingg")
+        return userInfo
     }
+
     //USING COROUTINE! SUSPEND FUNCTIONS
     fun getProfileImage(){
         Log.i("getProfile","Called")
@@ -69,6 +66,5 @@ class TutorProfileViewModel: ViewModel() {
             }
             GetImageListener?.onGetImgSuccess(profileImg)
         }
-
     }
 }

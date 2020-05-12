@@ -113,7 +113,7 @@ class ProfileRepository {
 
         return saveDataResponseP3
     }
-    //saving profile info  I think this is causing issues
+    //saving profile THIS WORKS
     fun saveProfileInfo(name:String, age:String, email: String, zipcode: String, phoneNumber: String,
                         subjects: String, degree: String, school: String, gradDate: String, price:String,
                         description: String): LiveData<ParseUser>?{
@@ -153,7 +153,6 @@ class ProfileRepository {
         }catch (e:InvocationTargetException){
             Log.i("error",e.cause.toString())
         }
-
         return saveUserResponse
     }
 //method to fetch user info
@@ -166,7 +165,7 @@ class ProfileRepository {
         return userResponse
     }
 
-    suspend fun getProfilePhoto(): Bitmap?{
+    fun getProfilePhoto(): Bitmap?{
         val currentUser = ParseUser.getCurrentUser()
 
         var file: ParseFile? = currentUser.getParseFile("image")
@@ -175,6 +174,27 @@ class ProfileRepository {
         val bmp: Bitmap? = data?.size?.let { BitmapFactory.decodeByteArray(data,0, it) }
 
         return bmp
+    }
+
+//takes image from UI and saves to current user
+    fun saveUserImage(file: ParseFile): String{
+    var result = "";
+    try{
+        val currentUser = ParseUser.getCurrentUser()
+        currentUser.put("image",file)
+        currentUser.saveInBackground(SaveCallback { e -> Unit
+            if(e === null){
+                Log.i("saveUserImg","success")
+                result = "success"
+            } else {
+                Log.i("saveUserImg","failed")
+                result = "failed"
+            }
+        })
+    }catch (e:Exception){
+        Log.i("error",e.printStackTrace().toString())
+        }
+    return result
     }
 
 
