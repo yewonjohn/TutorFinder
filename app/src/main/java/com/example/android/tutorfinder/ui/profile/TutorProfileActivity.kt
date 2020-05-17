@@ -80,7 +80,7 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
         }
         return super.onOptionsItemSelected(item)
     }
-    
+    //how to trigger ui population oncreate..
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityTutorProfileBinding = DataBindingUtil.setContentView(this, R.layout.activity_tutor_profile)
