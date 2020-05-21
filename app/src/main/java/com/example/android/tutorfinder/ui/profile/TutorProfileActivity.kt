@@ -57,7 +57,7 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
         return super.onCreateOptionsMenu(menu)
     }
 
-    //when loggedout, intent takes you back to homepage
+    //when loggedout, intent takes you back to homepage asf
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
             if (item?.itemId === R.id.logout) {
                 ParseUser.logOutInBackground() { e ->
