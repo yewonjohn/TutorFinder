@@ -16,10 +16,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
@@ -91,11 +88,12 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
         viewModel.saveImageListener = this
 
 
+        nameEditText.setText("example")
         // GETTING USER DATA AND SETTING IT TO DISPLAY RESPONSE:
         var userInfo = TutorProfileViewModel().getInfo()
             try {
                 Log.i("name:",userInfo.value?.get("name").toString())
-                nameEditText.setText(userInfo.value?.get("name").toString())
+                nameEditText.setText("example") //userInfo.value?.get("name").toString()
                 ageEditText.setText(userInfo.value?.get("age").toString())
                 profileEmailEditText.setText(userInfo.value?.get("email").toString())
                 zipcodeEditText.setText(userInfo.value?.get("zipcode").toString())
@@ -123,6 +121,7 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
 
 
     }
+
 
     //setup setting imageView to uploaded image
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

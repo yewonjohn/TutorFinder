@@ -177,6 +177,7 @@ class ProfileRepository {
     }
 
 //takes image from UI and saves to current user
+    //RESULT IS BEING GIVEN BEFORE SAVEINBACKGROUND FETCHES DATA AND SETS THE NEW RESULT VALUE
     fun saveUserImage(file: ParseFile): String{
     var result = "";
     try{

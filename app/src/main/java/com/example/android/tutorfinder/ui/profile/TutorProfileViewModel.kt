@@ -41,16 +41,22 @@ class TutorProfileViewModel: ViewModel() {
         saveImageListener?.onUploadSuccess("Saved Image!")
         saveImageListener?.onUploadFailiure("Failed to save Image")
     }
-    fun saveInfo(view: View) {
-        ProfileListener?.onStarted()
-        //HAVE TO FIGURE OUT LOGIC FOR SUBJECTS FOR FAILIURE CONDITIONS
-
-        val profileInfo = ProfileRepository().saveProfileInfo(name!!,age!!,email!!,zipcode!!,phoneNumber!!,subjects!!,degree!!,school!!,gradDate!!,price!!,description!!)
-        ProfileListener?.onSuccess(profileInfo)
-
-    }
+//    fun saveInfo(view: View) {
+//        ProfileListener?.onStarted()
+//        //HAVE TO FIGURE OUT LOGIC FOR SUBJECTS FOR FAILIURE CONDITIONS
+//
+//        val profileInfo = ProfileRepository().saveProfileInfo(name!!,age!!,email!!,zipcode!!,phoneNumber!!,subjects!!,degree!!,school!!,gradDate!!,price!!,description!!)
+//        ProfileListener?.onSuccess(profileInfo)
+//
+//    }
+    fun saveInfo(view: View){
+    Log.i("nameeeee",name.toString())
+    Log.i("ageee",age.toString())
+}
     fun getInfo():LiveData<ParseUser>{
         val userInfo = ProfileRepository().getCurrentUserInfo()
+        name = userInfo.value?.get("name").toString()
+
         return userInfo
     }
 
