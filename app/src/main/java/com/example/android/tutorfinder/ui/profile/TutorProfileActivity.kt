@@ -94,7 +94,7 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
         userInfo.observe(this, Observer {
             try {
                 Log.i("name:",it.get("name").toString())
-                nameEditText.setText(it.get("name").toString())
+                nameEditText.setText(it.get("name").toString(),TextView.BufferType.EDITABLE)
                 ageEditText.setText(it.get("age").toString())
                 profileEmailEditText.setText(it.get("email").toString())
                 zipcodeEditText.setText(it.get("zipcode").toString())
@@ -126,7 +126,7 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
 
 
     }
-    
+
 
 
     //setup setting imageView to uploaded image

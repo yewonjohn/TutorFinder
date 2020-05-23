@@ -54,7 +54,6 @@ class TutorProfileViewModel: ViewModel() {
 //}
     fun getInfo():LiveData<ParseUser>{
         val userInfo = ProfileRepository().getCurrentUserInfo()
-        name = userInfo.value?.get("name").toString()
 
         return userInfo
     }

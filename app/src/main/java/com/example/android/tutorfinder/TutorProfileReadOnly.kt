@@ -57,15 +57,13 @@ class TutorProfileReadOnly : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutor_profile_read_only)
 
-        //TEMPORARY RATING SYSTEM
-        var ratingbar = findViewById<RatingBar>(R.id.ratingBar)
-        var ratingButton = findViewById<TextView>(R.id.ratingTextButton)
-        var ratingTextView = findViewById<TextView>(R.id.ratingTextView)
-
-        ratingButton.setOnClickListener(View.OnClickListener {
-            ratingTextView.text = ratingbar.rating.toString()
-        })
-
+        var contactFragment = ContactTutorFragment()
+        supportFragmentManager.beginTransaction().apply {
+            setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+            show(contactFragment)
+            replace(R.id.profileFrameLayout,contactFragment)
+            commit()
+        }
 
         //initializing actionBar
         setSupportActionBar(findViewById(R.id.app_toolbar))

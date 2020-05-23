@@ -7,10 +7,12 @@
     tools:context=".TutorProfileReadOnly">
 
     <include
+        android:id="@+id/include"
         layout="@layout/app_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></include>
+
 
     <ImageView
         android:id="@+id/profileImageView"
@@ -32,6 +34,7 @@
         android:layout_marginEnd="5dp"
         android:ems="10"
         android:fontFamily="@font/open_sans"
+        android:paddingHorizontal="3dp"
         android:text="First Last, Age"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -46,6 +49,7 @@
         android:layout_marginStart="23dp"
         android:layout_marginTop="5dp"
         android:ems="10"
+        android:paddingHorizontal="3dp"
         android:text="Example, Location"
         android:textColor="#BCBCBC"
         android:textSize="14sp"
@@ -73,18 +77,18 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
         android:fontFamily="@font/open_sans"
         android:gravity="top"
         android:lineSpacingExtra="2sp"
+        android:padding="3dp"
         android:text="Short Personal Description if the person wants. It can be as long as they want or as short as they want. Blah blah blah keeyeon is a loser"
         android:textAppearance="@style/short_perso"
         android:translationY="-1.19sp"
         app:layout_constraintBottom_toTopOf="@+id/costTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profileImageView"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+        app:layout_constraintTop_toBottomOf="@+id/locationTextView" />
 
     <TextView
         android:id="@+id/costTextView"
@@ -96,6 +100,7 @@
         android:fontFamily="@font/open_sans"
         android:gravity="top"
         android:lineSpacingExtra="0sp"
+        android:paddingHorizontal="3dp"
         android:text="Avg $30 / hr"
         android:textAppearance="@style/avg_30_hr"
         app:layout_constraintBottom_toBottomOf="@+id/profileImageView"
@@ -110,6 +115,7 @@
         android:layout_marginEnd="100dp"
         android:background="@drawable/button_border"
         android:text="Contact Button"
+        android:stateListAnimator="@null"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -185,55 +191,23 @@
         android:layout_height="0dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
+        android:padding="3dp"
         android:text="Bachelors of Science"
         app:layout_constraintBottom_toTopOf="@+id/line2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/educationTitleTextView" />
 
-    <RatingBar
-        android:id="@+id/ratingBar"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="0dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="2dp"
-        android:clickable="true"
-        android:isIndicator="false"
-        android:max="5"
-        android:numStars="5"
-        android:progressTint="#FFEB3B"
-        android:saveEnabled="true"
-        android:stepSize="0.5"
-        app:layout_constraintStart_toEndOf="@+id/profileImageView"
-        app:layout_constraintTop_toBottomOf="@+id/locationTextView" />
-
-    <TextView
-        android:id="@+id/ratingTextView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
-        android:fontFamily="@font/open_sans"
-        android:paddingBottom="0dp"
-        android:text="5.0"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
-        app:layout_constraintEnd_toStartOf="@+id/ratingBar"
-        app:layout_constraintStart_toEndOf="@+id/profileImageView"
-        app:layout_constraintTop_toBottomOf="@+id/locationTextView" />
 
     <TextView
         android:id="@+id/ratingTextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="100dp"
         android:text="rate"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ratingBar"
         app:layout_constraintTop_toBottomOf="@+id/locationTextView" />
 
     <Button
@@ -338,5 +312,19 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/profileFrameLayout"
+        android:name="com.example.android.tutorfinder.ContactTutorFragment"
+        android:layout_width="293dp"
+        android:layout_height="94dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginBottom="250dp"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/include" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
