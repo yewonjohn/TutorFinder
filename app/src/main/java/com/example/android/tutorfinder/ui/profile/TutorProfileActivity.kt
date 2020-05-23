@@ -91,23 +91,28 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
         nameEditText.setText("example")
         // GETTING USER DATA AND SETTING IT TO DISPLAY RESPONSE:
         var userInfo = TutorProfileViewModel().getInfo()
+        userInfo.observe(this, Observer {
             try {
-                Log.i("name:",userInfo.value?.get("name").toString())
-                nameEditText.setText("example") //userInfo.value?.get("name").toString()
-                ageEditText.setText(userInfo.value?.get("age").toString())
-                profileEmailEditText.setText(userInfo.value?.get("email").toString())
-                zipcodeEditText.setText(userInfo.value?.get("zipcode").toString())
-                phoneNumberEditText.setText(userInfo.value?.get("phoneNumber").toString())
-                SubjectsEditText.setText(userInfo.value?.get("subjects").toString())
-                highestDegreeEditText.setText(userInfo.value?.get("highestDegree").toString())
-                SchoolEditText.setText(userInfo.value?.get("school").toString())
-                graduationEditText.setText(userInfo.value?.get("graduationDate").toString())
-                costRateEditText.setText(userInfo.value?.get("cost").toString())
-                descriptionEditText.setText(userInfo.value?.get("description").toString())
+                Log.i("name:",it.get("name").toString())
+                nameEditText.setText(it.get("name").toString())
+                ageEditText.setText(it.get("age").toString())
+                profileEmailEditText.setText(it.get("email").toString())
+                zipcodeEditText.setText(it.get("zipcode").toString())
+                phoneNumberEditText.setText(it.get("phoneNumber").toString())
+                SubjectsEditText.setText(it.get("subjects").toString())
+                highestDegreeEditText.setText(it.get("highestDegree").toString())
+                SchoolEditText.setText(it.get("school").toString())
+                graduationEditText.setText(it.get("graduationDate").toString())
+                costRateEditText.setText(it.get("cost").toString())
+                descriptionEditText.setText(it.get("description").toString())
             } catch (e:Exception){
                 Toast.makeText(this,"Error in fetching user data",Toast.LENGTH_SHORT).show()
                 e.printStackTrace()
             }
+        })
+
+
+
 
         TutorProfileViewModel().getProfileImage()
 
@@ -121,6 +126,7 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
 
 
     }
+    
 
 
     //setup setting imageView to uploaded image
