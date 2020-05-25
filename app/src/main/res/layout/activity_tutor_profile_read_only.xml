@@ -81,7 +81,7 @@
         android:fontFamily="@font/open_sans"
         android:gravity="top"
         android:lineSpacingExtra="2sp"
-        android:padding="3dp"
+        android:padding="4dp"
         android:text="Short Personal Description if the person wants. It can be as long as they want or as short as they want. Blah blah blah keeyeon is a loser"
         android:textAppearance="@style/short_perso"
         android:translationY="-1.19sp"
@@ -114,8 +114,9 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="100dp"
         android:background="@drawable/button_border"
-        android:text="Contact Button"
+        android:onClick="viewFragment"
         android:stateListAnimator="@null"
+        android:text="Contact Info"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -160,6 +161,7 @@
         android:fontFamily="@font/open_sans"
         android:gravity="top"
         android:lineSpacingExtra="0sp"
+        android:padding="3dp"
         android:text="John's Education"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -178,6 +180,7 @@
         android:fontFamily="@font/open_sans"
         android:gravity="top"
         android:lineSpacingExtra="0sp"
+        android:padding="3dp"
         android:text="John's Subjects"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -199,17 +202,6 @@
         app:layout_constraintTop_toBottomOf="@+id/educationTitleTextView" />
 
 
-    <TextView
-        android:id="@+id/ratingTextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="100dp"
-        android:text="rate"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locationTextView" />
-
     <Button
         android:id="@+id/seeMoreButton"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
@@ -229,7 +221,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="142dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -316,15 +308,28 @@
     <FrameLayout
         android:id="@+id/profileFrameLayout"
         android:name="com.example.android.tutorfinder.ContactTutorFragment"
-        android:layout_width="293dp"
-        android:layout_height="94dp"
-        android:layout_marginTop="250dp"
-        android:layout_marginBottom="250dp"
+        android:layout_width="295dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="100dp"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/include" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.369" />
+
+    <Button
+        android:id="@+id/xButton"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="310dp"
+        android:layout_marginEnd="61dp"
+        android:background="@drawable/cancel_icon"
+        android:onClick="hideFragment"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

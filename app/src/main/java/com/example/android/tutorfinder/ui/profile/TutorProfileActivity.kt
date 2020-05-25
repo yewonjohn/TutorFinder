@@ -88,13 +88,13 @@ class TutorProfileActivity : AppCompatActivity(), View.OnClickListener, ProfileL
         viewModel.saveImageListener = this
 
 
-        nameEditText.setText("example")
         // GETTING USER DATA AND SETTING IT TO DISPLAY RESPONSE:
         var userInfo = TutorProfileViewModel().getInfo()
+
         userInfo.observe(this, Observer {
             try {
                 Log.i("name:",it.get("name").toString())
-                nameEditText.setText(it.get("name").toString(),TextView.BufferType.EDITABLE)
+                nameEditText.setText(it.get("name").toString())
                 ageEditText.setText(it.get("age").toString())
                 profileEmailEditText.setText(it.get("email").toString())
                 zipcodeEditText.setText(it.get("zipcode").toString())

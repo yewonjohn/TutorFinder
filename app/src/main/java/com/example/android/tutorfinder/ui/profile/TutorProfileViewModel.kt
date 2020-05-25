@@ -3,12 +3,15 @@ package com.example.android.tutorfinder.ui.profile
 import android.graphics.Bitmap
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.android.tutorfinder.data.repository.ProfileRepository
 import com.example.android.tutorfinder.util.Coroutines
 import com.parse.ParseFile
 import com.parse.ParseUser
+import kotlinx.android.synthetic.main.activity_tutor_profile.*
 
 class TutorProfileViewModel: ViewModel() {
 
@@ -55,7 +58,20 @@ class TutorProfileViewModel: ViewModel() {
     fun getInfo():LiveData<ParseUser>{
         val userInfo = ProfileRepository().getCurrentUserInfo()
 
-        return userInfo
+        name = userInfo.value?.getString("name")
+        age = userInfo.value?.getString("age")
+        email = userInfo.value?.getString("email")
+        zipcode = userInfo.value?.getString("zipcode")
+        phoneNumber = userInfo.value?.getString("phoneNumber")
+        subjects = userInfo.value?.getString("subjects")
+        degree = userInfo.value?.getString("highestDegree")
+        school = userInfo.value?.getString("school")
+        gradDate = userInfo.value?.getString("graduationDate")
+        price = userInfo.value?.getString("cost")
+        description = userInfo.value?.getString("description")
+
+
+    return userInfo
     }
 
     //USING COROUTINE! SUSPEND FUNCTIONS

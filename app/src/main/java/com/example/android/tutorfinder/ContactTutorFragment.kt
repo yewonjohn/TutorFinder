@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.contact_tutor_fragment.*
 
 
 class ContactTutorFragment : Fragment() {
@@ -26,6 +27,8 @@ class ContactTutorFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ContactTutorViewModel::class.java)
+
+
         // TODO: Use the ViewModel
     }
 

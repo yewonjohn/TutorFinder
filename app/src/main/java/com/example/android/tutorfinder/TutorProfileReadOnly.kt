@@ -1,21 +1,24 @@
 package com.example.android.tutorfinder
 
+import android.R.attr.animationDuration
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
+import android.transition.TransitionManager
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.widget.RatingBar
+import android.view.*
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.android.tutorfinder.ui.home.HomePageActivity
 import com.example.android.tutorfinder.ui.profile.TutorProfileActivity
 import com.parse.FindCallback
 import com.parse.ParseQuery
 import com.parse.ParseUser
 import kotlinx.android.synthetic.main.activity_tutor_profile_read_only.*
+import kotlinx.android.synthetic.main.contact_tutor_fragment.*
+
 
 class TutorProfileReadOnly : AppCompatActivity(){
 
@@ -59,8 +62,6 @@ class TutorProfileReadOnly : AppCompatActivity(){
 
         var contactFragment = ContactTutorFragment()
         supportFragmentManager.beginTransaction().apply {
-            setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-            show(contactFragment)
             replace(R.id.profileFrameLayout,contactFragment)
             commit()
         }
@@ -157,6 +158,50 @@ class TutorProfileReadOnly : AppCompatActivity(){
                 Log.i("query failed",e.printStackTrace().toString())
             }
         })
+    }
+
+    fun hideFragment(view:View){
+            // get the center for the clipping circle
+            val cx = profileFrameLayout.width / 2
+            val cy = profileFrameLayout.height / 2
+
+            // get the initial radius for the clipping circle
+            val initialRadius = Math.hypot(cx.toDouble(), cy.toDouble()).toFloat()
+
+            // create the animation (the final radius is zero)
+            val anim = ViewAnimationUtils.createCircularReveal(profileFrameLayout, cx, cy, initialRadius, 0f)
+
+            // make the view invisible when the animation is done
+            anim.addListener(object : AnimatorListenerAdapter() {
+
+                override fun onAnimationEnd(animation: Animator) {
+                    super.onAnimationEnd(animation)
+                    profileFrameLayout.visibility = View.GONE
+                }
+            })
+            // start the animation
+            anim.start()
+
+        xButton.visibility = View.GONE
+    }
+
+    fun viewFragment(myView:View){
+
+
+            // get the center for the clipping circle
+            val cx = profileFrameLayout.width / 2
+            val cy = profileFrameLayout.height / 2
+
+            // get the final radius for the clipping circle
+            val finalRadius = Math.hypot(cx.toDouble(), cy.toDouble()).toFloat()
+
+            // create the animator for this view (the start radius is zero)
+            val anim = ViewAnimationUtils.createCircularReveal(profileFrameLayout, cx, cy, 0f, finalRadius)
+            // make the view visible and start the animation
+            profileFrameLayout.visibility = View.VISIBLE
+            anim.start()
+
+        xButton.visibility = View.VISIBLE
 
     }
 
