@@ -1,23 +1,20 @@
-package com.example.android.tutorfinder
+package com.example.android.tutorfinder.ui.profileRead
 
-import android.R.attr.animationDuration
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.transition.TransitionManager
 import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.android.tutorfinder.R
 import com.example.android.tutorfinder.ui.home.HomePageActivity
 import com.example.android.tutorfinder.ui.profile.TutorProfileActivity
 import com.parse.FindCallback
 import com.parse.ParseQuery
 import com.parse.ParseUser
 import kotlinx.android.synthetic.main.activity_tutor_profile_read_only.*
-import kotlinx.android.synthetic.main.contact_tutor_fragment.*
 
 
 class TutorProfileReadOnly : AppCompatActivity(){
@@ -60,7 +57,8 @@ class TutorProfileReadOnly : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutor_profile_read_only)
 
-        var contactFragment = ContactTutorFragment()
+        var contactFragment =
+            ContactTutorFragment()
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.profileFrameLayout,contactFragment)
             commit()

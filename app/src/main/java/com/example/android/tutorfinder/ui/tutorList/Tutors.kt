@@ -1,4 +1,4 @@
-package com.example.android.tutorfinder
+package com.example.android.tutorfinder.ui.tutorList
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -10,6 +10,9 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.ListView
+import com.example.android.tutorfinder.CustomListView
+import com.example.android.tutorfinder.R
+import com.example.android.tutorfinder.ui.profileRead.TutorProfileReadOnly
 import com.example.android.tutorfinder.ui.home.HomePageActivity
 import com.example.android.tutorfinder.ui.profile.TutorProfileActivity
 import com.parse.FindCallback
@@ -70,7 +73,13 @@ class Tutors : AppCompatActivity() {
         //declaring the array that will hold all the queried users objectId
         val listOfTutorsObjectId = ArrayList<String>()
         //initializing adapter for listView
-        val adapter = CustomListView(this,userNames,userLocation,userPrice,userImage)
+        val adapter = CustomListView(
+            this,
+            userNames,
+            userLocation,
+            userPrice,
+            userImage
+        )
 
         //filter by username ascending order
         val query1: ParseQuery<ParseUser> = ParseUser.getQuery()

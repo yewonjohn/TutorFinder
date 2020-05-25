@@ -16,7 +16,7 @@
         android:id="@+id/profileConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".TutorProfileReadOnly">
+        tools:context=".ui.profileRead.TutorProfileReadOnly">
 
         <include
             layout="@layout/app_toolbar"

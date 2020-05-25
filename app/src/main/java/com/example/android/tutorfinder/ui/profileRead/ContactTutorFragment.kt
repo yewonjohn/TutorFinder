@@ -1,4 +1,4 @@
-package com.example.android.tutorfinder
+package com.example.android.tutorfinder.ui.profileRead
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -6,13 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.contact_tutor_fragment.*
+import com.example.android.tutorfinder.R
 
 
 class ContactTutorFragment : Fragment() {
 
     companion object {
-        fun newInstance() = ContactTutorFragment()
+        fun newInstance() =
+            ContactTutorFragment()
     }
 
     private lateinit var viewModel: ContactTutorViewModel

@@ -7,7 +7,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.android.tutorfinder.R
 import com.example.android.tutorfinder.ui.profile.TutorProfileActivity
-import com.example.android.tutorfinder.Tutors
+import com.example.android.tutorfinder.ui.tutorList.Tutors
 import com.example.android.tutorfinder.ui.auth.LoginActivity
 import com.example.android.tutorfinder.ui.auth.RegisterActivity
 import com.parse.*

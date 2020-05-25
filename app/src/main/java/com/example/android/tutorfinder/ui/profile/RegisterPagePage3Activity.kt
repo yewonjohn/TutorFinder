@@ -16,12 +16,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.android.tutorfinder.R
-import com.example.android.tutorfinder.Tutors
+import com.example.android.tutorfinder.ui.tutorList.Tutors
 import com.example.android.tutorfinder.databinding.ActivityRegisterPage3Binding
 import com.parse.ParseFile
 import com.parse.ParseUser
 import com.parse.SaveCallback
-import kotlinx.android.synthetic.main.activity_register_page3.*
 import kotlinx.android.synthetic.main.activity_register_page3.progress_bar
 import java.io.ByteArrayOutputStream
 
