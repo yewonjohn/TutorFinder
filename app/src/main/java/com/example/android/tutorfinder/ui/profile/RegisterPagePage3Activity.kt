@@ -114,5 +114,6 @@ class RegisterPagePage3Activity : AppCompatActivity(),RegisterPageListener {
     override fun onFailiure(message: String) {
         progress_bar.visibility = View.VISIBLE
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, Tutors::class.java)
     }
 }

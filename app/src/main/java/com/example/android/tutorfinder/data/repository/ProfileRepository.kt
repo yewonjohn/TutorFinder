@@ -17,6 +17,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.lang.reflect.InvocationTargetException
+import java.util.ArrayList
 
 class ProfileRepository {
 
@@ -58,7 +59,8 @@ class ProfileRepository {
         currentUser.put("email",email)
         currentUser.put("zipcode",zipcode)
         //make condition to check if string is not empty if neccessary
-        currentUser.put("phoneNumber", phoneNumber.toLong())
+        //.toLong() <-- how u handle long numbers like phone digits
+        currentUser.put("phoneNumber", phoneNumber)
         //calling API & saving data. This is probably not the best idea..
         fetchFormattedAddressAndSave(zipcode,currentUser)
         currentUser.saveInBackground(SaveCallback { e -> Unit
@@ -155,14 +157,28 @@ class ProfileRepository {
         }
         return saveUserResponse
     }
-//method to fetch user info
-    fun getCurrentUserInfo():LiveData<ParseUser>{
+//method to fetch user info. CHANGING TO <ArrayList<String>> rn
+    fun getCurrentUserInfo():LiveData<ArrayList<String>>{
         val currentUser = ParseUser.getCurrentUser()
-        val userResponse = MutableLiveData<ParseUser>()
+//        val userResponse = MutableLiveData<ParseUser>()
+//        userResponse.value = currentUser
 
-        userResponse.value = currentUser
+        val response = MutableLiveData<ArrayList<String>>()
+        currentUser.getString("name")?.let { response.value?.add(it) }
+        currentUser.getString("age")?.let { response.value?.add(it) }
+        currentUser.getString("email")?.let { response.value?.add(it) }
+        currentUser.getString("zipcode")?.let { response.value?.add(it) }
+        currentUser.getString("phoneNumber")?.let { response.value?.add(it) }
+        currentUser.getString("subjects")?.let { response.value?.add(it) }
+        currentUser.getString("highestDegree")?.let { response.value?.add(it) }
+        currentUser.getString("school")?.let { response.value?.add(it) }
+        currentUser.getString("graduationDate")?.let { response.value?.add(it) }
+        currentUser.getString("cost")?.let { response.value?.add(it) }
+        currentUser.getString("description")?.let { response.value?.add(it) }
 
-        return userResponse
+        Log.i("asdfasdf", response.value?.toString())
+
+        return response
     }
 
     fun getProfilePhoto(): Bitmap?{
@@ -197,6 +213,9 @@ class ProfileRepository {
         }
     return result
     }
+
+
+
 
 
 }

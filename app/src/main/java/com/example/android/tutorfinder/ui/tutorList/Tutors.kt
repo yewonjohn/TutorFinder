@@ -81,7 +81,7 @@ class Tutors : AppCompatActivity() {
             userImage
         )
 
-        //filter by username ascending order
+        //filter by objectId ascending order
         val query1: ParseQuery<ParseUser> = ParseUser.getQuery()
         query1.addAscendingOrder("objectId")
         query1.findInBackground(FindCallback { objects, e -> Unit

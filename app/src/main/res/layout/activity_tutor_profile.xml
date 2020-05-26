@@ -261,7 +261,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/costRateEditText" />
 
                 <EditText
-                    android:text="@={viewmodel.description}"
                     android:id="@+id/descriptionEditText"
                     android:layout_width="374dp"
                     android:layout_height="106dp"
@@ -273,6 +272,8 @@
                     android:gravity="top|left"
                     android:hint="Description"
                     android:inputType="textMultiLine|textPersonName"
+                    android:paddingHorizontal="4dp"
+                    android:text="@={viewmodel.description}"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"

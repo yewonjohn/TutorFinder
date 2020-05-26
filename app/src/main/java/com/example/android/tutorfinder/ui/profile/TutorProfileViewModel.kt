@@ -12,6 +12,7 @@ import com.example.android.tutorfinder.util.Coroutines
 import com.parse.ParseFile
 import com.parse.ParseUser
 import kotlinx.android.synthetic.main.activity_tutor_profile.*
+import java.util.ArrayList
 
 class TutorProfileViewModel: ViewModel() {
 
@@ -55,21 +56,22 @@ class TutorProfileViewModel: ViewModel() {
 //    Log.i("nameeeee",name.toString())
 //    Log.i("ageee",age.toString())
 //}
-    fun getInfo():LiveData<ParseUser>{
+    //changing to LiveDate<ArrayList<String>> for now
+    fun getInfo():LiveData<ArrayList<String>>{
         val userInfo = ProfileRepository().getCurrentUserInfo()
+        val userInfoList = userInfo.value
 
-        name = userInfo.value?.getString("name")
-        age = userInfo.value?.getString("age")
-        email = userInfo.value?.getString("email")
-        zipcode = userInfo.value?.getString("zipcode")
-        phoneNumber = userInfo.value?.getString("phoneNumber")
-        subjects = userInfo.value?.getString("subjects")
-        degree = userInfo.value?.getString("highestDegree")
-        school = userInfo.value?.getString("school")
-        gradDate = userInfo.value?.getString("graduationDate")
-        price = userInfo.value?.getString("cost")
-        description = userInfo.value?.getString("description")
-
+        name = userInfoList?.get(0)
+        age = userInfoList?.get(1)
+        email = userInfoList?.get(2)
+        zipcode = userInfoList?.get(3)
+        phoneNumber = userInfoList?.get(4)
+        subjects = userInfoList?.get(5)
+        degree = userInfoList?.get(6)
+        school = userInfoList?.get(7)
+        gradDate = userInfoList?.get(8)
+        price = userInfoList?.get(9)
+        description = userInfoList?.get(10)
 
     return userInfo
     }
